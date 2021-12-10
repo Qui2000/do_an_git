@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RegulationController extends Controller
+class ChartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class RegulationController extends Controller
      */
     public function index()
     {
-        return view('admin.regulation.index');
+        return view('admin.chart.index');
     }
 
     /**
