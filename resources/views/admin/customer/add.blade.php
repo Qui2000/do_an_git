@@ -64,6 +64,7 @@
             <label for="pwd">Quốc tịch:</label>
             <input type="text" class="form-control" placeholder="Quốc tịch" name="quoc_tich">
           </div>
+          <input type="hidden" class="form-control" name="ma_quyen" value="2">
           <button type="submit" class="btn btn-success">Lưu</button>
           <button type="button" class="btn btn-info"><a style="color: #fff"
               href="{{ route('admin.customer.index') }}">Trở lại</a></button>

@@ -65,6 +65,10 @@
             <input type="text" class="form-control" placeholder="Quốc tịch" name="quoc_tich" value="{{ $personnel->quoc_tich }}">
           </div>
           <div class="form-group">
+            <label for="pwd">Ngày làm việc:</label>
+            <input type="date" class="form-control" placeholder="Ngày làm việc" name="ngay_lam_viec" value="{{ $personnel->ngay_lam_viec }}">
+          </div>
+          <div class="form-group">
             <label for="pwd">Quyền:</label>
             <select name="ma_quyen" id="">
               @foreach($permissions as $key => $permission)

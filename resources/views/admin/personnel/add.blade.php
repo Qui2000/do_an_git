@@ -64,6 +64,11 @@
             <label for="pwd">Quốc tịch:</label>
             <input type="text" class="form-control" placeholder="Quốc tịch" name="quoc_tich">
           </div>
+          <div class="form-group">
+            <label for="pwd">Ngày làm việc:</label>
+            <input type="date" class="form-control" placeholder="Ngày làm việc" name="ngay_lam_viec">
+          </div>
+          <input type="hidden" class="form-control" name="ma_quyen" value="1">
           <button type="submit" class="btn btn-success">Lưu</button>
           <button type="button" class="btn btn-info"><a style="color: #fff"
               href="{{ route('admin.personnel.index') }}">Trở lại</a></button>

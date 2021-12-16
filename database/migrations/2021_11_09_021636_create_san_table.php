@@ -15,6 +15,9 @@ class CreateSanTable extends Migration
     {
         Schema::create('san', function (Blueprint $table) {
             $table->id();
+            $table->integer('ma_loai_san');
+            $table->string('ten');
+            $table->string('mo_ta');
             $table->timestamps();
         });
     }

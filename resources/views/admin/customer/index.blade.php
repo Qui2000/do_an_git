@@ -24,6 +24,11 @@
       </div>
     @endif
     <!-- ============================================================== -->
+    <div class="search" style="margin-bottom: 10px;">
+      <input style="padding-left: 5px; width:215px" id="search" type="text" class="searchTerm" placeholder="Tìm kiếm tên khách hàng">
+      <i style="margin: 13px 0 0 -25px;" class="fa fa-search"></i>
+      </button>
+    </div>
     <!-- Row -->
     <div class="row">
       <div class="card" style="margin-left: 15px;">
@@ -37,56 +42,43 @@
       <div class="col-12">
         <div class="card">
           <div class="table-responsive">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Id</th>
-                  <th scope="col">Tên</th>
-                  <th scope="col">Ngày sinh</th>
-                  <th scope="col">Địa chỉ</th>
-                  <th scope="col">Số điện thoại</th>
-                  <th scope="col">Giới tính</th>
-                  <th scope="col">Quốc tịch</th>
-                  <th scope="col">Quyền</th>
-                  <th scope="col"></th>
-                </tr>
-              </thead>
-              <tbody>
-              @foreach($customers as $key => $customer)
-                <tr>
-                  <td>{{ $key +1 }}</td>
-                  <td>{{ $customer->ten }}</td>
-                  <td>{{ $customer->ngay_sinh }}</td>
-                  <td>{{ $customer->dia_chi }}</td>
-                  <td>{{ $customer->sdt }}</td>
-                  <td>{{ $customer->gioi_tinh }}</td>
-                  <td>{{ $customer->quoc_tich }}</td>
-                  @foreach($permissions as $permission)
-                    @if($permission->id == $customer->ma_quyen)
-                      <td>{{ $permission->ten }}</td>
-                    @endif
-                  @endforeach
-                  <td>
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.customer.edit', ['id'=> $customer->id]) }}" aria-expanded="false">
-                      Sửa<i style="font-size: 25px; padding-right: 5px;" class="mdi mdi-account-edit"></i>
-                    </a>
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: red" href="{{ route('admin.customer.delete', ['id'=> $customer->id]) }}" aria-expanded="false"
-                    onclick="return confirm('Ban co muon xoa khong?')">
-                    Xóa<i style="font-size: 25px;" class="mdi mdi-delete"></i>
-                    </a>
-                  </td>
-                </tr>
-              @endforeach
-              </tbody>
-            </table>
+            <div id="tableCustomer">
+
+            </div>
           </div>
         </div>
       </div>
     </div>
-    {{ $customers->links() }}
   </div>
   <!-- ============================================================== -->
   <!-- End Container fluid  -->
   <!-- ============================================================== -->
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+  function fetch_data(page)
+  {
+      let val_search = $('#search').val();
+      $.ajax({
+          url:`customer/search?search=${val_search}&page=${page}`,
+          success:function(data)
+          {
+              $('#tableCustomer').html(data.html);
+          }
+      });
+  }
+  $('#search').on('keyup',function(){
+      let val_search = $(this).val();
+      fetch_data(val_search);
+  });
+  
+  $(document).ready(function() { 
+      fetch_data();
+      $(document).on('click', '.pagination a', function(event){
+            event.preventDefault(); 
+            var page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
+  });
+</script>
 @endsection

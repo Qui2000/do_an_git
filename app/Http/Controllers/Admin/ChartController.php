@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\PutPitch;
 
 class ChartController extends Controller
 {
@@ -35,7 +36,25 @@ class ChartController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $tuNgay = $data['tu_ngay'];
+        // $denNgay = $data['den_ngay'];
+
+        $thongKe = PutPitch::where('ngay_dat', 'like', '%'. $tuNgay .'%')->orderBy('ngay_dat', 'ASC')->get();
+        $tongTien = 0;
+        foreach($thongKe as $key => $val) {
+            $tongTien += $val->so_tien_thanh_toan;
+            $soLuongDatSan = count($thongKe);
+            $ngayDat = $val->ngay_dat;
+            $chart_data[] = array(
+                'ngayDat' => $ngayDat,
+                'tongTien' => $tongTien,
+                'soLuongDatSan' => $soLuongDatSan,
+            );
+        }
+        
+        echo $data = json_encode($chart_data);
+
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\FootballPitch;
 
 class FootballPitchController extends Controller
 {
@@ -14,7 +15,8 @@ class FootballPitchController extends Controller
      */
     public function index()
     {
-        return view('admin.football_pitch.index');
+        $footballPitchs = FootballPitch::latest()->paginate(5);
+        return view('admin.football_pitch.index', compact('footballPitchs'));
     }
 
     /**
@@ -24,7 +26,7 @@ class FootballPitchController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.football_pitch.add');
     }
 
     /**
@@ -35,7 +37,14 @@ class FootballPitchController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $footballPitch = new FootballPitch;
+        $data = $request->all();
+        if($footballPitch->create($data))
+        {
+            return redirect()->route('admin.football_pitch.index')->with('success',('Thêm thông tin sân bóng thành công!'));
+        }else{
+            return redirect()->route('admin.football_pitch.index')->withError('Thêm thông tin sân bóng thất bại!');
+        }
     }
 
     /**
@@ -57,7 +66,8 @@ class FootballPitchController extends Controller
      */
     public function edit($id)
     {
-        //
+        $footballPitch = FootballPitch::find($id);
+        return view('admin.football_pitch.edit', compact('footballPitch'));
     }
 
     /**
@@ -69,7 +79,15 @@ class FootballPitchController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $footballPitch = FootballPitch::find($id); 
+        $data = $request->all();
+        // dd($data);
+        if($footballPitch->update($data))
+        {
+            return redirect()->route('admin.football_pitch.index')->with('success',('Sửa thông tin sân bóng thành công!'));
+        }else{
+            return redirect()->route('admin.football_pitch.index')->withError('Sửa thông tin sân bóng thất bại!');
+        }
     }
 
     /**
@@ -80,6 +98,12 @@ class FootballPitchController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $footballPitch = FootballPitch::find($id); 
+        if($footballPitch->delete())
+        {
+            return redirect()->route('admin.football_pitch.index')->with('success',('Xóa thông tin sân bóng thành công!'));
+        }else{
+            return redirect()->route('admin.football_pitch.index')->withError('Xóa thông tin sân bóng thất bại!');
+        }
     }
 }

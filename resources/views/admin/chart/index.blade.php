@@ -2,26 +2,10 @@
 @section('title','Customer')
 @section('content')
 <style>
-  input[type=file] {
-    width: 90px;
-    color: transparent;
-  }
   .chart_customer {
-      margin-top: 100px;
+    margin-top: 100px;
   }
 </style>
-<script>
-  window.pressed = function () {
-    var a = document.getElementById('nhan');
-    if (a.value == "") {
-        fileLabel.innerHTML = "Choose file";
-    }
-    else {
-        var theSplit = a.value.split('\\');
-        fileLabel.innerHTML = theSplit[theSplit.length - 1];
-    }
-};
-</script>
 <div class="page-wrapper">
   <!-- ============================================================== -->
   <!-- End Bread crumb and right sidebar toggle -->
@@ -34,89 +18,98 @@
     <!-- Start Page Content -->
     <div class="row page-titles">
       <div class="col-md-6 col-8 align-self-center">
-        <h3 class="text-themecolor m-b-0 m-t-0">Thống kê</h3>
-        {{-- <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="javascript:void(0)">Trang chủ</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol> --}}
+        <h3 class="text-themecolor m-b-0 m-t-0">Thống kê số lượng đặt sân</h3>
       </div>
     </div>
-    <div class="chart_customer">
-        <div id="columnChart" style="height: 500px; width: 100%;"></div>
+    <div class="row">
+      <form autocomplete="off" style="display: inline-flex">
+        @csrf
+        <div class="col-md-3">
+          <p>Theo ngày: <input type="text" id="datepicker" class="form-control"></p>
+          <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
+        </div>
+        <!-- <div class="col-md-3">
+          <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
+        </div> -->
+        <div class="col-md-3">
+          <p>
+            Lọc theo:
+            <select class="dashboard-filter form-control">
+              <option>---Chọn---</option>
+              <option value="7ngay">7 ngày trước</option>
+              <option value="thangTruoc">Tháng trước</option>
+              <option value="thangNay">Tháng này</option>
+              <option value="365ngayqua">365 ngày qua</option>
+            </select>
+          </p>
+        </div>
+
+      </form>
+      <div class="col-md-12">
+        <div id="chart" style="height: 250px;"></div>
+      </div>
     </div>
+  </div>
+  <div class="chart_customer">
+    <div id="columnChart" style="height: 500px; width: 100%;"></div>
   </div>
   <!-- ============================================================== -->
   <!-- End Container fluid  -->
   <!-- ============================================================== -->
 </div>
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
+  $(document).ready(function(){
+    var chart = new Morris.Line({
+      element: 'chart',
+      lineColors: ['#50c763', '#dee825', '#e83c25'],
+      pointFillColors: ['#ffffff'],
+      pointStrokeColors:['#0000000'],
+      fillObarcity: 0.6,
+      hideHover: 'auto',
+      parseTime: false,
+      xkey: 'ngayDat',
+      ykeys: ['tongTien','soLuongDatSan'],
+      labels: ['Tổng tiền', 'Số lượng đặt sân']
+    });
+    $( "#datepicker" ).datepicker({
+      prevText: "Tháng trước",
+      nextText: "Tháng sau",
+      dataFormat: "yy-mm-dd",
+      dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
+      duration: "slow",
+      dateFormat: 'yy-mm-dd',
+    });
 
-var columnChartValues = [{
-  y: 686.04,
-  label: "Tháng 1",
-  color: "#1f77b4"
-}, {
-  y: 381.84,
-  label: "Tháng 2",
-  color: "#ff7f0e"
-}, {
-  y: 375.76,
-  label: "Tháng 3",
-  color: " #ffbb78"
-}, {
-  y: 97.48,
-  label: "Tháng 4",
-  color: "#d62728"
-}, {
-  y: 94.2,
-  label: "Tháng 5",
-  color: "#98df8a"
-}, {
-  y: 650.28,
-  label: "Tháng 6",
-  color: "#bcbd22"
-}, {
-  y: 300.2,
-  label: "Tháng 7",
-  color: "#f7b6d2"
-}];
-renderColumnChart(columnChartValues);
+    $( "#datepicker2" ).datepicker({
+      prevText: "Tháng trước",
+      nextText: "Tháng sau",
+      dataFormat: "yy-mm-dd",
+      dayNamesMin: ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ nhật"],
+      duration: "slow",
+      dateFormat: 'yy-mm-dd',
+    });
 
-function renderColumnChart(values) {
-
-  var chart = new CanvasJS.Chart("columnChart", {
-    backgroundColor: "white",
-    colorSet: "colorSet3",
-    title: {
-      text: "Thống kê khách hàng",
-      fontFamily: "Verdana",
-      fontSize: 25,
-      fontWeight: "normal",
-    },
-    animationEnabled: true,
-    legend: {
-      verticalAlign: "bottom",
-      horizontalAlign: "center"
-    },
-    theme: "theme2",
-    data: [
-
-      {
-        indexLabelFontSize: 15,
-        indexLabelFontFamily: "Monospace",
-        indexLabelFontColor: "darkgrey",
-        indexLabelLineColor: "darkgrey",
-        indexLabelPlacement: "outside",
-        type: "column",
-        showInLegend: false,
-        legendMarkerColor: "grey",
-        dataPoints: values
-      }
-    ]
-  });
-
-  chart.render();
-}
+    $("#btn-dashboard-filter").click(function() {
+      var tu_ngay = $("#datepicker").val();
+      // var den_ngay = $("#datepicker2").val();
+      var token = $("#token").val();
+      $.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					    }
+				    });
+      $.ajax({
+        url: "{{ route('admin.chart.search') }}",
+        type:"POST",
+        dataType: "JSON",
+        data: { tu_ngay: tu_ngay },
+        success: function(data) {
+          chart.setData(data);
+        },
+      })
+    })
+  })
 </script>
 @endsection

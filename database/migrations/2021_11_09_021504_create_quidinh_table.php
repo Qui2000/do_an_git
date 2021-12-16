@@ -15,6 +15,8 @@ class CreateQuidinhTable extends Migration
     {
         Schema::create('qui_dinh', function (Blueprint $table) {
             $table->id();
+            $table->string('ten');
+            $table->string('noi_dung');
             $table->timestamps();
         });
     }

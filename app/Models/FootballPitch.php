@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FootballPitch extends Model
 {
-    protected $table = 'san_bong';
+    protected $table = 'san';
     protected $fillable = [
         'ma_loai_san',
         'ten',

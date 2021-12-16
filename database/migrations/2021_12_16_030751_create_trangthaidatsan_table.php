@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePhieudatsanTable extends Migration
+class CreateTrangthaidatsanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreatePhieudatsanTable extends Migration
      */
     public function up()
     {
-        Schema::create('phieu_dat_san', function (Blueprint $table) {
+        Schema::create('trang_thai_dat_san', function (Blueprint $table) {
             $table->id();
+            $table->integer('ma_trang_thai');
+            $table->string('ten_trang_thai');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreatePhieudatsanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('phieu_dat_san');
+        Schema::dropIfExists('trang_thai_dat_san');
     }
 }

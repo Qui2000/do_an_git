@@ -15,6 +15,8 @@ class CreateQuyenTable extends Migration
     {
         Schema::create('quyen', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('ma_quyen');
             $table->timestamps();
         });
     }

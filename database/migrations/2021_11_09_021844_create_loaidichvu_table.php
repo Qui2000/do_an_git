@@ -15,6 +15,8 @@ class CreateLoaidichvuTable extends Migration
     {
         Schema::create('loai_dich_vu', function (Blueprint $table) {
             $table->id();
+            $table->integer('ma_dv');
+            $table->string('ten');
             $table->timestamps();
         });
     }
