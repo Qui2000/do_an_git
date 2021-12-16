@@ -15,6 +15,9 @@ class CreateLoaisanTable extends Migration
     {
         Schema::create('loai_san', function (Blueprint $table) {
             $table->id();
+            $table->string('ten');
+            $table->string('so_luong_nguoi_da');
+            $table->integer('ma_san');
             $table->timestamps();
         });
     }

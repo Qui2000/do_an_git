@@ -15,6 +15,10 @@ class CreateDichvuTable extends Migration
     {
         Schema::create('dich_vu', function (Blueprint $table) {
             $table->id();
+            $table->integer('ma_loai_dv');
+            $table->string('ten');
+            $table->float('gia_tien');
+            $table->integer('don_vi');
             $table->timestamps();
         });
     }

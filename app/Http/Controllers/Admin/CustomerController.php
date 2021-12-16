@@ -17,9 +17,18 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = Account::where('ma_quyen', 2)->latest()->paginate(5);
-        $permissions = Permission::where('id','<>', 0)->get();
-        return view('admin.customer.index',compact('customers', 'permissions'));
+        $result = $this->getAllCustomer();
+		return view('admin.customer.index')->with([
+            'customers'            => $result['customers'],
+            'permissions'        => $result['permissions'],
+        ]);
+    }
+
+    public function getAllCustomer()
+    {
+        $result['customers'] = Account::where('ma_quyen', 2)->latest()->paginate(5);
+        $result['permissions'] = Permission::where('id','<>', 0)->get();
+        return $result;
     }
 
     /**
@@ -42,15 +51,9 @@ class CustomerController extends Controller
     public function store(CreateAccountRequest $request)
     {
         $customer = new Account;
-        $customer->ten = $request->ten;
-        $customer->ngay_sinh = $request->ngay_sinh;
-        $customer->dia_chi = $request->dia_chi;
-        $customer->sdt = $request->sdt;
-        $customer->gioi_tinh = $request->gioi_tinh;
-        $customer->quoc_tich = $request->quoc_tich;
-        $customer->ma_quyen = 2;
+        $data = $request->all();
 
-        if($customer->save())
+        if($customer->create($data))
         {
             return redirect()->route('admin.customer.index')->with('success',('Thêm thông tin khách hàng thành công!'));
         }else{
@@ -58,6 +61,34 @@ class CustomerController extends Controller
         }
         
 
+    }
+
+    /**
+     * search.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        if($request->ajax()){
+            $result = [];
+            if (empty(request()->search)) {
+                $result = $this->getAllCustomer();
+                $view =  view('admin.customer.table')->with([
+                    'customers'   => $result['customers'],
+                    'permissions' => $result['permissions'],
+                ])->render();
+                return response()->json(['html' => $view]);
+            }
+            $result = $this->getAllCustomer();
+            $result['customers'] = Account::latest()->where('ten', 'LIKE', '%' . $request->search . '%')->paginate(5);
+            $view = view('admin.customer.table')->with([
+                'customers'   => $result['customers'],
+                'permissions' => $result['permissions'],
+            ])->render();
+            return response()->json(['html' => $view]);
+        }
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Service;
 
 class ServiceController extends Controller
 {
@@ -14,7 +15,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        return view('admin.service.index');
+        $services = Service::latest()->paginate(5);
+        return view('admin.service.index', compact('services'));
     }
 
     /**
@@ -24,7 +26,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.service.add');
     }
 
     /**
@@ -35,7 +37,14 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service = new Service;
+        $data = $request->all();
+        if($service->create($data))
+        {
+            return redirect()->route('admin.service.index')->with('success',('Thêm thông tin dịch vụ thành công!'));
+        }else{
+            return redirect()->route('admin.service.index')->withError('Thêm thông tin dịch vụ thất bại!');
+        }
     }
 
     /**
@@ -57,7 +66,8 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
-        //
+        $service = Service::find($id);
+        return view('admin.service.edit', compact('service'));
     }
 
     /**
@@ -69,7 +79,15 @@ class ServiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $service = Service::find($id); 
+        $data = $request->all();
+        // dd($data);
+        if($service->update($data))
+        {
+            return redirect()->route('admin.service.index')->with('success',('Sửa thông tin dịch vụ thành công!'));
+        }else{
+            return redirect()->route('admin.service.index')->withError('Sửa thông tin dịch vụ thất bại!');
+        }
     }
 
     /**
@@ -80,6 +98,12 @@ class ServiceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $service = Service::find($id); 
+        if($service->delete())
+        {
+            return redirect()->route('admin.service.index')->with('success',('Xóa thông tin dịch vụ thành công!'));
+        }else{
+            return redirect()->route('admin.service.index')->withError('Xóa thông tin dịch vụ thất bại!');
+        }
     }
 }

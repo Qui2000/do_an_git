@@ -17,9 +17,18 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        $personnels = Account::where('ma_quyen', 1)->latest()->paginate(5);
-        $permissions = Permission::where('id','<>', 0)->get();
-        return view('admin.personnel.index',compact('personnels', 'permissions'));
+        $result = $this->getAllPersonnel();
+		return view('admin.personnel.index')->with([
+            'personnels'            => $result['personnels'],
+            'permissions'        => $result['permissions'],
+        ]);
+    }
+
+    public function getAllPersonnel()
+    {
+        $result['personnels'] = Account::where('ma_quyen', 1)->latest()->paginate(5);
+        $result['permissions'] = Permission::where('id','<>', 0)->get();
+        return $result;
     }
 
     /**
@@ -42,22 +51,42 @@ class PersonnelController extends Controller
     public function store(CreateAccountRequest $request)
     {
         $customer = new Account;
-        $customer->ten = $request->ten;
-        $customer->ngay_sinh = $request->ngay_sinh;
-        $customer->dia_chi = $request->dia_chi;
-        $customer->sdt = $request->sdt;
-        $customer->gioi_tinh = $request->gioi_tinh;
-        $customer->quoc_tich = $request->quoc_tich;
-        $customer->ma_quyen = 1;
-
-        if($customer->save())
+        $data = $request->all();
+        if($customer->create($data))
         {
             return redirect()->route('admin.personnel.index')->with('success',('Thêm thông tin nhân viên thành công!'));
         }else{
             return redirect()->route('admin.personnel.index')->withError('Thêm thông tin nhân viên thất bại!');
         }
-        
 
+    }
+
+    /**
+     * search.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        if($request->ajax()){
+            $result = [];
+            if (empty(request()->search)) {
+                $result = $this->getAllPersonnel();
+                $view =  view('admin.personnel.table')->with([
+                    'personnels'   => $result['personnels'],
+                    'permissions' => $result['permissions'],
+                ])->render();
+                return response()->json(['html' => $view]);
+            }
+            $result = $this->getAllPersonnel();
+            $result['personnels'] = Account::latest()->where('ten', 'LIKE', '%' . $request->search . '%')->paginate(5);
+            $view = view('admin.personnel.table')->with([
+                'personnels'   => $result['personnels'],
+                'permissions' => $result['permissions'],
+            ])->render();
+            return response()->json(['html' => $view]);
+        }
     }
 
     /**

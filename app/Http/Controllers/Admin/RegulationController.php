@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Regulation;
 
 class RegulationController extends Controller
 {
@@ -14,7 +15,8 @@ class RegulationController extends Controller
      */
     public function index()
     {
-        return view('admin.regulation.index');
+        $regulations = Regulation::latest()->paginate(5);
+        return view('admin.Regulation.index', compact('regulations'));
     }
 
     /**
@@ -24,7 +26,7 @@ class RegulationController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.Regulation.add');
     }
 
     /**
@@ -35,7 +37,14 @@ class RegulationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regulations = new Regulation;
+        $data = $request->all();
+        if($regulations->create($data))
+        {
+            return redirect()->route('admin.regulation.index')->with('success',('Thêm thông tin qui định thành công!'));
+        }else{
+            return redirect()->route('admin.regulation.index')->withError('Thêm thông tin qui định thất bại!');
+        }
     }
 
     /**
@@ -57,7 +66,8 @@ class RegulationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $regulation = Regulation::find($id);
+        return view('admin.regulation.edit', compact('regulation'));
     }
 
     /**
@@ -69,7 +79,15 @@ class RegulationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $regulation = Regulation::find($id); 
+        $data = $request->all();
+        // dd($data);
+        if($regulation->update($data))
+        {
+            return redirect()->route('admin.regulation.index')->with('success',('Sửa thông tin qui định thành công!'));
+        }else{
+            return redirect()->route('admin.regulation.index')->withError('Sửa thông tin qui định thất bại!');
+        }
     }
 
     /**
@@ -80,6 +98,12 @@ class RegulationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $regulation = Regulation::find($id); 
+        if($regulation->delete())
+        {
+            return redirect()->route('admin.regulation.index')->with('success',('Xóa thông tin qui định thành công!'));
+        }else{
+            return redirect()->route('admin.regulation.index')->withError('Xóa thông tin qui định thất bại!');
+        }
     }
 }

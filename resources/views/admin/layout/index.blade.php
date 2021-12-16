@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('admin/assets/images/favicon.png') }}">
     <title>@yield('title') - Quản lý sân bóng đá Đa Phước</title>
@@ -17,6 +18,8 @@
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{ asset('admin/css/colors/blue.css') }}" id="theme" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css') }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -90,6 +93,9 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{ asset('admin/assets/plugins/styleswitcher/jQuery.style.switcher.js') }}"></script>
+    <script src="{{ asset('https://code.jquery.com/ui/1.13.0/jquery-ui.js') }}"></script>
+    <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js') }}"></script>
+    <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js') }}"></script>
 </body>
 
 </html>

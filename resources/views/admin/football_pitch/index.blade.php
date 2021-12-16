@@ -1,24 +1,6 @@
 @extends('admin.layout.index')
 @section('title','Customer')
 @section('content')
-<style>
-  input[type=file] {
-    width: 90px;
-    color: transparent;
-  }
-</style>
-<script>
-  window.pressed = function () {
-    var a = document.getElementById('nhan');
-    if (a.value == "") {
-        fileLabel.innerHTML = "Choose file";
-    }
-    else {
-        var theSplit = a.value.split('\\');
-        fileLabel.innerHTML = theSplit[theSplit.length - 1];
-    }
-};
-</script>
 <div class="page-wrapper">
   <!-- ============================================================== -->
   <!-- End Bread crumb and right sidebar toggle -->
@@ -41,6 +23,13 @@
     <!-- ============================================================== -->
     <!-- Row -->
     <div class="row">
+      <div class="card" style="margin-left: 15px;">
+        <div class="table-responsive">
+          <a href="{{ route('admin.football_pitch.add') }}">
+            <button style="display: block ;" type="submit" class="btn btn-success">Thêm sân bóng</button>
+          </a>
+        </div>
+      </div>
       <!-- Column -->
       <div class="col-12">
         <div class="card">
@@ -56,38 +45,33 @@
                 </tr>
               </thead>
               <tbody>
-                @for($i = 1; $i <= 5; $i++)                
-                <tr>
-                  <td><?php echo $i ?></td>
-                  <td>01</td>
-                  <td>Sân A</td>
-                  <td>Sân bóng 5 người</td>
-                  <td>
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false">
-                      <i style="font-size: 25px; padding-right: 5px;" class="mdi mdi-account-edit"></i>
-                    </a>
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="" aria-expanded="false"
-                    onclick="return confirm('Ban co muon xoa khong?')">
-                    <i style="font-size: 25px;" class="mdi mdi-delete"></i>
-                  </a>
-                </td>
-              </tr>
-              @endfor
-              </tbody>
+              @foreach($footballPitchs as $key => $footballPitch)
+                
+              <tr>
+                <td>{{ $key+1 }}</td>
+                <td>{{ $footballPitch->ma_loai_san }}</td>
+                <td>{{ $footballPitch->ten }}</td>
+                <td>{{ $footballPitch->mo_ta }}</td>
+              <td>
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.football_pitch.edit', ['id'=> $footballPitch->id]) }}"" aria-expanded="false">
+                  Sửa<i style="font-size: 25px; padding-right: 5px;" class="mdi mdi-account-edit"></i>
+                </a>
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: red" href="{{ route('admin.football_pitch.delete', ['id'=> $footballPitch->id]) }}" aria-expanded="false"
+                onclick="return confirm('Ban co muon xoa khong?')">
+                Xóa<i style="font-size: 25px;" class="mdi mdi-delete"></i>
+                </a>
+              </td>
+            </tr>
+            @endforeach
+            </tbody>
             </table>
           </div>
         </div>
         <div style="float: right;">
         </div>
       </div>
-      <div class="col-12">
-        <div class="card">
-          <div class="table-responsive">
-            <a href=""><button style="display: block ;" type="submit" class="btn btn-success">Thêm sân bóng</button></a>
-          </div>
-        </div>
-      </div>
     </div>
+    {{ $footballPitchs->links() }}
   </div>
   <!-- ============================================================== -->
   <!-- End Container fluid  -->

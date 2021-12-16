@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBaocaoTable extends Migration
+class CreateChitietdichvuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateBaocaoTable extends Migration
      */
     public function up()
     {
-        Schema::create('bao_cao', function (Blueprint $table) {
+        Schema::create('chi_tiet_dich_vu', function (Blueprint $table) {
             $table->id();
+            $table->integer('ma_dat_san');
+            $table->integer('ma_dich_vu');
+            $table->integer('so_luong');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateBaocaoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bao_cao');
+        Schema::dropIfExists('chi_tiet_dich_vu');
     }
 }
