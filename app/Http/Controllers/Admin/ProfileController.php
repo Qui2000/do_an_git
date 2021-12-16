@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -35,7 +37,23 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $acounntId = Auth::id();
+        $account = Account::findOrFail($acounntId);
+        $data = $request->all();
+        // dd($data);
+        if($data['password'])
+        {
+            $data['password'] = bcrypt($data['password']);
+        }else{
+            $data['password'] = $account->password;
+        }
+    
+        if($account->update($data))
+        {
+            return redirect()->back()->with('success',('Cập nhật thông tin thành công!'));
+        }else{
+            return redirect()->back()->withError('Cập nhật thông tin thất bại!');
+        }
     }
 
     /**

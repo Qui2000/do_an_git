@@ -39,7 +39,7 @@
     </div>
     <div>
       @if(auth()->check())
-      <span>Xin chào: </span> <a style="margin-top: -15px;font-size: 14px;margin-left: -17px;" class="nav-link " href="">{{ Auth::User()->ten }}</a>
+      <span>Xin chào: </span> <a style="margin-top: -15px;font-size: 14px; text-align:center" class="nav-link " href="">{{ Auth::User()->ten }}</a>
       @endif
     </div>
 

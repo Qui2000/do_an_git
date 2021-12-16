@@ -45,10 +45,9 @@
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card">
                     <div class="card-body">
-                        <center class="m-t-30"> <img src="{{asset('upload/user/avatar/q.jpg')}}"
-                                class="rounded-circle" width="150" />
-                            <h4 class="card-title m-t-10">Hanna Gover</h4>
-                            <h6 class="card-subtitle">Accoubts Manager Amix corp</h6>
+                        <center class="m-t-30">
+                            <h4 class="card-title m-t-10">{{ Auth::user()->ten }}</h4>
+                            <h6 class="card-subtitle">{{ Auth::user()->email }}</h6>
                             <div class="row text-center justify-content-md-center">
                                 <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i>
                                         <font class="font-medium">254</font>
@@ -63,19 +62,16 @@
                     <div>
                         <hr>
                     </div>
-                    <div class="card-body"> <small class="text-muted">Email address </small>
-                        {{-- <h6>{{ Auth::user()->email }}</h6> <small class="text-muted p-t-30 db">Phone</small>
-                        <h6>{{ Auth::user()->phone }}</h6> <small class="text-muted p-t-30 db">Address</small>
-                        <h6>{{ Auth::user()->address }}</h6> --}}
+                    <div class="card-body"> <small class="text-muted">Địa chỉ </small>
                         <div class="map-box">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508"
-                                width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
-                        </div> <small class="text-muted p-t-30 db">Social Profile</small>
-                        <br />
-                        <button class="btn btn-circle btn-secondary"><i class="mdi mdi-facebook"></i></button>
-                        <button class="btn btn-circle btn-secondary"><i class="mdi mdi-twitter"></i></button>
-                        <button class="btn btn-circle btn-secondary"><i class="mdi mdi-youtube-play"></i></button>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.9226758923865!2d108.19934391478377!3d16.069501843699104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421852877a1d31%3A0x5dcee24136b718e6!2zTMOqIMSQ4buZLCBUaGFuaCBLaMOqLCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1639640987983!5m2!1svi!2s" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        <br>
+                        </div>
+                        <div style="text-align:center; margin:15px 0 15px 0">
+                            <button class="btn btn-circle btn-secondary"><i class="mdi mdi-facebook"></i></button>
+                            <button class="btn btn-circle btn-secondary"><i class="mdi mdi-twitter"></i></button>
+                            <button class="btn btn-circle btn-secondary"><i class="mdi mdi-youtube-play"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,7 +81,7 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="" method="POST" class="form-horizontal form-material"
-                            enctype="multipart/form-data">
+                            enctype="multipart/form-data" style="margin: 15px 0 0 10px">
                             @csrf
                             @if(session('success'))
                             <div class="alert alert-danger alert-dismissible">
@@ -109,10 +105,10 @@
                             @endif
 
                             <div class="form-group">
-                                <label class="col-md-12">Full Name</label>
+                                <label class="col-md-12">Tên</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="name" placeholder="" class="form-control form-control-line"
-                                        value="">
+                                    <input type="text" name="ten" placeholder="" class="form-control form-control-line"
+                                        value="{{ Auth::User()->ten }}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -120,39 +116,47 @@
                                 <div class="col-md-12">
                                     <input type="email" name="email" placeholder=""
                                         class="form-control form-control-line" name="example-email" id="example-email"
-                                        value="">
+                                        value="{{ Auth::User()->email }}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Password</label>
                                 <div class="col-md-12">
-                                    <input type="password" name="password" value=""
+                                    <input type="password" name="password" value="{{ Auth::User()->password }}"
                                         class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Phone No</label>
+                                <label class="col-md-12">Số điện thoại</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="phone" placeholder="123 456 7890" value=""
+                                    <input type="text" name="sdt" placeholder="123 456 7890" value="{{ Auth::User()->sdt }}"
                                         class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-12">Address</label>
+                                <label class="col-md-12">Địa chỉ</label>
                                 <div class="col-md-12">
-                                    <textarea rows="5" name="address" class="form-control form-control-line" aria-valuetext=""></textarea>
+                                    <input type="text" name="dia_chi" placeholder="123 456 7890" value="{{ Auth::User()->dia_chi }}"
+                                        class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-12">Select Country</label>
+                                <label class="col-md-12">Ngày làm việc</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="phone" placeholder="123 456 7890" value=""
+                                    <input type="text" name="ngay_lam_viec" placeholder="123 456 7890" value="{{ Auth::User()->ngay_lam_viec }}"
+                                        class="form-control form-control-line">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-12">Quốc tịch</label>
+                                <div class="col-md-12">
+                                    <input type="text" name="quoc_tich" placeholder="123 456 7890" value="{{ Auth::User()->quoc_tich }}"
                                         class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <button class="btn btn-success">Update Profile</button>
+                                    <button class="btn btn-success">Cập nhật</button>
                                 </div>
                             </div>
 

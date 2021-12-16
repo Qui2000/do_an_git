@@ -25,7 +25,7 @@
         <td>{{ $personnel->quoc_tich }}</td>
         <td>{{ $personnel->ngay_lam_viec }}</td>
         @foreach($permissions as $permission)
-          @if($permission->id == $personnel->ma_quyen)
+          @if($permission->ma_quyen == $personnel->ma_quyen)
             <td>{{ $permission->ten }}</td>
           @endif
         @endforeach

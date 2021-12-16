@@ -19,16 +19,28 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group([
+    'prefix' => 'admin',
+    'namespace' => 'Auth'
+], function () {
+    Route::get('/', 'LoginController@showLoginForm');
+    Route::get('/login', 'LoginController@showLoginForm');
+    Route::post('/login', 'LoginController@login');
+    Route::get('/logout', 'LoginController@logout');
+});
+
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group([
     'prefix'    => 'admin',
     'namespace' => 'Admin',
     'as'        => 'admin.',
+    'middleware' => ['admin']
 ],function(){
     Route::get('index', 'HomeController@index')->name('home');
 
     Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::post('profile', 'ProfileController@store')->name('updateProfile');
     // Route::get('putPitch', 'PutPitchController@index')->name('putPitch');
     Route::group([
         'prefix'    => 'putPitch',
@@ -123,6 +135,7 @@ Route::group([
     'prefix'    => 'frontend',
     'namespace' => 'Frontend',
     'as'        => 'frontend.',
+    
 ],function(){
     Route::get('index', 'HomeController@index')->name('index');
     Route::get('about', 'AboutController@index')->name('about');

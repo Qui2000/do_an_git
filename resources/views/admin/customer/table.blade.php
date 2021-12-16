@@ -23,7 +23,7 @@
         <td>{{ $customer->gioi_tinh }}</td>
         <td>{{ $customer->quoc_tich }}</td>
         @foreach($permissions as $permission)
-          @if($permission->id == $customer->ma_quyen)
+          @if($permission->ma_quyen == $customer->ma_quyen)
             <td>{{ $permission->ten }}</td>
           @endif
         @endforeach

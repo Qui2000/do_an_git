@@ -26,14 +26,14 @@ class AccountController extends Controller
     
     public function postRegister(Request $request)
     {   
-        $pass = $request->pass;
+        $password = $request->password;
         $pass_confirm = $request->pass_confirm;
-        if($pass == $pass_confirm) {
+        if($password == $pass_confirm) {
             $dataUser = [
                 'ten'       => $request->name,
                 'email'      => $request->email,
                 'sdt'      => $request->phone,
-                'mat_khau'   => bcrypt($request->pass),
+                'password'   => bcrypt($password),
                 'ma_quyen'      => 2,
             ];
             
@@ -62,6 +62,9 @@ class AccountController extends Controller
             $remember = true;
         }
         if ($this->doLogin($login, $remember)) {
+            if( Auth::check() && Auth::user()->ma_quyen == 0 || Auth::user()->ma_quyen == 1 ){
+                return redirect('admin/index');
+            }
             return redirect('/frontend/index')->with('success',('Đăng nhập thành công.'));;
         }else{
             return redirect()->back()->with('success',('Email hoặc mật khẩu không đúng.'));

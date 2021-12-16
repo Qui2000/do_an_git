@@ -16,6 +16,7 @@
                 <li>
                     <a href="{{ route('admin.customer.index') }}" class="waves-effect"><i class="fa fa-address-card-o m-r-10" aria-hidden="true"></i>Quản lý khách hàng</a>
                 </li>
+                @if(Auth::User()->ma_quyen == 0)
                 <li>
                     <a href="{{ route('admin.personnel.index') }}" class="waves-effect"><i class="fa fa-address-card-o m-r-10" aria-hidden="true"></i>Quản lý nhân viên</a>
                 </li>
@@ -28,12 +29,13 @@
                 <li>
                     <a href="{{ route('admin.regulation.index') }}" class="waves-effect"><i class="fa fa-info-circle m-r-10" aria-hidden="true"></i>Quản lý qui định</a>
                 </li>
+                @endif
                 <li>
                     <a href="{{ route('admin.chart.index') }}" class="waves-effect"><i class="fa fa-bar-chart m-r-10" aria-hidden="true"></i>Thống kê</a>
                 </li>
             </ul>
             <div class="text-center m-t-30">
-                <a href="https://themewagon.com/themes/free-bootstrap-4-admin-dashboard-template/" class="btn btn-danger">Đăng xuất</a>
+                <a href="{{ route('frontend.account.logout') }}" class="btn btn-danger">Đăng xuất</a>
             </div>
         </nav>
         <!-- End Sidebar navigation -->
