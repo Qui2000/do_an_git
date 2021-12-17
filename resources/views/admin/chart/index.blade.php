@@ -18,7 +18,7 @@
     <!-- Start Page Content -->
     <div class="row page-titles">
       <div class="col-md-6 col-8 align-self-center">
-        <h3 class="text-themecolor m-b-0 m-t-0">Thống kê số lượng đặt sân</h3>
+        <h3 class="text-themecolor m-b-0 m-t-0">Thống kê doanh thu đặt sân</h3>
       </div>
     </div>
     <div class="row">
@@ -28,9 +28,9 @@
           <p>Theo ngày: <input type="text" id="datepicker" class="form-control"></p>
           <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả">
         </div>
-        <!-- <div class="col-md-3">
+        <div class="col-md-3">
           <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
-        </div> -->
+        </div>
         <div class="col-md-3">
           <p>
             Lọc theo:
@@ -39,14 +39,13 @@
               <option value="7ngay">7 ngày trước</option>
               <option value="thangTruoc">Tháng trước</option>
               <option value="thangNay">Tháng này</option>
-              <option value="365ngayqua">365 ngày qua</option>
             </select>
           </p>
         </div>
 
       </form>
-      <div class="col-md-12">
-        <div id="chart" style="height: 250px;"></div>
+      <div class="col-md-12" style="margin-top: 50px">
+        <div id="chart" style="height: 350px;"></div>
       </div>
     </div>
   </div>
@@ -61,7 +60,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
   $(document).ready(function(){
-    var chart = new Morris.Line({
+    chart7days();
+    var chart = new Morris.Bar({
       element: 'chart',
       lineColors: ['#50c763', '#dee825', '#e83c25'],
       pointFillColors: ['#ffffff'],
@@ -70,8 +70,8 @@
       hideHover: 'auto',
       parseTime: false,
       xkey: 'ngayDat',
-      ykeys: ['tongTien','soLuongDatSan'],
-      labels: ['Tổng tiền', 'Số lượng đặt sân']
+      ykeys: ['tongTien','tienCoc'],
+      labels: ['Tổng tiền', 'Tiền cọc']
     });
     $( "#datepicker" ).datepicker({
       prevText: "Tháng trước",
@@ -91,9 +91,27 @@
       dateFormat: 'yy-mm-dd',
     });
 
+    function chart7days()
+    {
+      $.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					    }
+				    });
+      $.ajax({
+        url: "{{ route('admin.chart.autoChart') }}",
+        type:"POST",
+        dataType: "JSON",
+        data: { },
+        success: function(data) {
+          chart.setData(data);
+        },
+      }) 
+    }
+
     $("#btn-dashboard-filter").click(function() {
       var tu_ngay = $("#datepicker").val();
-      // var den_ngay = $("#datepicker2").val();
+      var den_ngay = $("#datepicker2").val();
       var token = $("#token").val();
       $.ajaxSetup({
 					headers: {
@@ -104,7 +122,25 @@
         url: "{{ route('admin.chart.search') }}",
         type:"POST",
         dataType: "JSON",
-        data: { tu_ngay: tu_ngay },
+        data: { tu_ngay: tu_ngay, den_ngay: den_ngay },
+        success: function(data) {
+          chart.setData(data);
+        },
+      })
+    })
+
+    $(".dashboard-filter").change(function() {
+      var dashboard_value = $(this).val();
+      $.ajaxSetup({
+					headers: {
+						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					    }
+				    });
+      $.ajax({
+        url: "{{ route('admin.chart.search_month') }}",
+        type:"POST",
+        dataType: "JSON",
+        data: { dashboard_value: dashboard_value},
         success: function(data) {
           chart.setData(data);
         },

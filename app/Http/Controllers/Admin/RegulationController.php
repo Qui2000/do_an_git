@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Regulation;
+use App\Http\Requests\CreateRegulationRequest;
 
 class RegulationController extends Controller
 {
@@ -35,7 +36,7 @@ class RegulationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateRegulationRequest $request)
     {
         $regulations = new Regulation;
         $data = $request->all();
@@ -77,7 +78,7 @@ class RegulationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateRegulationRequest $request, $id)
     {
         $regulation = Regulation::find($id); 
         $data = $request->all();

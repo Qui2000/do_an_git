@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FootballPitch;
+use App\Http\Requests\CreateFootBallPitchRequest;
 
 class FootballPitchController extends Controller
 {
@@ -35,7 +36,7 @@ class FootballPitchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateFootBallPitchRequest $request)
     {
         $footballPitch = new FootballPitch;
         $data = $request->all();
@@ -77,7 +78,7 @@ class FootballPitchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateFootBallPitchRequest $request, $id)
     {
         $footballPitch = FootballPitch::find($id); 
         $data = $request->all();
