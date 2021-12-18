@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAccountRequest extends FormRequest
+class UpdateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,10 @@ class CreateAccountRequest extends FormRequest
     {
         return [
             'ten' => 'required',
-            'ngay_sinh' => 'required',
-            'dia_chi' => 'required',
+            'email' => 'required',
+            'password' => 'required',
             'sdt' => 'required|max:11',
-            'gioi_tinh' => 'required',
+            'ngay_lam_viec' => 'required',
             'quoc_tich' => 'required',
         ];
     }
@@ -36,10 +36,10 @@ class CreateAccountRequest extends FormRequest
     {
         return [
             'ten.required' => 'Tên không được bỏ trống!',
-            'ngay_sinh.required' => 'Ngày sinh không được bỏ trống!',
-            'dia_chi.required' => 'Địa chỉ không được bỏ trống!',
+            'email.required' => 'Email không được bỏ trống!',
+            'password.required' => 'Mật khẩu không được bỏ trống!',
             'sdt.required' => 'Số điện thoại không được bỏ trống!',
-            'gioi_tinh.required' => 'Giới tính không được bỏ trống!',
+            'ngay_lam_viec.required' => 'Ngày làm việc không được bỏ trống!',
             'quoc_tich.required' => ':Quốc tịch không được bỏ trống!',
             'sdt.max' => 'Số điện thoại không dược vượt quá 11 số!'
         ];

@@ -128,6 +128,8 @@ Route::group([
     ],function(){
         Route::get('/', 'ChartController@index')->name('index');
         Route::post('search/', 'ChartController@store')->name('search');
+        Route::post('search-month/', 'ChartController@searchMonth')->name('search_month');
+        Route::post('auto-chart', 'ChartController@autoChart')->name('autoChart');
     });
 });
 

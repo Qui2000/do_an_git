@@ -35,8 +35,12 @@ class CreatePutPitchRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => ':attribute khong duoc bo trong!',
-            'max' => ':attribute khong duoc qua :max ky tu!'
+            'ten_nguoi_dat.required' => 'Tên người đặt không được bỏ trống!',
+            'sdt_nguoi_dat.required' => 'SDT người đặt không được bỏ trống!',
+            'ngay_dat.required' => 'Ngày đặt không được bỏ trống!',
+            'tien_coc.required' => 'Tiền cọc không được bỏ trống!',
+            'ngay_coc_tien.required' => 'Ngày cọc tiền không được bỏ trống!',
+            'so_tien_thanh_toan.required' => 'Số tiền thanh toán không được bỏ trống!',
         ];
     }
 }

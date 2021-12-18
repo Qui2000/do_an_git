@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UpdateAccountRequest;
 
 class ProfileController extends Controller
 {
@@ -35,7 +36,7 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UpdateAccountRequest $request)
     {
         $acounntId = Auth::id();
         $account = Account::findOrFail($acounntId);
