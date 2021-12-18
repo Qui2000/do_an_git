@@ -1,5 +1,39 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
+.orders .item_detail {
+  border: 0.5px solid #454d55;
+  cursor: pointer;
+}
+
+.orders .item_detail:hover {
+  background-color: green;
+}
+
+.orders .active__item {
+  background-color: green;
+}
+
+.orders #content-tab .table-dark h4 {
+  color: #fff;
+  font-weight: bolder;
+}
+
+.orders #content-tab .table-dark .add {
+  background-color: #03a9f4;
+  padding: 0 8px;
+  color: red;
+}
+
+.orders #content-tab .table-dark .qty-item {
+  width: 100px;
+}
+
+.orders #content-tab .table-dark .sub {
+  background-color: #03a9f4;
+  padding: 0 8px;
+  color: red;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

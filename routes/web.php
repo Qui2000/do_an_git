@@ -154,6 +154,15 @@ Route::group([
         Route::post('login', 'AccountController@postLogin')->name('postLogin');
         Route::get('logout', 'AccountController@logout')->name('logout');
     });
+
+    Route::group([
+        'prefix' => 'order', 
+        'as' => 'order.'
+    ], function(){
+        Route::post('/order', 'OrderController@create')->name('post');
+    });
 });
+
+
 
 

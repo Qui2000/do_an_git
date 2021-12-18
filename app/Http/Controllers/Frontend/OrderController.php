@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\FootballPitch;
+use App\Http\Requests\CreateOrderRequest;
 
 class OrderController extends Controller
 {
@@ -14,7 +16,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('frontend.order.index');
+        $footballPitch = $this->getAllFootballPitch();
+
+        return view('frontend.order.index')->with([
+            'listFootballPitch'     => $footballPitch,
+        ]);
     }
 
     /**
@@ -22,9 +28,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CreateOrderRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -81,5 +87,10 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAllFootballPitch()
+    {
+        return FootballPitch::all();
     }
 }
