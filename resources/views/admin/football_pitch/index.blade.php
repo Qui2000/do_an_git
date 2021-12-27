@@ -34,9 +34,9 @@
       <div class="col-12">
         <div class="card">
           <div class="table-responsive">
-            <table class="table">
+            <table class="table table-striped">
               <thead class="thead-light">
-                <tr>
+                <tr class="bg_tr">
                   <th scope="col">Id</th>
                   <th scope="col">Mã loại sân</th>
                   <th scope="col">Tên</th>

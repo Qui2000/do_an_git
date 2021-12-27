@@ -1,13 +1,11 @@
-<table class="table">
+<table class="table table-striped">
     <thead class="thead-light">
-        <tr>
+        <tr class="bg_tr">
             <th scope="col">Id</th>
             <th scope="col">Mã tài khoản</th>
             <th scope="col">Tên người đặt</th>
             <th scope="col">SDT người đặt</th>
             <th width="150px" scope="col">Ngày đặt</th>
-            <th scope="col">Tiền cọc</th>
-            <th scope="col">Ngày cọc tiền</th>
             <th scope="col">Số tiền thanh toán</th>
             <th scope="col">Trạng thái</th>
             <th width="150px" scope="col"></th>
@@ -21,14 +19,18 @@
             <td>{{ $putPitch->ten_nguoi_dat }}</td>
             <td>{{ $putPitch->sdt_nguoi_dat }}</td>
             <td>{{ $putPitch->ngay_dat }}</td>
-            <td>{{ $putPitch->tien_coc }}</td>
-            <td>{{ $putPitch->ngay_coc_tien }}</td>
-            <td>{{ $putPitch->so_tien_thanh_toan }}</td>
+            <td>{{ number_format($putPitch->so_tien_thanh_toan) }} VND</td>
             @foreach($statusPutPitchs as $statusPutPitch)
                 @if($statusPutPitch['id'] == $putPitch->ma_trang_thai)
-                    <td>{{ $statusPutPitch['ten_trang_thai'] }}</td>
-                {{-- @else
-                    <td></td> --}}
+                    @if($statusPutPitch['id'] == 2)
+                        <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm badge-success">{{ $statusPutPitch['ten_trang_thai'] }} </span>
+                        </td>
+                    @elseif($statusPutPitch['id'] == 1)
+                        <td class="align-middle text-center text-sm">
+                            <span class="badge badge-sm badge-warning">{{ $statusPutPitch['ten_trang_thai'] }} </span>
+                        </td>
+                    @endif
                 @endif
             @endforeach
             <td>

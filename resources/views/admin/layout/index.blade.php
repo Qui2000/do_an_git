@@ -27,6 +27,12 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style>
+    .bg_tr {
+        color: #ffffff;
+        background: linear-gradient(to right, #0178bc 0%, #00bdda 100%);
+    }
+</style>
 
 <body class="fix-header fix-sidebar card-no-border">
     <!-- ============================================================== -->

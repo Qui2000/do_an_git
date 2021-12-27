@@ -44,7 +44,7 @@
             <!-- Column -->
             <div class="col-lg-4 col-xlg-3 col-md-5">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body" style="background: antiquewhite;">
                         <center class="m-t-30">
                             <h4 class="card-title m-t-10">{{ Auth::user()->ten }}</h4>
                             <h6 class="card-subtitle">{{ Auth::user()->email }}</h6>

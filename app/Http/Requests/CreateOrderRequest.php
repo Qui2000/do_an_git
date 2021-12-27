@@ -25,7 +25,6 @@ class CreateOrderRequest extends FormRequest
     {
         return [
             'ma_loai_san' => 'required',
-            'ngay_order' => 'required',
             'chi_tiet' => 'required|array',
         ];
     }

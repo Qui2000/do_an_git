@@ -16,8 +16,10 @@ class AdminAuthentication
      */
     public function handle($request, Closure $next)
     {
-        if( Auth::check() && Auth::user()->ma_quyen == 0 || Auth::user()->ma_quyen == 1 ){
-            return $next($request);
+        if( Auth::check() ){
+            if(Auth::user()->ma_quyen == 0 || Auth::user()->ma_quyen == 1 ){
+                return $next($request);
+            }
         }else{
             return redirect('frontend/account/login');
         }

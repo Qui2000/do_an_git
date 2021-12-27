@@ -17,8 +17,6 @@ class CreateDatsanTable extends Migration
             $table->id();
             $table->integer('ma_tk');
             $table->date('ngay_dat');
-            $table->float('tien_coc');
-            $table->date('ngay_coc_tien');
             $table->string('ten_nguoi_dat');
             $table->string('sdt_nguoi_dat');
             $table->float('so_tien_thanh_toan');

@@ -200,7 +200,49 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ mix('/js/app.js') }}"></script>
+{{-- <script src="{{ mix('/js/app.js') }}"></script> --}}
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+  var usd = $("#vn_to_usd").val();
+  paypal.Button.render({
+    // Configure environments
+    env: 'sandbox',
+    client: {
+      sandbox: 'AbmrKN0NrQLK0onox9m4xQUJ-XVU2OtPFBK3TAwHArHZFQq26dI_UpkmssfQDY90q1ioBdOKa5M_IuTC',
+      production: 'demo_production_client_id'
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+      size: 'small',
+      color: 'gold',
+      shape: 'pill',
+    },
+
+    // Enable Pay Now checkout flow (optional)
+    commit: true,
+
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: `${usd}`,
+            currency: 'USD'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        window.location.href = "{{URL::to('frontend/checkout/history')}}"
+      });
+    }
+  }, '#paypal-button');
+
+</script>
 @stack('after-scripts')
 </body>
 

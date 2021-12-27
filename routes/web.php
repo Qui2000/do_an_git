@@ -157,9 +157,20 @@ Route::group([
 
     Route::group([
         'prefix' => 'order', 
-        'as' => 'order.'
+        'as' => 'order.',
+        'middleware' => ['customer']
     ], function(){
         Route::post('/order', 'OrderController@create')->name('post');
+    });
+    
+    Route::group([
+        'prefix' => 'checkout', 
+        'as' => 'checkout.'
+    ], function(){
+        Route::get('/checkout', 'CheckoutController@index')->name('index');
+        Route::get('/success', 'CheckoutController@show')->name('success');
+        Route::get('/history', 'CheckoutController@store')->name('history');
+        Route::get('/showHistory', 'CheckoutController@showHistory')->name('showHistory');
     });
 });
 
