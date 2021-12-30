@@ -31,7 +31,7 @@
             <div class="container">
                 <div class="table-responsive cart_info">
                     <div>
-                        <a href=" {{ route('frontend.checkout.showHistory') }} " style="float: right; font-size: 18px">Xem lịch sử đặt sân</a>
+                        <a href=" {{ route('frontend.checkout.showHistory') }} " style="float: right; font-size: 18px; color:#2eca6a">Xem lịch sử đặt sân</a>
                     </div>
                     <table class="table table-condensed">
                         <thead>
@@ -51,25 +51,34 @@
                         <tbody>
                             @php
                             $total = 0;
+                            use App\Models\FootballPitch;
                             @endphp
                             @if(session()->has('order'))
                             <?php 
                               $carts = session()->get('order');
                               $total = 0;
-                          ?>
-                            @foreach($carts as $key => $value)
-                            <?php
-                            $total += $value['gia_tien'] 
-                          ?>
+                            ?>
+                                @foreach($carts as $key => $value)
+                                <?php
+                                $total += $value['gia_tien'] 
+                            ?>
                             <tr id="{{$key}}">
                                 <td class="cart_product">
                                     {{ $value['ma_dat_san'] }}
                                 </td>
                                 <td class="cart_description">
-                                    {{ $value['ma_san'] == 1 ? "Sân 5" : "Sân 7" }}
+                                    @foreach($footballPitchs as $key => $footballPitch)
+                                        @if($footballPitch['id'] ==  $value['ma_san'])
+                                            {{ $footballPitch['ten'] }}
+                                        @endif
+                                    @endforeach
                                 </td>
                                 <td class="cart_price">
-                                    {{ $value['khung_gio'] }}
+                                    @foreach (FootballPitch::LIST_TIME_ORDER as $key => $item)
+                                    @if($key == $value['khung_gio'])
+                                        {{ $item }}
+                                    @endif
+                                    @endforeach
                                 </td>
                                 <td class="cart_price">
                                     {{ $value['gia_san'] }} VND
@@ -90,7 +99,7 @@
                                     {{ number_format($value['gia_tien']) }} VND
                                 </td>
                                 <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+                                    <a class="cart_quantity_delete" href="{{ route('frontend.checkout.deleteSession', ['id'=> $value['id']]) }}"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -103,20 +112,33 @@
                                     <table class="table table-condensed total-result">
                                         <tr>
                                             <td style="font-weight: 600;">Tổng tiền: </td>
-                                            <td style="color: rgb(46, 202, 106);font-weight: 600;"><span><span class="total">
-                                                        <?php echo  number_format($total);  ?> VND
-                                                    </span></td>
+                                            <td style="color: rgb(46, 202, 106);font-weight: 600;">
+                                                <span class="total">
+                                                    <?php echo  number_format($total);  ?> VND
+                                                </span>
+                                            </td>
                                         </tr>
                                         <tr class="btn-order">
                                             <td style="font-weight: 600;">Thanh toán bằng: </td>
+                                            @if($total > 0)
                                             <td>
-                                                <?php 
-                                            $vn_to_usd = $total/22930
-                                          ?>
-                                                <input type="hidden" id="vn_to_usd"
-                                                    value="{{ (round($vn_to_usd, 2)) }}">
-                                                <div id="paypal-button"></div>
+                                                <a style="background: #2eca6a;
+                                                padding: 5px;
+                                                border-radius: 10px;
+                                                text-decoration: none;
+                                                font-weight: 700;
+                                                color: white;" href=" {{ route('frontend.checkout.vnpay') }} ">VNPAY</a>
                                             </td>
+                                            @else 
+                                            <td>
+                                                <a disabled style="background: #2eca6a;
+                                                padding: 5px;
+                                                border-radius: 10px;
+                                                text-decoration: none;
+                                                font-weight: 700;
+                                                color: white;" href=" {{ route('frontend.checkout.vnpay') }} ">VNPAY</a>
+                                            </td>
+                                            @endif
                                         </tr>
                                     </table>
                                 </td>
@@ -129,11 +151,29 @@
         <!--/#cart_items-->
     </main>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-    $("#paypal-button").click(function(e){
-        e.preventDefault();
-        
-        alert('ok');
-    })
+    $(document).ready(function(){
+        // alert('ok')
+        $('.cart_quantity_delete').click(function(){
+            $(this).closest('tr').remove();
+            valID = $(this).closest('tr').attr('id');
+            // alert(valID);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type:"GET",
+                url: "{{ route('frontend.checkout.deleteSession') }}",
+                data: {valID:valID},
+                success:function(data){
+                    console.log(data);
+                }
+            });
+            return false;
+        })
+    });
 </script>
 @endsection

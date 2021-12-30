@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\FootballPitch;
 use App\Models\PutPitchDetail;
 use App\Models\PutPitch;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Polyfill\Intl\Idn\Resources\unidata\Regex;
 
 class CheckoutController extends Controller
 {
@@ -17,23 +20,99 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        return view('frontend.checkout.index');
+        $footballPitchs = FootballPitch::all();
+        return view('frontend.checkout.index', compact('footballPitchs'));
     }
 
     public function showHistory()
     {
-        $historyOrders = PutPitchDetail::all();
+        $user_id = Auth::user()->id;
+        $historyOrders = PutPitchDetail::latest()
+            ->where('ma_tk', $user_id)
+            ->paginate(5);
+        
+        // dd($historyOrders);
         return view('frontend.checkout.history', compact('historyOrders'));
     }
 
+    
+    public function showVnpay()
+    {
+        return view('frontend.vnpay.index');
+        
+    }
+
+    function RandomString($lenght)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randstring = '';
+        for ($i = 0; $i < $lenght; $i++) {
+            $randstring = $characters[rand(0, strlen($characters)-1)];
+        }
+        return $randstring;
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createPayment(Request $request)
     {
-        //
+        $vnp_TxnRef = $this->RandomString(15); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
+        $vnp_OrderInfo = $request->order_desc;
+        $vnp_OrderType = $request->order_type;
+        $vnp_Amount = $request->amount;
+        $vnp_Locale = $request->language;
+        $vnp_BankCode = $request->bank_code;
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+        
+        $inputData = array(
+            "vnp_Version" => "2.1.0",
+            "vnp_Amount" => $vnp_Amount * 100,
+            "vnp_Command" => "pay",
+            "vnp_CreateDate" => date('YmdHis'),
+            "vnp_CurrCode" => "VND",
+            "vnp_IpAddr" => $vnp_IpAddr,
+            "vnp_Locale" => $vnp_Locale,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            "vnp_OrderType" => $vnp_OrderType,
+            "vnp_TxnRef" => $vnp_TxnRef,
+            "vnp_TmnCode" => env('VNP_TMN_CODE'),
+            "vnp_ReturnUrl" => route('frontend.checkout.history'),
+           
+        );
+
+        if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+            $inputData['vnp_BankCode'] = $vnp_BankCode;
+        }
+
+        ksort($inputData);
+
+        $query = "";
+        $i = 0;
+        $hashdata = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashdata .= urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+            $query .= urlencode($key) . "=" . urlencode($value) . '&';
+        }
+
+        $vnp_Url = env('VNP_URL') . "?" . $query;
+        if (env('VNP_HASH_SECRET')) {
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, env('VNP_HASH_SECRET'));//  
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+        }
+
+        // dd($vnp_Url);
+
+        return redirect($vnp_Url);
+
+       
     }
 
     /**
@@ -48,6 +127,7 @@ class CheckoutController extends Controller
             $orders = session()->get('order');
             foreach ($orders as $key => $order) {
                 PutPitchDetail::create([
+                    "ma_tk" => Auth::user()->id,
                     "ma_dat_san" => $order['ma_dat_san'],
                     "ma_san" => $order['ma_san'],
                     "khung_gio" => $order['khung_gio'],
@@ -65,12 +145,43 @@ class CheckoutController extends Controller
                     'ten_nguoi_dat' => Auth::user()->ten,
                     'sdt_nguoi_dat' => Auth::user()->sdt,
                     'so_tien_thanh_toan' => $order['gia_tien'],
-                    'ma_trang_thai' => 1
+                    'ma_trang_thai' => 2
                 ]);
             }
             $orders = session()->forget('order');
         } 
         return redirect()->route('frontend.checkout.success');
+    }
+
+    /**
+     * search.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        if($request->ajax()){
+            $result = [];
+            $user_id = Auth::user()->id;
+            if (empty(request()->search)) {
+                $historyOrders = PutPitchDetail::where('ma_tk', $user_id)
+                    ->paginate(5);
+                $view =  view('frontend.checkout.table')->with([
+                    'historyOrders'   => $historyOrders,
+                ])->render();
+                return response()->json(['html' => $view]);
+            }
+            if($request->search == 'Đã đặt') {
+                $result['historyOrders'] = PutPitchDetail::latest()->where('ma_tk', $user_id)->where('ngay_gio_huy', null)->paginate(5);
+            } else {
+                $result['historyOrders'] = PutPitchDetail::latest()->where('ma_tk', $user_id)->where('ngay_gio_huy','<>', null)->paginate(5);
+            }
+            $view = view('frontend.checkout.table')->with([
+                'historyOrders'   => $result['historyOrders'],
+            ])->render();
+            return response()->json(['html' => $view]);
+        }
     }
 
     /**
@@ -104,7 +215,13 @@ class CheckoutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $date = Carbon::now();
+        $today = $date->toDateTimeString();
+        $putPitchDetail = PutPitchDetail::find($id);
+        $putPitchDetail->ngay_gio_huy = $today;
+        $putPitchDetail->update();
+        return redirect()->back()->with('success',('Hủy đặt sân thành công!'));
+        
     }
 
     /**
@@ -115,6 +232,28 @@ class CheckoutController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $putPitch = PutPitchDetail::find($id); 
+        if($putPitch->delete())
+        {
+            return redirect()->route('frontend.checkout.showHistory')->with('success',('Xóa lịch sử đặt sân thành công!'));
+        }else{
+            return redirect()->route('frontend.checkout.showHistory')->withError('Xóa lịch sử đặt sân thất bại!');
+        }
+    }
+    public function deleteSession()
+    {
+        $idOrder = $_GET['valID'];
+        if(session()->has('order')) {
+            $order = session()->get('order');
+            foreach($order as $key => $val) {
+                if($key == $idOrder) {
+                    unset($order[$key]);
+                }
+            }
+            session()->put('order', $order);
+        }else {
+            echo "Session does not exist!";
+        }
+
     }
 }

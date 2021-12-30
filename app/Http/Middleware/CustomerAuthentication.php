@@ -16,8 +16,10 @@ class CustomerAuthentication
      */
     public function handle($request, Closure $next)
     {
-        if( Auth::check() && Auth::user()->ma_quyen == 2 ){
-            return $next($request);
+        if( Auth::check() ) {
+            if(Auth::user()->ma_quyen == 2 || Auth::user()->ma_quyen == 1 || Auth::user()->ma_quyen == 0){
+                return $next($request);
+            }
         }else{
             return redirect('frontend/account/login');
         }

@@ -52,6 +52,10 @@ use App\Models\FootballPitch;
             padding: 0 3px;
             color: #fff;
         }
+        .disabled__item {
+            background-color: #ddd;
+            cursor: not-allowed;
+        }
 
     </style>
 @endsection
@@ -79,7 +83,6 @@ use App\Models\FootballPitch;
         </div>
         <div>
             <a href="{{ route('frontend.checkout.index') }}" style="float: right; font-size: 18px;color: #2eca6a;">Xem chi tiết đặt sân tại đây</a>
-            <a href="https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=1806000&vnp_Command=pay&vnp_CreateDate=20210801153333&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang+%3A5&vnp_OrderType=other&vnp_ReturnUrl=https%3A%2F%2Fdomainmerchant.vn%2FReturnUrl&vnp_TmnCode=DEMOV210&vnp_TxnRef=5&vnp_Version=2.1.0&vnp_SecureHash=3e0d61a0c0534b2e36680b3f7277743e8784cc4e1d68fa7d276e79c23be7d6318d338b477910a27992f5057bb1582bd44bd82ae8009ffaf6d141219218625c42">Thanh Toán</a>
         </div>
     </div>
 </section><!-- End Intro Single-->
@@ -94,10 +97,10 @@ use App\Models\FootballPitch;
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Loại sân</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="ma_loai_san">
+                        <select class="form-control" id="footballPitch" name="ma_loai_san">
                             <option value="default">----Chọn loại sân----</option>
                             @foreach ($listFootballPitch as $footballPitch)
-                                <option value="{{ $footballPitch->ma_san }}">{{ $footballPitch->ten }}</option>
+                                <option value="{{ $footballPitch->id }}">{{ $footballPitch->ten }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -109,9 +112,9 @@ use App\Models\FootballPitch;
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group" style="line-height: 6.5;">
+                    {{-- <div class="form-group" style="line-height: 6.5;">
                         <button type="button" id="showSchedule" class="btn btn-primary">Xem</button>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-md-3">
                     <div class="form-group" style="line-height: 6.5; float:right">
@@ -129,20 +132,21 @@ use App\Models\FootballPitch;
                     <tbody>
                         @foreach (FootballPitch::LIST_TIME_ORDER as $key => $item)
                             @if (($loop->iteration - 1) % 5 == 0)
-                                <tr>
+                            <tr>
                             @endif
-                            <td class="text-center item_detail" data-time="{{ $key }}">
+                            <td class="text-center item_detail a_{{ $key }}" data-time="{{ $key }}">
                                 <input type="hidden" name="key" value="{{ $key }}">
+                                <input type="hidden" name="timeText" class="timeText_{{ $key }}" value="{{ $key }}">
                                 <h4>{{ $item }}</h4>
-                                <input type="hidden" name="chi_tiet[{{ $key }}][khung_gio]" id="khung_gio" value="{{ $item }}" class="qty-item" disabled>
-                                <span>Còn chỗ</span><br>
+                                <input type="hidden" name="chi_tiet[{{ $key }}][khung_gio]" id="khung_gio" value="{{ $key }}" class="qty-item" disabled>
+                                <span class="status_{{ $key }} status">Còn chỗ</span><br>
                                 <div class=" row water mb-2" style="margin-top: 15px;">
                                     <div class="col-md-3" style="margin-top: -11px;">
                                         <span>Loại nước:</span>
                                     </div>
                                     <div class="col-md-6">
                                         <select id="loai_nuoc" name="chi_tiet[{{ $key }}][water_name]" class="qty-item text-center water_name" disabled>
-                                            <option value="">---Chọn---</option>
+                                            <option value="default">---Chọn---</option>
                                             @foreach($listService as $service)
                                                     <option value="{{ $service->ma_loai_dv }}">{{ $service->ten }}</option>
                                             @endforeach
@@ -169,77 +173,20 @@ use App\Models\FootballPitch;
         </div>
     </form>
 </div>
-{{-- <!-- Add and Edit category modal -->
-<div class="modal fade" id="crud-modal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="orderCrudModal" style="font-weight: 600"></h4>
-            </div>
-            <div class="modal-body">
-                <form name="categoryForm" action="" method="POST" id="newModalForm">
-                    <input type="hidden" name="cate_id" id="cate_id">
-                    @csrf
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Mã đặt sân: </strong>
-                                <span id="ma_dat_san">12345</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Mã sân</strong>
-                                <span id="ma_san">1</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Loại nước</strong>
-                                <span id="loai_nuoc">Nước khoáng</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Số lượng nước</strong>
-                                <span id="so_luong_nuoc">10</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Ngày sử dụng</strong>
-                                <span id="ngay_su_dung">2021-12-19</span>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <strong>Tổng tiền</strong>
-                                <span id="tong_tien">332,414 VND</span>
-                            </div>
-                        </div>
-                        
-                        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                            <button type="submit" id="btn-save" class="btn btn-primary">Thanh toán</button>
-                            <a href="" class="btn btn-danger">Trở lại</a>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> --}}
 @endsection
 @push('after-scripts')
 <script>
     $(document).ready(function() {
         $('.item_detail').click(function() {
-            if (!$(this).hasClass("active__item")) {
-                $(this).find('.qty-item').attr('disabled', false);
-                console.log($(this).find('.qty-item'));
-                $(this).addClass("active__item");
-            } else {
-                $(this).removeClass("active__item");
-                $(this).find('.qty-item').attr('disabled', true);
+            if(!$(this).hasClass('disabled__item')) {
+                if (!$(this).hasClass("active__item")) {
+                    $(this).find('.qty-item').attr('disabled', false);
+                    console.log($(this).find('.qty-item'));
+                    $(this).addClass("active__item");
+                } else {
+                    $(this).removeClass("active__item");
+                    $(this).find('.qty-item').attr('disabled', true);
+                }
             }
         });
 
@@ -259,32 +206,61 @@ use App\Models\FootballPitch;
             var valMaloaiSan = $('#exampleFormControlSelect1').val();
             var valDate = $('#dateRequest').val();
             var valKhungGio = $('#khung_gio').val();
-            var valLoaiNuoc = $('#loai_nuoc').val();
-            var valSoLuongNuoc = $('#so_luong').val();
-            if(valMaloaiSan =='default'){var valDate = $('#dateRequest').val();
-                alert('Vui lòng chọn loại sân!');
-                return false;
-            }
-            $('#orderCrudModal').html("Chi tiết đặt sân");
-            $('#cate_id').val('');
-            // $('#crud-modal').modal('show');
-        })
-
-        $('#showSchedule').click(function(e){
-            e.preventDefault();
-            var valMaloaiSan = $('#exampleFormControlSelect1').val();
-            var valDate = $('#dateRequest').val();
+            var valLoaiNuoc = $(this).find('#loai_nuoc').val();
+            var valSoLuongNuoc = $(this).find('#so_luong').val();
             if(valMaloaiSan =='default')
             {
-                var valDate = $('#dateRequest').val();
                 alert('Vui lòng chọn loại sân!');
                 return false;
-            } else {
-               
             }
+
+            if(valLoaiNuoc =='default')
+            {
+                alert('Vui lòng chọn loại nước uống!');
+                return false;
+            }
+
+            if(valSoLuongNuoc =='')
+            {
+                alert('Vui lòng chọn số lượng nước uống!');
+                return false;
+            }
+
+        })
+
+        $('#footballPitch,#dateRequest').on('change keyup', function(e){
+            var footballPitch = $('#footballPitch').val();
+            var dateRequest = $('#dateRequest').val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                type:"GET",
+                url: "{{ route('frontend.order.orderSearch') }}",
+                data: {footballPitch: footballPitch, dateRequest: dateRequest},
+                success:function(data){
+                    putPitchDetails = data.data;
+                    console.log(putPitchDetails);
+                    $(`.item_detail`).removeClass("disabled__item");
+                    $(`.status`).html('Còn chỗ');
+                    $.map(putPitchDetails, function(putPitchDetail, index) {
+                        val = $(`.timeText_${putPitchDetail.khung_gio}`).val();
+                        if (putPitchDetail.khung_gio == val) {
+                            $(`.a_${val}`).addClass("disabled__item");
+                            $(`.status_${ putPitchDetail.khung_gio }`).html('Hết chỗ');
+                        } 
+                    });
+                }
+            });
+
             
         })
 
+        $('.timeText_05:00-06:00').click(function () {
+            console.log(23);
+        })
     });
 </script>
 @endpush

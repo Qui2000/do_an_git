@@ -201,8 +201,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 {{-- <script src="{{ mix('/js/app.js') }}"></script> --}}
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-<script>
+{{-- <script src="https://www.paypalobjects.com/api/checkout.js"></script> --}}
+{{-- <script>
   var usd = $("#vn_to_usd").val();
   paypal.Button.render({
     // Configure environments
@@ -242,7 +242,7 @@
     }
   }, '#paypal-button');
 
-</script>
+</script> --}}
 @stack('after-scripts')
 </body>
 

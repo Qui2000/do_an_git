@@ -29,62 +29,54 @@
     <main id="main">
         <section id="cart_items">
             <div class="container">
+                @if(session('success'))
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                    <h4><i class="icon fa fa-check"></i>Thong bao!</h4>
+                    {{session('success')}}
+                </div>
+                @endif
+                <div class="search" style="margin-bottom: 15px;">
+                    <input style="padding: 5px; width:215px; color:black;border: 1px solid" id="search" type="text"
+                        class="searchTerm" placeholder="Xem sân (Đã đặt / Đã hủy)">
+                    <i style="margin: 13px 0 0 -25px;" class="fa fa-search"></i>
+                    </button>
+                </div>
                 <div class="table-responsive cart_info">
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr class="cart_menu" style="background: #2eca6a;font-size: 16px;color: black;font-weight: 600;">
-                                <td class="image">Mã đặt sân</td>
-                                <td class="description">Loại sân</td>
-                                <td class="description">Khung giờ</td>
-                                <td class="price">Loại nước</td>
-                                <td class="quantity">Số lượng nước</td>
-                                <td class="total">Ngày sử dụng</td>
-                                <td class="total">Tổng tiền</td>
-                                <td></td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($historyOrders as $key => $historyOrder)
-                            <tr id="{{$key}}">
-                                <td class="cart_product">
-                                    {{ $historyOrder['ma_dat_san'] }}
-                                </td>
-                                <td class="cart_description">
-                                    {{ $historyOrder['ma_san'] == 1 ? "Sân 5" : "Sân 7" }}
-                                </td>
-                                <td class="cart_price">
-                                    {{ $historyOrder['khung_gio'] }}
-                                </td>
-                                <td class="cart_quantity">
-                                    {{ $historyOrder['ma_loai_dv'] == 1 ? "Nước Khoáng" : "Nước Sting" }}
-                                </td>
-                                <td class="cart_quantity">
-                                    {{ $historyOrder['so_luong_dv'] }} chai
-                                </td>
-                                <td class="cart_quantity">
-                                    {{ $historyOrder['ngay_su_dung'] }}
-                                </td>
-                                <td class="cart_quantity">
-                                    {{ number_format($historyOrder['gia_tien']) }} VND
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div id="tableHistory">
+
+                    </div>
                 </div>
             </div>
         </section>
         <!--/#cart_items-->
     </main>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
-    $("#paypal-button").click(function(e){
-        e.preventDefault();
-        
-        alert('ok');
-    })
+    function fetch_data(page)
+    {
+        let val_search = $('#search').val();
+        $.ajax({
+            url:`/frontend/checkout/search?search=${val_search}&page=${page}`,
+            success:function(data)
+            {
+                $('#tableHistory').html(data.html);
+            }
+        });
+    }
+    $('#search').on('keyup',function(){
+        let val_search = $(this).val();
+        fetch_data(val_search);
+    });
+    
+    $(document).ready(function() { 
+        fetch_data();
+        $(document).on('click', '.pagination a', function(event){
+            event.preventDefault(); 
+            var page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
+    });
 </script>
 @endsection

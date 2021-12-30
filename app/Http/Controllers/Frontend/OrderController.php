@@ -11,6 +11,7 @@ use App\Models\PriceTime;
 use App\Models\FootballPitch;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\CreateOrderRequest;
+use \Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
@@ -40,9 +41,10 @@ class OrderController extends Controller
     
     public function getAllFootballPitch()
     {
-        $result['footballPitch'] =  PitchType::all();
+        // $result['footballPitch'] =  PitchType::all();
         $result['service'] =  Service::all();
         $result['putPitchDetail'] =  PutPitchDetail::all();
+        $result['footballPitch'] =  FootballPitch::all();
     
         return $result;
     }
@@ -59,10 +61,10 @@ class OrderController extends Controller
         $date = date_format($date,"Y/m/d H:i:s");
         $maLoaiSan = $request->ma_loai_san;
         $chiTiet = $request->chi_tiet;
-        $maDatSan = rand(10,100);
+        $maDatSan = rand();
         $order = session()->get('order');
         foreach($chiTiet as $key => $val) {
-            $priceTime = PriceTime::where('ma_loai_san', $maLoaiSan)->where('khung_gio', FootballPitch::LIST_TIME_ORDER[$key])->first(); 
+            $priceTime = PriceTime::where('khung_gio', FootballPitch::LIST_TIME_ORDER[$key])->first(); 
             $priceService = Service::where('ma_loai_dv', FootballPitch::LIST_SERVICE_ORDER[$val['water_name']])->first();
             // dd($priceService);   
             if($val['water_name'] == "1") {
@@ -72,6 +74,7 @@ class OrderController extends Controller
                 $giaTien =  $priceTime->gia_tien + ($priceService->gia_tien *  $val['water_qty']);
             }
             $order[$key] = [
+                'id' => $key,
                 'ma_dat_san' => $maDatSan,
                 'ma_san' => $maLoaiSan,
                 'khung_gio' => $val['khung_gio'],
@@ -93,9 +96,24 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        // info(request()->all());
+        $footballPitch = request()->footballPitch;
+        $dateRequest = request()->dateRequest;
+
+        $putPitchDetails = PutPitchDetail::when(!empty($footballPitch), function ($q) use ($footballPitch) {
+            return $q->where('ma_san', $footballPitch );
+        })->when(!empty($dateRequest), function ($q) use ($dateRequest) {
+            return $q->where('ngay_su_dung', $dateRequest );
+        })->get();
+
+        return response()->json([
+            'status'    => Response::HTTP_OK,
+            'data'      => $putPitchDetails,
+        ]);
+
+
     }
 
     /**

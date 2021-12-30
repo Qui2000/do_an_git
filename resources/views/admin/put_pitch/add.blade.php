@@ -53,14 +53,6 @@
             <input type="date" class="form-control" placeholder="Ngày đặt" name="ngay_dat" >
           </div>
           <div class="form-group">
-            <label for="pwd">Tiền cọc:</label>
-            <input type="number" class="form-control" step="0.01" placeholder="Tiền cọc" name="tien_coc">
-          </div>
-          <div class="form-group">
-            <label for="pwd">Ngày cọc tiền:</label>
-            <input type="date" class="form-control" placeholder="Ngày cọc tiền" name="ngay_coc_tien">
-          </div>
-          <div class="form-group">
             <label for="pwd">Số tiền thanh toán:</label>
             <input type="number" class="form-control" step="0.01" placeholder="Số tiền thanh toán" name="so_tien_thanh_toan">
           </div>

@@ -37,4 +37,8 @@ class FootballPitch extends Model
         'ten',
         'mo_ta',
     ];
+
+    public function PutPitchDetai() {
+        return $this->belongsTo('App\Models\PutPitchDetai');
+    }
 }

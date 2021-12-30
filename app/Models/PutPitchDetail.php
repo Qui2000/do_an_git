@@ -8,6 +8,7 @@ class PutPitchDetail extends Model
 {
     protected $table = 'chi_tiet_dat_san';
     protected $fillable = [
+        'ma_tk',
         'ma_dat_san',
         'ma_san',
         'khung_gio',
