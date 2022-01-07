@@ -75,6 +75,7 @@ class CustomerController extends Controller
             $result = [];
             if (empty(request()->search)) {
                 $result = $this->getAllCustomer();
+                info($result['customers']);
                 $view =  view('admin.customer.table')->with([
                     'customers'   => $result['customers'],
                     'permissions' => $result['permissions'],

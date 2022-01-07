@@ -22,7 +22,7 @@
         <li class="nav-item">
           <a class="nav-link " href="{{ route('frontend.order') }}">Đặt sân</a>
         </li>
-
+      
         <li class="nav-item">
           <a class="nav-link " href="{{ route('frontend.contact') }}">Liên hệ</a>
         </li>

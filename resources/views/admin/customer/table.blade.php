@@ -1,6 +1,6 @@
-<table class="table">
+<table class="table table-striped">
     <thead class="thead-light">
-      <tr>
+      <tr class="bg_tr">
         <th scope="col">Id</th>
         <th scope="col">Tên</th>
         <th scope="col">Ngày sinh</th>

@@ -73,6 +73,27 @@
               </div>
             </div>
           </div>
+          <div class="col-md-12 section-t8 position-relative">
+            <div class="row">
+              <div class="col-md-6 col-lg-4">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <div class="title-box-d" style="margin-top: -80px;">
+                  <h6 class="title-d">Các qui định của sân bóng đá Đa Phước.
+                  </h6>
+                </div>
+              </div>
+              <div class="col-lg-2  d-none d-lg-block position-relative">
+            </div>
+            <div class="row"> 
+              <div class="col-md-6 col-lg-3">
+              </div>
+              <div class="col-md-6 col-lg-5">
+                <p></p>
+              </div>
+              <div class="col-lg-2  d-none d-lg-block position-relative">
+            </div>
+          </div>
         </div>
       </div>
     </section>

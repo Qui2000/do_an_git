@@ -53,10 +53,10 @@
             <div class="w-body-a">
               <ul class="list-unstyled">
                 <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Sân 5 (6 sân)</a>
+                  <i class="bi bi-chevron-right"></i> <a href="#">Sân 5 (5 sân)</a>
                 </li>
                 <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Sân 7 (2 sân)</a>
+                  <i class="bi bi-chevron-right"></i> <a href="#">Sân 7 (0 sân)</a>
                 </li>
               </ul>
             </div>

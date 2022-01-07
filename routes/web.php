@@ -41,7 +41,6 @@ Route::group([
 
     Route::get('profile', 'ProfileController@index')->name('profile');
     Route::post('profile', 'ProfileController@store')->name('updateProfile');
-    // Route::get('putPitch', 'PutPitchController@index')->name('putPitch');
     Route::group([
         'prefix'    => 'putPitch',
         'as'        => 'putPitch.',
@@ -53,6 +52,7 @@ Route::group([
         Route::post('edit/{id}', 'PutPitchController@update')->name('update');
         Route::get('delete/{id}', 'PutPitchController@destroy')->name('delete');
         Route::get('search/', 'PutPitchController@search')->name('search');
+        Route::get('/orderSearch', 'PutPitchController@orderSearch')->name('orderSearch');
     });
 
     Route::group([
@@ -154,6 +154,30 @@ Route::group([
         Route::post('login', 'AccountController@postLogin')->name('postLogin');
         Route::get('logout', 'AccountController@logout')->name('logout');
     });
+
+    Route::group([
+        'prefix' => 'order', 
+        'as' => 'order.',
+        'middleware' => ['customer']
+    ], function(){
+        Route::post('/order', 'OrderController@create')->name('post');
+        Route::get('/orderSearch', 'OrderController@store')->name('orderSearch');
+    });
+    
+    Route::group([
+        'prefix' => 'checkout', 
+        'as' => 'checkout.',
+        'middleware' => ['customer']
+    ], function(){
+        Route::get('/checkout', 'CheckoutController@index')->name('index');
+        Route::get('/success', 'CheckoutController@show')->name('success');
+        Route::get('/history', 'CheckoutController@store')->name('history');
+        Route::get('/search', 'CheckoutController@search')->name('search');
+        Route::get('/delete/{id}', 'CheckoutController@destroy')->name('delete');
+        Route::get('/delete-session', 'CheckoutController@deleteSession')->name('deleteSession');
+        Route::get('/update/{id}', 'CheckoutController@update')->name('update');
+        Route::get('/showHistory', 'CheckoutController@showHistory')->name('showHistory');
+        Route::get('/vnpay', 'CheckoutController@showVnpay')->name('vnpay');
+        Route::post('/vnpay', 'CheckoutController@createPayment')->name('vnpayCreate');
+    });
 });
-
-

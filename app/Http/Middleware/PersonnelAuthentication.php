@@ -19,7 +19,7 @@ class PersonnelAuthentication
         if( Auth::check() && Auth::user()->ma_quyen == 1 ){
             return $next($request);
         }else{
-            return redirect('frontend/index');
+            return redirect('frontend/account/login');
         }
     }
 }

@@ -69,9 +69,9 @@
       fillObarcity: 0.6,
       hideHover: 'auto',
       parseTime: false,
-      xkey: 'ngayDat',
-      ykeys: ['tongTien','tienCoc'],
-      labels: ['Tổng tiền', 'Tiền cọc']
+      xkey: 'ngay_su_dung',
+      ykeys: ['tongTien'],
+      labels: ['Tổng tiền']
     });
     $( "#datepicker" ).datepicker({
       prevText: "Tháng trước",

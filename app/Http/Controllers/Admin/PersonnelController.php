@@ -73,6 +73,7 @@ class PersonnelController extends Controller
             $result = [];
             if (empty(request()->search)) {
                 $result = $this->getAllPersonnel();
+                info($result['personnels']);
                 $view =  view('admin.personnel.table')->with([
                     'personnels'   => $result['personnels'],
                     'permissions' => $result['permissions'],

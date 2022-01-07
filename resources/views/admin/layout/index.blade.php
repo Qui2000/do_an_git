@@ -27,6 +27,12 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
+<style>
+    .bg_tr {
+        color: #ffffff;
+        background: linear-gradient(to right, #0178bc 0%, #00bdda 100%);
+    }
+</style>
 
 <body class="fix-header fix-sidebar card-no-border">
     <!-- ============================================================== -->
@@ -96,6 +102,35 @@
     <script src="{{ asset('https://code.jquery.com/ui/1.13.0/jquery-ui.js') }}"></script>
     <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js') }}"></script>
     <script src="{{ asset('//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#footballPitch,#dateRequest').on('change keyup', function(e){
+                var footballPitch = $('#footballPitch').val();
+                var dateRequest = $('#dateRequest').val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    type:"GET",
+                    url: "{{ route('admin.putPitch.orderSearch') }}",
+                    data: {footballPitch: footballPitch, dateRequest: dateRequest},
+                    success:function(data){
+                    putPitchDetails = data.data;
+                    console.log(putPitchDetails);
+                    $(`.item_detail`).removeClass("disabled__item");
+                    $.map(putPitchDetails, function(putPitchDetail, index) {
+                        val = $(`.timeText_${putPitchDetail.khung_gio}`).val();
+                        if (putPitchDetail.khung_gio == val) {
+                            $(`.timeText_${val}`).addClass("disabled__item");
+                        } 
+                    });
+                    }
+                });
+            })
+        });
+    </script>
 </body>
 
 </html>
