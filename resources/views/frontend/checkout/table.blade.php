@@ -22,12 +22,16 @@
                 {{ $historyOrder['ma_dat_san'] }}
             </td>
             <td class="cart_description">
-                {{ $historyOrder['ma_san'] == 1 ? "Sân 5" : "Sân 7" }}
+                @foreach($footballPitchs as $footballPitch)
+                @if($historyOrder['ma_san'] == $footballPitch['id'])
+                {{ $footballPitch['ten'] }}
+                @endif
+                @endforeach
             </td>
             <td class="cart_price">
                 @foreach (FootballPitch::LIST_TIME_ORDER as $key => $item)
                 @if($key == $historyOrder['khung_gio'])
-                    {{ $item }}
+                {{ $item }}
                 @endif
                 @endforeach
             </td>
@@ -47,29 +51,31 @@
                 {{ number_format($historyOrder['gia_tien']) }} VND
             </td>
             <td class="cart_delete">
-                {{-- <i style="color: red" class="fa fa-times"></i> --}}
-                @if( $historyOrder['ngay_gio_huy'] == null)
+                @if( $historyOrder['ngay_gio_huy'] != null || strtotime($today) > strtotime($historyOrder['ngay_su_dung']))
+                    <button style="background: red;
+                                        border-radius: 5px;
+                                        padding: 0 5px;">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: white"
+                        href="{{ route('frontend.checkout.delete', ['id'=> $historyOrder['id']]) }}"
+                        aria-expanded="false" onclick="return confirm('Ban co muon xoa khong?')">Xóa
+                    </a>
+                    </button>
+                @else
                     <button style="background: cadetblue;
-                                    border-radius: 5px;
-                                    padding: 0 5px;">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: white" href="{{ route('frontend.checkout.update', ['id'=> $historyOrder['id']]) }}" aria-expanded="false"
-                            onclick="return confirm('Ban chắc chắn muon hủy sân không?')">Hủy sân 
+                                        border-radius: 5px;
+                                        padding: 0 5px;">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: white"
+                            href="{{ route('frontend.checkout.update', ['id'=> $historyOrder['id']]) }}"
+                            aria-expanded="false" onclick="return confirm('Ban chắc chắn muon hủy sân không?')">Hủy sân
                         </a>
                     </button>
                     <button style="background: red;
-                                    border-radius: 5px;
-                                    padding: 0 5px;">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: white" href="{{ route('frontend.checkout.delete', ['id'=> $historyOrder['id']]) }}" aria-expanded="false"
-                        onclick="return confirm('Ban co muon xoa khong?')">Xóa 
-                    </a>
-                    </button>
-                @else 
-                    <button style="background: red;
-                                    border-radius: 5px;
-                                    padding: 0 5px;">
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: white" href="{{ route('frontend.checkout.delete', ['id'=> $historyOrder['id']]) }}" aria-expanded="false"
-                        onclick="return confirm('Ban co muon xoa khong?')">Xóa 
-                    </a>
+                                        border-radius: 5px;
+                                        padding: 0 5px;">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: white"
+                            href="{{ route('frontend.checkout.delete', ['id'=> $historyOrder['id']]) }}"
+                            aria-expanded="false" onclick="return confirm('Ban co muon xoa khong?')">Xóa
+                        </a>
                     </button>
                 @endif
             </td>

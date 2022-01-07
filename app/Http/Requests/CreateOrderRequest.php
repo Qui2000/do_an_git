@@ -25,14 +25,15 @@ class CreateOrderRequest extends FormRequest
     {
         return [
             'ma_loai_san' => 'required',
-            'chi_tiet' => 'required|array',
+            'chi_tiet' => 'required',
         ];
     }
-    // public function messages()
-    // {
-    //     return [
-    //         'ma_loai_san.required' => ':attribute khong duoc bo trong!',
-    //         // 'max' => ':attribute khong duoc qua :max ky tu!'
-    //     ];
-    // }
+    public function messages()
+    {
+        return [
+            'ma_loai_san.required' => 'Mã loại sân không được bỏ trống!',
+            'chi_tiet.required' => 'Vui lòng chọn khung giờ!',
+            // 'max' => ':attribute khong duoc qua :max ky tu!'
+        ];
+    }
 }

@@ -41,7 +41,6 @@ Route::group([
 
     Route::get('profile', 'ProfileController@index')->name('profile');
     Route::post('profile', 'ProfileController@store')->name('updateProfile');
-    // Route::get('putPitch', 'PutPitchController@index')->name('putPitch');
     Route::group([
         'prefix'    => 'putPitch',
         'as'        => 'putPitch.',
@@ -53,6 +52,7 @@ Route::group([
         Route::post('edit/{id}', 'PutPitchController@update')->name('update');
         Route::get('delete/{id}', 'PutPitchController@destroy')->name('delete');
         Route::get('search/', 'PutPitchController@search')->name('search');
+        Route::get('/orderSearch', 'PutPitchController@orderSearch')->name('orderSearch');
     });
 
     Route::group([
@@ -181,7 +181,3 @@ Route::group([
         Route::post('/vnpay', 'CheckoutController@createPayment')->name('vnpayCreate');
     });
 });
-
-
-
-

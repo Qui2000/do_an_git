@@ -1,6 +1,17 @@
 @extends('admin.layout.index')
 @section('title','Add-PutPitch')
+@php
+use App\Models\FootballPitch;
+@endphp
 @section('content')
+<style>
+  input {
+    width: 50%;
+  }
+  .disabled__item {
+      display: none;
+    }
+</style>
 <div class="page-wrapper">
   <!-- ============================================================== -->
   <!-- End Bread crumb and right sidebar toggle -->
@@ -49,22 +60,40 @@
             <input type="text" class="form-control" placeholder="SDT người đặt" name="sdt_nguoi_dat">
           </div>
           <div class="form-group">
-            <label for="email">Ngày đặt:</label>
-            <input type="date" class="form-control" placeholder="Ngày đặt" name="ngay_dat" >
+            <label for="dateRequest">Ngày sử dụng</label>
+            <input type="date" class="form-control" name="ngay_su_dung" id="dateRequest" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
           </div>
           <div class="form-group">
-            <label for="pwd">Số tiền thanh toán:</label>
-            <input type="number" class="form-control" step="0.01" placeholder="Số tiền thanh toán" name="so_tien_thanh_toan">
-          </div>
-          <div class="form-group">
-            <label for="pwd">Trạng thái:</label>
-            <select name="ma_trang_thai" id="">
-                @foreach($statusPutPitchs as $statusPutPitch)
-                    <option value="{{ $statusPutPitch['id'] }}">
-                        {{ $statusPutPitch['ten_trang_thai'] }}
-                    </option>
+            <label for="footballPitch">Chọn sân</label>
+            <select class="form-control" id="footballPitch" name="ma_san">
+                <option value="default">----Chọn sân----</option>
+                @foreach ($listFootballPitch as $footballPitch)
+                    <option value="{{ $footballPitch->id }}">{{ $footballPitch->ten }}</option>
                 @endforeach
             </select>
+          </div>
+          <div class="form-group">
+            <label for="khung_gio">Khung giờ</label>
+            <select class="form-control" id="khung_gio" name="khung_gio">
+                <option value="default">----Chọn khung giờ----</option>
+                @foreach (FootballPitch::LIST_TIME_ORDER as $key => $item)
+                    <option class="item_detail timeText_{{ $key }}" value="{{ $key }}">{{ $item }}</option>
+                @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pwd">Loại nước:</label> <br>
+            <select id="ma_loai_dv" name="ma_loai_dv" class="form-control">
+              {{-- <option value="default">---Chọn---</option> --}}
+              @foreach($listService as $service)
+                      <option value="{{ $service->ma_loai_dv }}">{{ $service->ten }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pwd">Số lượng nước:</label>
+              <input style="width: 100px !important;" id="so_luong" type="number" name="so_luong_dv"
+                  class="water_qty" required>
           </div>
           <button type="submit" class="btn btn-success">Lưu</button>
           <button type="button" class="btn btn-info"><a style="color: #fff"

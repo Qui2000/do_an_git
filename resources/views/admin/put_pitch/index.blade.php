@@ -31,14 +31,14 @@
         </div>
         <!-- Row -->
         <div class="row">
-            <div class="card" style="margin-left: 15px;">
+            {{-- <div class="card" style="margin-left: 15px;">
                 <div class="table-responsive">
                     <a href="{{ route('admin.putPitch.add') }}">
                         <button style="display: block ;" type="submit" class="btn btn-success">Thêm thông tin đặt
                             sân</button>
                     </a>
                 </div>
-            </div>
+            </div> --}}
             <!-- Column -->
             <div class="col-12">
                 <div class="card">

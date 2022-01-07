@@ -131,12 +131,17 @@
                                             </td>
                                             @else 
                                             <td>
-                                                <a disabled style="background: #2eca6a;
+                                                <a 
+                                                style="background: #2eca6a;
+                                                pointer-events: none; 
+                                                cursor: default; 
                                                 padding: 5px;
                                                 border-radius: 10px;
                                                 text-decoration: none;
                                                 font-weight: 700;
-                                                color: white;" href=" {{ route('frontend.checkout.vnpay') }} ">VNPAY</a>
+                                                color: white;" href="" 
+                                                >VNPAY
+                                                </a>
                                             </td>
                                             @endif
                                         </tr>

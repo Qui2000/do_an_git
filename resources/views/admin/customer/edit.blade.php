@@ -68,7 +68,7 @@
             <label for="pwd">Quyền:</label>
             <select name="ma_quyen" id="">
               @foreach($permissions as $key => $permission)
-                <option value="{{ $permission->id }}" {{ $permission->id == $customer->ma_quyen ? 'selected' : '' }}>  
+                <option value="{{ $permission->ma_quyen }}" {{ $permission->ma_quyen == $customer->ma_quyen ? 'selected' : '' }}>  
                   {{ $permission->ten}}
                 </option>
               @endforeach

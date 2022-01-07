@@ -53,7 +53,7 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(CreateOrderRequest $request)
     {
         // dd($request->all());
         // session()->forget('order');
@@ -61,7 +61,7 @@ class OrderController extends Controller
         $date = date_format($date,"Y/m/d H:i:s");
         $maLoaiSan = $request->ma_loai_san;
         $chiTiet = $request->chi_tiet;
-        $maDatSan = rand();
+        $maDatSan = rand(1000, 10000);
         $order = session()->get('order');
         foreach($chiTiet as $key => $val) {
             $priceTime = PriceTime::where('khung_gio', FootballPitch::LIST_TIME_ORDER[$key])->first(); 

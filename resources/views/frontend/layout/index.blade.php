@@ -158,7 +158,7 @@
   <!-- End Header/Navbar -->
 
   <!-- ======= Intro Section ======= -->
-  @include('includes.partials.message')
+  {{-- @include('includes.partials.message') --}}
 
   @yield('content')
 

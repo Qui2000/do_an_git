@@ -129,28 +129,28 @@
                             <div class="form-group">
                                 <label class="col-md-12">Số điện thoại</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="sdt" placeholder="123 456 7890" value="{{ Auth::User()->sdt }}"
+                                    <input type="text" name="sdt" placeholder="Số điện thoại" value="{{ Auth::User()->sdt }}"
                                         class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Địa chỉ</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="dia_chi" placeholder="123 456 7890" value="{{ Auth::User()->dia_chi }}"
+                                    <input type="text" name="dia_chi" placeholder="Địa chỉ" value="{{ Auth::User()->dia_chi }}"
                                         class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Ngày làm việc</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="ngay_lam_viec" placeholder="123 456 7890" value="{{ Auth::User()->ngay_lam_viec }}"
+                                    <input type="date" name="ngay_lam_viec" placeholder="" value="{{ Auth::User()->ngay_lam_viec }}"
                                         class="form-control form-control-line">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-12">Quốc tịch</label>
                                 <div class="col-md-12">
-                                    <input type="text" name="quoc_tich" placeholder="123 456 7890" value="{{ Auth::User()->quoc_tich }}"
+                                    <input type="text" name="quoc_tich" placeholder="Quốc tịch" value="{{ Auth::User()->quoc_tich }}"
                                         class="form-control form-control-line">
                                 </div>
                             </div>

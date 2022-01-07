@@ -53,8 +53,8 @@ use App\Models\FootballPitch;
             color: #fff;
         }
         .disabled__item {
-            background-color: #ddd;
-            cursor: not-allowed;
+            display: none;
+            
         }
 
     </style>
@@ -94,9 +94,18 @@ use App\Models\FootballPitch;
             <div class="row">
                 {{-- <div class="col-md-3">
                 </div> --}}
+                @if($errors->any())
+                <div class="alert alert-danger" style="padding-bottom: 0">
+                <ul>
+                    @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+                </div>
+                @endif
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Loại sân</label>
+                        <label for="footballPitch">Loại sân</label>
                         <select class="form-control" id="footballPitch" name="ma_loai_san">
                             <option value="default">----Chọn loại sân----</option>
                             @foreach ($listFootballPitch as $footballPitch)
@@ -107,7 +116,7 @@ use App\Models\FootballPitch;
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Ngày giờ</label>
+                        <label for="dateRequest">Ngày giờ</label>
                         <input type="date" class="form-control" name="ngay_su_dung" id="dateRequest" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                     </div>
                 </div>
@@ -146,7 +155,7 @@ use App\Models\FootballPitch;
                                     </div>
                                     <div class="col-md-6">
                                         <select id="loai_nuoc" name="chi_tiet[{{ $key }}][water_name]" class="qty-item text-center water_name" disabled>
-                                            <option value="default">---Chọn---</option>
+                                            {{-- <option value="default">---Chọn---</option> --}}
                                             @foreach($listService as $service)
                                                     <option value="{{ $service->ma_loai_dv }}">{{ $service->ten }}</option>
                                             @endforeach
@@ -159,7 +168,7 @@ use App\Models\FootballPitch;
                                     </div>
                                     <div class="col-md-6" style="margin-top: 9px;">
                                         <input id="so_luong" type="number" name="chi_tiet[{{ $key }}][water_qty]"
-                                            class="qty-item text-center water_qty" disabled>
+                                            class="qty-item text-center water_qty" disabled required>
                                     </div>
                                 </div>
                             </td>
@@ -203,26 +212,12 @@ use App\Models\FootballPitch;
             }
         }
         $('#btn_order').click(function(){
-            var valMaloaiSan = $('#exampleFormControlSelect1').val();
+            var valMaloaiSan = $('#footballPitch').val();
             var valDate = $('#dateRequest').val();
-            var valKhungGio = $('#khung_gio').val();
-            var valLoaiNuoc = $(this).find('#loai_nuoc').val();
-            var valSoLuongNuoc = $(this).find('#so_luong').val();
+            
             if(valMaloaiSan =='default')
             {
                 alert('Vui lòng chọn loại sân!');
-                return false;
-            }
-
-            if(valLoaiNuoc =='default')
-            {
-                alert('Vui lòng chọn loại nước uống!');
-                return false;
-            }
-
-            if(valSoLuongNuoc =='')
-            {
-                alert('Vui lòng chọn số lượng nước uống!');
                 return false;
             }
 

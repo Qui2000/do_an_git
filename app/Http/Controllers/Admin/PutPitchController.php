@@ -6,7 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\PutPitch;
 use App\Models\StatusPutPitch;
+use App\Models\FootballPitch;
+use App\Models\Service;
+use App\Models\PriceTime;
 use App\Http\Requests\CreatePutPitchRequest;
+use App\Models\PutPitchDetail;
+use Carbon\Carbon;
+use \Illuminate\Http\Response;
 
 class PutPitchController extends Controller
 {
@@ -20,14 +26,19 @@ class PutPitchController extends Controller
         $result = $this->getAllPutPitch();
 		return view('admin.put_pitch.index')->with([
             'putPitchs'            => $result['putPitchs'],
-            'statusPutPitchs'        => $result['statusPutPitchs'],
+            'statusPutPitchs'      => $result['statusPutPitchs'],
+            'footballPitchs'        => $result['footballPitch']
         ]);
     }
 
     public function getAllPutPitch()
     {
-        $result['putPitchs'] = PutPitch::latest()->paginate(5);
-        $result['statusPutPitchs'] = StatusPutPitch::all()->toArray();
+        $result['putPitchs'] = PutPitchDetail::join('dat_san', 'dat_san.id', '=', 'chi_tiet_dat_san.id')
+            ->orderBy('chi_tiet_dat_san.ngay_su_dung', 'desc')
+            ->paginate(5);
+        $result['statusPutPitchs'] = StatusPutPitch::all();
+        $result['footballPitch'] =  FootballPitch::all();
+        $result['service'] =  Service::all();
         return $result;
     }
 
@@ -38,8 +49,12 @@ class PutPitchController extends Controller
      */
     public function create()
     {
-        $statusPutPitchs = StatusPutPitch::all()->toArray();
-        return view('admin.put_pitch.add', compact('statusPutPitchs'));
+        $result = $this->getAllPutPitch();
+        return view('admin.put_pitch.add')->with([
+            'listFootballPitch'            => $result['footballPitch'],
+            'statusPutPitchs'        => $result['statusPutPitchs'],
+            'listService'     => $result['service'],
+        ]);
     }
 
     /**
@@ -48,17 +63,38 @@ class PutPitchController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePutPitchRequest $request)
+    public function store(Request $request)
     {
-        $putPitch = new PutPitch; 
-        $data = $request->all();
-        // dd($data);
-        if($putPitch->create($data))
-        {
-            return redirect()->route('admin.putPitch.index')->with('success',('Thêm thông tin đặt sân thành công!'));
-        }else{
-            return redirect()->route('admin.putPitch.index')->withError('Thêm thông tin khách hàng thất bại!');
-        }
+        $maDatSan = $request->ma_dat_san;
+        $khungGio = $request->khung_gio;
+        $loaiDV = $request->ma_loai_dv;
+        $soLuongDV = $request->so_luong_dv;
+        $maDatSan = rand(1000, 10000);
+        $ngayDat = Carbon::now();
+
+        $priceTime = PriceTime::where('khung_gio', FootballPitch::LIST_TIME_ORDER[$khungGio])->first(); 
+        $priceService = Service::where('ma_loai_dv', FootballPitch::LIST_SERVICE_ORDER[$loaiDV])->first();
+
+        $giaTien =  $priceTime->gia_tien + ($priceService->gia_tien *  $soLuongDV);
+
+        PutPitchDetail::create([
+            "ma_dat_san" => $maDatSan,
+            "ma_san" =>  $request->ma_san,
+            "khung_gio" => $khungGio,
+            "ma_loai_dv" => $loaiDV,
+            "so_luong_dv" => $soLuongDV,
+            "ngay_su_dung" => $request->ngay_su_dung,
+            "gia_tien" => $giaTien
+        ]);
+
+        PutPitch::create([
+            'ngay_dat' => $ngayDat->toDateString(),
+            'ten_nguoi_dat' => $request->ten_nguoi_dat,
+            'sdt_nguoi_dat' => $request->sdt_nguoi_dat,
+            'ma_trang_thai' => 1
+        ]);
+
+        return redirect()->route('admin.putPitch.index')->with('success',('Thêm thông tin đặt sân thành công!'));
     }
 
     /**
@@ -76,14 +112,19 @@ class PutPitchController extends Controller
                 $view =  view('admin.put_pitch.table')->with([
                     'putPitchs'            => $result['putPitchs'],
                     'statusPutPitchs'        => $result['statusPutPitchs'],
+                    'footballPitchs'        => $result['footballPitch']
                 ])->render();
                 return response()->json(['html' => $view]);
             }
             $result = $this->getAllPutPitch();
-            $result['putPitchs'] = PutPitch::latest()->where('ten_nguoi_dat', 'LIKE', '%' . $request->search . '%')->paginate(5);
+            $result['putPitchs'] = PutPitchDetail::join('dat_san', 'dat_san.id', '=', 'chi_tiet_dat_san.id')
+                ->where('dat_san.ten_nguoi_dat', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('chi_tiet_dat_san.ngay_su_dung', 'desc')
+                ->paginate(5);
             $view = view('admin.put_pitch.table')->with([
                 'putPitchs'   => $result['putPitchs'],
                 'statusPutPitchs' => $result['statusPutPitchs'],
+                'footballPitchs'        => $result['footballPitch']
             ])->render();
             return response()->json(['html' => $view]);
         }
@@ -108,9 +149,19 @@ class PutPitchController extends Controller
      */
     public function edit($id)
     {
-        $putPitch = PutPitch::find($id);
-        $statusPutPitchs = StatusPutPitch::all()->toArray();
-        return view('admin.put_pitch.edit',compact('putPitch', 'statusPutPitchs'));
+        // $today = Carbon::now()->toDateString();
+        $putPitch = PutPitch::join('chi_tiet_dat_san', 'chi_tiet_dat_san.id', '=', 'dat_san.id')
+            ->where('dat_san.id', $id)
+            ->first();
+
+        // dd($putPitchDetail);
+        $result = $this->getAllPutPitch();
+        return view('admin.put_pitch.edit')->with([
+            'listFootballPitch' => $result['footballPitch'],
+            'statusPutPitchs'   => $result['statusPutPitchs'],
+            'listService'       => $result['service'],
+            'putPitch'          => $putPitch,
+        ]);
     }
 
     /**
@@ -122,10 +173,29 @@ class PutPitchController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $maDatSan = $request->ma_dat_san;
+        $khungGio = $request->khung_gio;
+        $loaiDV = $request->ma_loai_dv;
+        $soLuongDV = $request->so_luong_dv;
+
         $putPitch = PutPitch::find($id); 
+        $putPitchDetail = PutPitchDetail::find($id); 
+
+        $priceTime = PriceTime::where('khung_gio', FootballPitch::LIST_TIME_ORDER[$khungGio])->first(); 
+        $priceService = Service::where('ma_loai_dv', FootballPitch::LIST_SERVICE_ORDER[$loaiDV])->first();
+
         $data = $request->all();
-        // dd($data);
-        if($putPitch->update($data))
+        $giaTien =  $priceTime->gia_tien + ($priceService->gia_tien *  $soLuongDV);
+
+        $data['gia_tien'] = $giaTien;
+
+        if($request->ma_trang_thai == 3) {
+            $data['ngay_gio_huy'] = Carbon::now()->toDateString();
+        }else {
+            $data['ngay_gio_huy'] = null;
+        }
+
+        if($putPitch->update($data) && $putPitchDetail->update($data))
         {
             return redirect()->route('admin.putPitch.index')->with('success',('Sửa thông tin đặt sân thành công!'));
         }else{
@@ -133,6 +203,29 @@ class PutPitchController extends Controller
         }
     }
 
+    /**
+     * orderSearch a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function orderSearch()
+    {
+        // info(request()->all());
+        $footballPitch = request()->footballPitch;
+        $dateRequest = request()->dateRequest;
+
+        $putPitchDetails = PutPitchDetail::when(!empty($footballPitch), function ($q) use ($footballPitch) {
+            return $q->where('ma_san', $footballPitch );
+        })->when(!empty($dateRequest), function ($q) use ($dateRequest) {
+            return $q->where('ngay_su_dung', $dateRequest );
+        })->get();
+
+        return response()->json([
+            'status'    => Response::HTTP_OK,
+            'data'      => $putPitchDetails,
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -142,7 +235,8 @@ class PutPitchController extends Controller
     public function destroy($id)
     {
         $putPitch = PutPitch::find($id); 
-        if($putPitch->delete())
+        $putPitchDetail = PutPitchDetail::find($id); 
+        if($putPitch->delete() && $putPitchDetail->delete())
         {
             return redirect()->route('admin.putPitch.index')->with('success',('Xóa thông tin đặt sân thành công!'));
         }else{

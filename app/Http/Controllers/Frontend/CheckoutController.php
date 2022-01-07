@@ -9,7 +9,6 @@ use App\Models\PutPitch;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Polyfill\Intl\Idn\Resources\unidata\Regex;
 
 class CheckoutController extends Controller
 {
@@ -29,7 +28,7 @@ class CheckoutController extends Controller
         $user_id = Auth::user()->id;
         $historyOrders = PutPitchDetail::latest()
             ->where('ma_tk', $user_id)
-            ->paginate(5);
+            ->paginate(10);
         
         // dd($historyOrders);
         return view('frontend.checkout.history', compact('historyOrders'));
@@ -123,6 +122,7 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+        $ngayDat = Carbon::now();
         if(session()->has('order')){
             $orders = session()->get('order');
             foreach ($orders as $key => $order) {
@@ -141,10 +141,9 @@ class CheckoutController extends Controller
 
                 PutPitch::create([
                     'ma_tk' => Auth::user()->id,
-                    'ngay_dat' => $order['ngay_su_dung'],
+                    'ngay_dat' => $ngayDat->toDateString(),
                     'ten_nguoi_dat' => Auth::user()->ten,
                     'sdt_nguoi_dat' => Auth::user()->sdt,
-                    'so_tien_thanh_toan' => $order['gia_tien'],
                     'ma_trang_thai' => 2
                 ]);
             }
@@ -164,21 +163,32 @@ class CheckoutController extends Controller
         if($request->ajax()){
             $result = [];
             $user_id = Auth::user()->id;
+            $nowDate = Carbon::now(); 
+            $today = $nowDate->toDateString();
+            $footballPitchs = FootballPitch::all();
+
             if (empty(request()->search)) {
                 $historyOrders = PutPitchDetail::where('ma_tk', $user_id)
+                    ->orderBy('ngay_su_dung', 'desc')
                     ->paginate(5);
+
                 $view =  view('frontend.checkout.table')->with([
                     'historyOrders'   => $historyOrders,
+                    'footballPitchs'  => $footballPitchs,
+                    'today'           => $today  
                 ])->render();
                 return response()->json(['html' => $view]);
             }
             if($request->search == 'Đã đặt') {
-                $result['historyOrders'] = PutPitchDetail::latest()->where('ma_tk', $user_id)->where('ngay_gio_huy', null)->paginate(5);
+                $result['historyOrders'] = PutPitchDetail::orderBy('ngay_su_dung', 'desc')->where('ma_tk', $user_id)->where('ngay_gio_huy', null)->paginate(5);
             } else {
-                $result['historyOrders'] = PutPitchDetail::latest()->where('ma_tk', $user_id)->where('ngay_gio_huy','<>', null)->paginate(5);
+                $result['historyOrders'] = PutPitchDetail::orderBy('ngay_su_dung', 'desc')->where('ma_tk', $user_id)->where('ngay_gio_huy','<>', null)->paginate(5);
             }
+
             $view = view('frontend.checkout.table')->with([
                 'historyOrders'   => $result['historyOrders'],
+                'footballPitchs'   => $footballPitchs,
+                'today'           => $today  
             ])->render();
             return response()->json(['html' => $view]);
         }
@@ -218,8 +228,11 @@ class CheckoutController extends Controller
         $date = Carbon::now();
         $today = $date->toDateTimeString();
         $putPitchDetail = PutPitchDetail::find($id);
+        $putPitch = PutPitch::find($id); 
         $putPitchDetail->ngay_gio_huy = $today;
+        $putPitch->ma_trang_thai = 3;
         $putPitchDetail->update();
+        $putPitch->update();
         return redirect()->back()->with('success',('Hủy đặt sân thành công!'));
         
     }
@@ -232,8 +245,9 @@ class CheckoutController extends Controller
      */
     public function destroy($id)
     {
-        $putPitch = PutPitchDetail::find($id); 
-        if($putPitch->delete())
+        $putPitchDetail = PutPitchDetail::find($id); 
+        $putPitch = PutPitch::find($id); 
+        if($putPitch->delete() && $putPitchDetail->delete())
         {
             return redirect()->route('frontend.checkout.showHistory')->with('success',('Xóa lịch sử đặt sân thành công!'));
         }else{
