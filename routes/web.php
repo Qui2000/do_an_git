@@ -41,6 +41,7 @@ Route::group([
 
     Route::get('profile', 'ProfileController@index')->name('profile');
     Route::post('profile', 'ProfileController@store')->name('updateProfile');
+
     Route::group([
         'prefix'    => 'putPitch',
         'as'        => 'putPitch.',
@@ -68,7 +69,6 @@ Route::group([
         Route::get('search/', 'CustomerController@search')->name('search');
     });
 
-    // Route::get('personnel', 'PersonnelController@index')->name('personnel');
     Route::group([
         'prefix'    => 'personnel',
         'as'        => 'personnel.',
@@ -82,7 +82,6 @@ Route::group([
         Route::get('search/', 'PersonnelController@search')->name('search');
     });
 
-    // Route::get('football-pitch', 'FootballPitchController@index')->name('football_pitch');
     Route::group([
         'prefix'    => 'football_pitch',
         'as'        => 'football_pitch.',
@@ -93,9 +92,12 @@ Route::group([
         Route::get('edit/{id}', 'FootballPitchController@edit')->name('edit');
         Route::post('edit/{id}', 'FootballPitchController@update')->name('update');
         Route::get('delete/{id}', 'FootballPitchController@destroy')->name('delete');
+        Route::get('price-time/', 'FootballPitchController@priceTime')->name('priceTime');
+        Route::get('edit/{id}', 'FootballPitchController@editPriceTime')->name('editPriceTime');
+        Route::post('edit/{id}', 'FootballPitchController@editPostPriceTime')->name('editPostPriceTime');
+
     });
 
-    // Route::get('service', 'ServiceController@index')->name('service');
     Route::group([
         'prefix'    => 'service',
         'as'        => 'service.',
@@ -108,7 +110,6 @@ Route::group([
         Route::get('delete/{id}', 'ServiceController@destroy')->name('delete');
     });
 
-    // Route::get('regulation', 'RegulationController@index')->name('regulation');
     Route::group([
         'prefix'    => 'regulation',
         'as'        => 'regulation.',

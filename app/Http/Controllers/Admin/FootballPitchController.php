@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\FootballPitch;
+use App\Models\PriceTime;
 use App\Http\Requests\CreateFootBallPitchRequest;
 
 class FootballPitchController extends Controller
@@ -107,4 +108,29 @@ class FootballPitchController extends Controller
             return redirect()->route('admin.football_pitch.index')->withError('Xóa thông tin sân bóng thất bại!');
         }
     }
+
+    public function priceTime() 
+    {
+        $priceTimes = PriceTime::paginate(5);
+        return view('admin.price_time.index', compact('priceTimes'));
+    }
+
+    public function editPriceTime($id)
+    {
+        $priceTime = PriceTime::find($id);
+        return view('admin.price_time.edit', compact('priceTime'));
+    }
+
+    public function editPostPriceTime(Request $request, $id)
+    {
+        $priceTime = PriceTime::find($id);
+        $data = $request->all();
+        if($priceTime->update($data))
+        {
+            return redirect()->route('admin.football_pitch.priceTime')->with('success',('Sửa giá khung giờ thành công!'));
+        }else{
+            return redirect()->route('admin.football_pitch.priceTime')->withError('Sửa giá khung giờ thất bại!');
+        }
+    }
+
 }

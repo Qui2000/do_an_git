@@ -179,7 +179,7 @@ class CheckoutController extends Controller
                 ])->render();
                 return response()->json(['html' => $view]);
             }
-            if($request->search == 'Đã đặt') {
+            if($request->search == 'da_dat') {
                 $result['historyOrders'] = PutPitchDetail::orderBy('ngay_su_dung', 'desc')->where('ma_tk', $user_id)->where('ngay_gio_huy', null)->paginate(5);
             } else {
                 $result['historyOrders'] = PutPitchDetail::orderBy('ngay_su_dung', 'desc')->where('ma_tk', $user_id)->where('ngay_gio_huy','<>', null)->paginate(5);

@@ -13,7 +13,7 @@
     <!-- Start Page Content -->
     <div class="row page-titles">
       <div class="col-md-6 col-8 align-self-center">
-        <h3 class="text-themecolor m-b-0 m-t-0">Quản lý qui định / Sửa qui định</h3>
+        <h3 class="text-themecolor m-b-0 m-t-0">Quản lý giá theo khung giờ / Sửa giá theo khung giờ</h3>
       </div>
     </div>
     @if(session('success'))
@@ -41,16 +41,20 @@
         <form action="" method="post" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
-            <label for="pwd">Tên:</label>
-            <input type="text" class="form-control" placeholder="Tên" name="ten" value="{{ $regulation->ten }}">
+            <label for="pwd">Loại sân:</label>
+            <input type="text" class="form-control" placeholder="Loại sân" name="san" value="Sân 5">
           </div>
           <div class="form-group">
-            <label for="pwd">Nội dung:</label><br>
-            <textarea style="border: 1px solid rgba(0,0,0,.15); padding-left: 10px" name="noi_dung" placeholder="Nội dung" cols="150" rows="5">value="{{ $regulation->noi_dung }}"</textarea>
+            <label for="pwd">Khung giờ:</label>
+            <input type="text" class="form-control" placeholder="Khung giờ" name="khung_gio" value="{{ $priceTime->khung_gio }}">
+          </div>
+          <div class="form-group">
+            <label for="pwd">Giá tiền: </label>
+            <input type="number" class="form-control" placeholder="Giá tiền" name="gia_tien" value="{{ $priceTime->gia_tien }}">
           </div>
           <button type="submit" class="btn btn-success">Lưu</button>
           <button type="button" class="btn btn-info"><a style="color: #fff"
-              href="{{ route('admin.regulation.index') }}">Trở lại</a></button>
+              href="{{ route('admin.football_pitch.priceTime') }}">Trở lại</a></button>
         </form>
         <div style="float: right;">
         </div>
