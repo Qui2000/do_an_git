@@ -53,7 +53,7 @@
                 <td>{{ $footballPitch->ten }}</td>
                 <td>{{ $footballPitch->mo_ta }}</td>
               <td>
-                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.football_pitch.edit', ['id'=> $footballPitch->id]) }}"" aria-expanded="false">
+                <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.football_pitch.edit', ['id'=> $footballPitch->id]) }}" aria-expanded="false">
                   Sửa<i style="font-size: 25px; padding-right: 5px;" class="mdi mdi-account-edit"></i>
                 </a>
                 <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: red" href="{{ route('admin.football_pitch.delete', ['id'=> $footballPitch->id]) }}" aria-expanded="false"
