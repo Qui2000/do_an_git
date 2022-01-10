@@ -13,7 +13,7 @@
     <!-- Start Page Content -->
     <div class="row page-titles">
       <div class="col-md-6 col-8 align-self-center">
-        <h3 class="text-themecolor m-b-0 m-t-0">Quản lý qui định</h3>
+        <h3 class="text-themecolor m-b-0 m-t-0">Quản lý giá theo khung giờ</h3>
       </div>
     </div>
     @if(session('success'))
@@ -28,9 +28,6 @@
     <div class="row">
       <div class="card" style="margin-left: 15px">
         <div class="table-responsive">
-          <a href="{{ route('admin.regulation.add') }}">
-            <button style="display: block ;" type="submit" class="btn btn-success">Thêm qui định</button>
-          </a>
         </div>
       </div>
       <!-- Column -->
@@ -41,24 +38,22 @@
               <thead class="thead-light">
                 <tr class="bg_tr">
                   <th scope="col">Id</th>
-                  <th scope="col">Tên</th>
-                  <th scope="col">Nội dung</th>
+                  <th scope="col">Loại sân</th>
+                  <th scope="col">Khung giờ</th>
+                  <th scope="col">Giá tiền</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($regulations as $key => $regulation)              
+                @foreach($priceTimes as $key => $priceTime)              
                 <tr>
                   <td>{{ $key+1 }}</td>
-                  <td>{{ $regulation->ten }}</td>
-                  <td>{{ $regulation->noi_dung }}</td>
+                  <td>Sân 5</td>
+                  <td>{{ $priceTime->khung_gio }}</td>
+                  <td>{{ number_format($priceTime->gia_tien) }} VND</td>
                   <td>
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.regulation.edit', ['id'=> $regulation->id]) }}" aria-expanded="false">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('admin.football_pitch.editPriceTime', ['id'=> $priceTime->id]) }}" aria-expanded="false">
                       Sửa<i style="font-size: 25px; padding-right: 5px;" class="mdi mdi-account-edit"></i>
-                    </a>
-                    <a class="sidebar-link waves-effect waves-dark sidebar-link" style="color: red" href="{{ route('admin.regulation.delete', ['id'=> $regulation->id]) }}" aria-expanded="false"
-                    onclick="return confirm('Ban co muon xoa khong?')">
-                    Xóa<i style="font-size: 25px;" class="mdi mdi-delete"></i>
                     </a>
                   </td>
               </tr>
@@ -69,7 +64,9 @@
         </div>
       </div>
     </div>
-    {{ $regulations->links() }}
+    <div class="pagination justify-content-center">
+      {{ $priceTimes->links() }}
+    </div>
   </div>
   <!-- ============================================================== -->
   <!-- End Container fluid  -->

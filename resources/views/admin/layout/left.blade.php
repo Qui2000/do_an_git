@@ -27,7 +27,7 @@
                     <a href="{{ route('admin.service.index') }}" class="waves-effect"><i class="fa fa-columns m-r-10" aria-hidden="true"></i>Quản lý dịch vụ</a>
                 </li>
                 <li>
-                    <a href="{{ route('admin.regulation.index') }}" class="waves-effect"><i class="fa fa-info-circle m-r-10" aria-hidden="true"></i>Quản lý qui định</a>
+                    <a href="{{ route('admin.football_pitch.priceTime') }}" class="waves-effect"><i class="fa fa-info-circle m-r-10" aria-hidden="true"></i>Quản lý giá theo khung giờ</a>
                 </li>
                 @endif
                 <li>

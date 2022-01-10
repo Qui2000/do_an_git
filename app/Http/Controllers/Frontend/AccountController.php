@@ -29,14 +29,21 @@ class AccountController extends Controller
         $password = $request->password;
         $pass_confirm = $request->pass_confirm;
         if($password == $pass_confirm) {
+            if ($request->email == 'quanly@gmail.com') {
+                $maQuyen = 0;
+            } else if ($request->email == 'nhanvien@gmail.com') {
+                $maQuyen = 1;
+            } else {
+                $maQuyen = 2;
+            }
             $dataUser = [
                 'ten'       => $request->name,
                 'email'      => $request->email,
                 'sdt'      => $request->phone,
                 'password'   => bcrypt($password),
-                'ma_quyen'      => 2,
+                'ma_quyen'      => $maQuyen,
             ];
-            
+
             if(Account::create($dataUser)) {
                 return redirect()->back()->with('success',('Đăng ký thành công. Vui lòng đăng nhập!'));
             }

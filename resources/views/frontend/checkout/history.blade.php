@@ -37,9 +37,12 @@
                 </div>
                 @endif
                 <div class="search" style="margin-bottom: 15px;">
-                    <input style="padding: 5px; width:215px; color:black;border: 1px solid" id="search" type="text"
-                        class="searchTerm" placeholder="Xem sân (Đã đặt / Đã hủy)">
-                    <i style="margin: 13px 0 0 -25px;" class="fa fa-search"></i>
+                    <select style="padding: 5px; width:200px; color:black;border: 1px solid;background: white;" class="searchTerm" name="" id="search">
+                        <option value="">Tìm kiếm trạng thái sân</option>
+                        <option value="da_dat">Đã đặt</option>
+                        <option value="da_huy">Đã hủy</option>
+                    </select>
+                    {{-- <i style="margin: 13px 0 0 -25px;" class="fa fa-search"></i> --}}
                     </button>
                 </div>
                 <div class="table-responsive cart_info">
@@ -65,8 +68,9 @@
             }
         });
     }
-    $('#search').on('keyup',function(){
+    $('#search').on('click',function(){
         let val_search = $(this).val();
+        console.log(val_search);
         fetch_data(val_search);
     });
     
