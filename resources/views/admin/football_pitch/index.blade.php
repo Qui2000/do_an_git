@@ -38,8 +38,8 @@
               <thead class="thead-light">
                 <tr class="bg_tr">
                   <th scope="col">Id</th>
-                  <th scope="col">Mã loại sân</th>
-                  <th scope="col">Tên</th>
+                  <th scope="col">Loại sân</th>
+                  <th scope="col">Tên sân</th>
                   <th scope="col">Mô tả</th>
                   <th scope="col"></th>
                 </tr>
@@ -49,7 +49,7 @@
                 
               <tr>
                 <td>{{ $key+1 }}</td>
-                <td>{{ $footballPitch->ma_loai_san }}</td>
+                <td>Sân 5</td>
                 <td>{{ $footballPitch->ten }}</td>
                 <td>{{ $footballPitch->mo_ta }}</td>
               <td>
