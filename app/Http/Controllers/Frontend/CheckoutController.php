@@ -251,23 +251,26 @@ class CheckoutController extends Controller
         {
             return redirect()->route('frontend.checkout.showHistory')->with('success',('Xóa lịch sử đặt sân thành công!'));
         }else{
-            return redirect()->route('frontend.checkout.showHistory')->withError('Xóa lịch sử đặt sân thất bại!');
+            return redirect()->route('frontend.checkout.showHistory')->withErrors('Xóa lịch sử đặt sân thất bại!');
         }
     }
     public function deleteSession()
     {
-        $idOrder = $_GET['valID'];
-        if(session()->has('order')) {
-            $order = session()->get('order');
-            foreach($order as $key => $val) {
-                if($key == $idOrder) {
-                    unset($order[$key]);
+        if(!empty($_GET['valID'])) {
+            $idOrder = $_GET['valID'];
+            if(session()->has('order')) {
+                $order = session()->get('order');
+                foreach($order as $key => $val) {
+                    if($key == $idOrder) {
+                        unset($order[$key]);
+                    }
                 }
+                session()->put('order', $order);
+            }else {
+                echo "Session does not exist!";
             }
-            session()->put('order', $order);
-        }else {
-            echo "Session does not exist!";
         }
+        return redirect()->route('frontend.checkout.index');
 
     }
 }

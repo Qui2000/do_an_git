@@ -44,7 +44,7 @@ class ServiceController extends Controller
         {
             return redirect()->route('admin.service.index')->with('success',('Thêm thông tin dịch vụ thành công!'));
         }else{
-            return redirect()->route('admin.service.index')->withError('Thêm thông tin dịch vụ thất bại!');
+            return redirect()->route('admin.service.index')->withErrors('Thêm thông tin dịch vụ thất bại!');
         }
     }
 
@@ -87,7 +87,7 @@ class ServiceController extends Controller
         {
             return redirect()->route('admin.service.index')->with('success',('Sửa thông tin dịch vụ thành công!'));
         }else{
-            return redirect()->route('admin.service.index')->withError('Sửa thông tin dịch vụ thất bại!');
+            return redirect()->route('admin.service.index')->withErrors('Sửa thông tin dịch vụ thất bại!');
         }
     }
 
@@ -104,7 +104,7 @@ class ServiceController extends Controller
         {
             return redirect()->route('admin.service.index')->with('success',('Xóa thông tin dịch vụ thành công!'));
         }else{
-            return redirect()->route('admin.service.index')->withError('Xóa thông tin dịch vụ thất bại!');
+            return redirect()->route('admin.service.index')->withErrors('Xóa thông tin dịch vụ thất bại!');
         }
     }
 }

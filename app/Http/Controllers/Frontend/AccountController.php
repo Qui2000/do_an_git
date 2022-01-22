@@ -47,9 +47,9 @@ class AccountController extends Controller
             if(Account::create($dataUser)) {
                 return redirect()->back()->with('success',('Đăng ký thành công. Vui lòng đăng nhập!'));
             }
-            return redirect()->back()->with('success',('Đăng ký thất bại.'));
+            return redirect()->back()->withErrors('Đăng ký thất bại.');
         }
-        return redirect()->back()->with('success',('Mật khẩu phải trùng nhau!.'));
+        return redirect()->back()->withErrors('Mật khẩu phải trùng nhau!.');
         
     }
     public function login() {
@@ -72,9 +72,9 @@ class AccountController extends Controller
             if( Auth::check() && Auth::user()->ma_quyen == 0 || Auth::user()->ma_quyen == 1 ){
                 return redirect('admin/index');
             }
-            return redirect('/frontend/index')->with('success',('Đăng nhập thành công.'));;
+            return redirect('frontend/index')->with('success',('Đăng nhập thành công.'));;
         }else{
-            return redirect()->back()->with('success',('Email hoặc mật khẩu không đúng.'));
+            return redirect()->back()->withErrors('Email hoặc mật khẩu không đúng.');
         }
     }
     /**
@@ -98,6 +98,7 @@ class AccountController extends Controller
     {
         if(Auth::check()){
             Auth::logout();
+            $orders = session()->forget('order');
         }
         return redirect()->route('frontend.account.login');
         

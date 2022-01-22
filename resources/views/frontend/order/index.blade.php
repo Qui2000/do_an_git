@@ -52,9 +52,10 @@ use App\Models\FootballPitch;
             padding: 0 3px;
             color: #fff;
         }
+
         .disabled__item {
             display: none;
-            
+
         }
 
     </style>
@@ -65,9 +66,9 @@ use App\Models\FootballPitch;
         <div class="row">
             <div class="col-md-12 col-lg-8">
                 <div class="title-single-box">
-                  <h1 class="title-single">Đặt sân</h1>
+                    <h1 class="title-single">Đặt sân</h1>
                 </div>
-              </div>
+            </div>
             <div class="col-md-12 col-lg-4">
                 <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
                     <ol class="breadcrumb">
@@ -82,7 +83,8 @@ use App\Models\FootballPitch;
             </div>
         </div>
         <div>
-            <a href="{{ route('frontend.checkout.index') }}" style="float: right; font-size: 18px;color: #2eca6a;">Xem chi tiết đặt sân tại đây</a>
+            <a href="{{ route('frontend.checkout.index') }}" style="float: right; font-size: 18px;color: #2eca6a;">Xem
+                chi tiết đặt sân tại đây</a>
         </div>
     </div>
 </section><!-- End Intro Single-->
@@ -94,14 +96,23 @@ use App\Models\FootballPitch;
             <div class="row">
                 {{-- <div class="col-md-3">
                 </div> --}}
-                @if($errors->any())
-                <div class="alert alert-danger" style="padding-bottom: 0">
-                <ul>
-                    @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-                </div>
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                        <h4><i class="icon fa fa-check"></i>Thong bao!</h4>
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                        <h4>Chú ý!</h4>
+                        <ul style="margin-left: -30px;">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
                 <div class="col-md-3">
                     <div class="form-group">
@@ -117,7 +128,8 @@ use App\Models\FootballPitch;
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="dateRequest">Ngày giờ</label>
-                        <input type="date" class="form-control" name="ngay_su_dung" id="dateRequest" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
+                        <input type="date" min='{{ now()->toDateString('Y-m-d') }}' max='' class="form-control"
+                            name="ngay_su_dung" id="dateRequest" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -141,23 +153,27 @@ use App\Models\FootballPitch;
                     <tbody>
                         @foreach (FootballPitch::LIST_TIME_ORDER as $key => $item)
                             @if (($loop->iteration - 1) % 5 == 0)
-                            <tr>
+                                <tr>
                             @endif
                             <td class="text-center item_detail a_{{ $key }}" data-time="{{ $key }}">
                                 <input type="hidden" name="key" value="{{ $key }}">
-                                <input type="hidden" name="timeText" class="timeText_{{ $key }}" value="{{ $key }}">
+                                <input type="hidden" name="timeText" class="timeText_{{ $key }}"
+                                    value="{{ $key }}">
                                 <h4>{{ $item }}</h4>
-                                <input type="hidden" name="chi_tiet[{{ $key }}][khung_gio]" id="khung_gio" value="{{ $key }}" class="qty-item" disabled>
+                                <input type="hidden" name="chi_tiet[{{ $key }}][khung_gio]" id="khung_gio"
+                                    value="{{ $key }}" class="qty-item" disabled>
                                 <span class="status_{{ $key }} status">Còn chỗ</span><br>
                                 <div class=" row water mb-2" style="margin-top: 15px;">
                                     <div class="col-md-3" style="margin-top: -11px;">
                                         <span>Loại nước:</span>
                                     </div>
                                     <div class="col-md-6">
-                                        <select id="loai_nuoc" name="chi_tiet[{{ $key }}][water_name]" class="qty-item text-center water_name" disabled>
+                                        <select id="loai_nuoc" name="chi_tiet[{{ $key }}][water_name]"
+                                            class="qty-item text-center water_name" disabled>
                                             {{-- <option value="default">---Chọn---</option> --}}
-                                            @foreach($listService as $service)
-                                                    <option value="{{ $service->ma_loai_dv }}">{{ $service->ten }}</option>
+                                            @foreach ($listService as $service)
+                                                <option value="{{ $service->ma_loai_dv }}">{{ $service->ten }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -167,7 +183,8 @@ use App\Models\FootballPitch;
                                         <span>Số lượng:</span>
                                     </div>
                                     <div class="col-md-6" style="margin-top: 9px;">
-                                        <input id="so_luong" type="number" name="chi_tiet[{{ $key }}][water_qty]"
+                                        <input id="so_luong" type="number"
+                                            name="chi_tiet[{{ $key }}][water_qty]"
                                             class="qty-item text-center water_qty" disabled required>
                                     </div>
                                 </div>
@@ -184,10 +201,22 @@ use App\Models\FootballPitch;
 </div>
 @endsection
 @push('after-scripts')
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script>
     $(document).ready(function() {
+
+        // var d = new Date();
+        // var time = d.getHours() + ":" + d.getMinutes();
+        // let valKey = $("input[name*='key']").val();
+        // var hourTime = time.split(':')[0];
+        // if(hourTime == 15) {
+        //     $(`.a_${valKey}`).addClass("disabled__item");
+        // }
+
+
         $('.item_detail').click(function() {
-            if(!$(this).hasClass('disabled__item')) {
+            if (!$(this).hasClass('disabled__item')) {
                 if (!$(this).hasClass("active__item")) {
                     $(this).find('.qty-item').attr('disabled', false);
                     console.log($(this).find('.qty-item'));
@@ -205,25 +234,29 @@ use App\Models\FootballPitch;
 
         async function getScheduleOrder(date) {
             let url = "{{ route('api.frontend.get-schedule') }}";
-            let response = await axios.get(url, {params: {'date': date}});
+            let response = await axios.get(url, {
+                params: {
+                    'date': date
+                }
+            });
             if (response) {
                 console.log(response);
-                
+
             }
         }
-        $('#btn_order').click(function(){
+        $('#btn_order').click(function() {
             var valMaloaiSan = $('#footballPitch').val();
             var valDate = $('#dateRequest').val();
-            
-            if(valMaloaiSan =='default')
-            {
-                alert('Vui lòng chọn loại sân!');
+
+            if (valMaloaiSan == 'default') {
+                // alert('Vui lòng chọn loại sân!');
+                toastr.error('Vui lòng chọn loại sân!', 'Chú ý!');
                 return false;
             }
 
         })
 
-        $('#footballPitch,#dateRequest').on('change keyup', function(e){
+        $('#footballPitch,#dateRequest').on('change keyup', function(e) {
             var footballPitch = $('#footballPitch').val();
             var dateRequest = $('#dateRequest').val();
             $.ajaxSetup({
@@ -232,10 +265,13 @@ use App\Models\FootballPitch;
                 }
             });
             $.ajax({
-                type:"GET",
+                type: "GET",
                 url: "{{ route('frontend.order.orderSearch') }}",
-                data: {footballPitch: footballPitch, dateRequest: dateRequest},
-                success:function(data){
+                data: {
+                    footballPitch: footballPitch,
+                    dateRequest: dateRequest
+                },
+                success: function(data) {
                     putPitchDetails = data.data;
                     console.log(putPitchDetails);
                     $(`.item_detail`).removeClass("disabled__item");
@@ -244,16 +280,17 @@ use App\Models\FootballPitch;
                         val = $(`.timeText_${putPitchDetail.khung_gio}`).val();
                         if (putPitchDetail.khung_gio == val) {
                             $(`.a_${val}`).addClass("disabled__item");
-                            $(`.status_${ putPitchDetail.khung_gio }`).html('Hết chỗ');
-                        } 
+                            $(`.status_${ putPitchDetail.khung_gio }`).html(
+                                'Hết chỗ');
+                        }
                     });
                 }
             });
 
-            
+
         })
 
-        $('.timeText_05:00-06:00').click(function () {
+        $('.timeText_05:00-06:00').click(function() {
             console.log(23);
         })
     });

@@ -42,18 +42,18 @@ class ProfileController extends Controller
         $account = Account::findOrFail($acounntId);
         $data = $request->all();
         // dd($data);
-        if($data['password'])
-        {
-            $data['password'] = bcrypt($data['password']);
-        }else{
-            $data['password'] = $account->password;
-        }
+        // if($data['password'])
+        // {
+        //     $data['password'] = bcrypt($data['password']);
+        // }else{
+        //     $data['password'] = $account->password;
+        // }
     
         if($account->update($data))
         {
             return redirect()->back()->with('success',('Cập nhật thông tin thành công!'));
         }else{
-            return redirect()->back()->withError('Cập nhật thông tin thất bại!');
+            return redirect()->back()->withErrors('Cập nhật thông tin thất bại!');
         }
     }
 

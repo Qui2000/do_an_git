@@ -105,6 +105,7 @@ class PutPitchController extends Controller
      */
     public function search(Request $request)
     {
+        info($request->all());
         if($request->ajax()){
             $result = [];
             if (empty(request()->search)) {
@@ -117,10 +118,23 @@ class PutPitchController extends Controller
                 return response()->json(['html' => $view]);
             }
             $result = $this->getAllPutPitch();
-            $result['putPitchs'] = PutPitchDetail::join('dat_san', 'dat_san.id', '=', 'chi_tiet_dat_san.id')
-                ->where('dat_san.ten_nguoi_dat', 'LIKE', '%' . $request->search . '%')
-                ->orderBy('chi_tiet_dat_san.ngay_su_dung', 'desc')
-                ->paginate(5);
+            $query = PutPitchDetail::join('dat_san', 'dat_san.id', '=', 'chi_tiet_dat_san.id')
+                ->orderBy('ngay_su_dung', 'desc');
+            if($request->search == 'da_dat') {
+                $result['putPitchs'] = $query
+                    ->where('ngay_gio_huy', null)
+                    ->paginate(5);
+            } else if($request->search == 'da_huy') { 
+                $result['putPitchs'] = $query
+                    ->where('ngay_gio_huy','<>', null)
+                    ->paginate(5);
+            } else {
+                $result['putPitchs'] = PutPitchDetail::join('dat_san', 'dat_san.id', '=', 'chi_tiet_dat_san.id')
+                    ->where('dat_san.ten_nguoi_dat', 'LIKE', '%' . $request->search . '%')
+                    ->orderBy('chi_tiet_dat_san.ngay_su_dung', 'desc')
+                    ->paginate(5);
+
+            }
             $view = view('admin.put_pitch.table')->with([
                 'putPitchs'   => $result['putPitchs'],
                 'statusPutPitchs' => $result['statusPutPitchs'],
@@ -199,7 +213,7 @@ class PutPitchController extends Controller
         {
             return redirect()->route('admin.putPitch.index')->with('success',('Sửa thông tin đặt sân thành công!'));
         }else{
-            return redirect()->route('admin.putPitch.index')->withError('Sửa thông tin đặt sân thất bại!');
+            return redirect()->route('admin.putPitch.index')->withErrors('Sửa thông tin đặt sân thất bại!');
         }
     }
 
@@ -240,7 +254,7 @@ class PutPitchController extends Controller
         {
             return redirect()->route('admin.putPitch.index')->with('success',('Xóa thông tin đặt sân thành công!'));
         }else{
-            return redirect()->route('admin.putPitch.index')->withError('Xóa thông tin đặt sân thất bại!');
+            return redirect()->route('admin.putPitch.index')->withErrors('Xóa thông tin đặt sân thất bại!');
         }
     }
 }

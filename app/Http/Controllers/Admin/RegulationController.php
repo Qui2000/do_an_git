@@ -44,7 +44,7 @@ class RegulationController extends Controller
         {
             return redirect()->route('admin.regulation.index')->with('success',('Thêm thông tin qui định thành công!'));
         }else{
-            return redirect()->route('admin.regulation.index')->withError('Thêm thông tin qui định thất bại!');
+            return redirect()->route('admin.regulation.index')->withErrors('Thêm thông tin qui định thất bại!');
         }
     }
 
@@ -87,7 +87,7 @@ class RegulationController extends Controller
         {
             return redirect()->route('admin.regulation.index')->with('success',('Sửa thông tin qui định thành công!'));
         }else{
-            return redirect()->route('admin.regulation.index')->withError('Sửa thông tin qui định thất bại!');
+            return redirect()->route('admin.regulation.index')->withErrors('Sửa thông tin qui định thất bại!');
         }
     }
 
@@ -104,7 +104,7 @@ class RegulationController extends Controller
         {
             return redirect()->route('admin.regulation.index')->with('success',('Xóa thông tin qui định thành công!'));
         }else{
-            return redirect()->route('admin.regulation.index')->withError('Xóa thông tin qui định thất bại!');
+            return redirect()->route('admin.regulation.index')->withErrors('Xóa thông tin qui định thất bại!');
         }
     }
 }
