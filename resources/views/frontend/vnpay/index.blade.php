@@ -50,11 +50,11 @@
                     </div>
                     <div class="form-group">
                         <label for="order_desc">Nội dung thanh toán</label>
-                        <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2" placeholder="Nội dung thanh toán"></textarea>
+                        <textarea class="form-control" cols="20" id="order_desc" name="order_desc" rows="2" placeholder="Nội dung thanh toán" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="bank_code">Ngân hàng</label>
-                        <select name="bank_code" id="bank_code" class="form-control">
+                        <select name="bank_code" id="bank_code" class="form-control" required>
                             <option value="">Không chọn</option>
                             <option value="NCB"> Ngan hang NCB</option>
                             <option value="AGRIBANK"> Ngan hang Agribank</option>

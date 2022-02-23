@@ -169,7 +169,7 @@ class CheckoutController extends Controller
 
             if (empty(request()->search)) {
                 $historyOrders = PutPitchDetail::where('ma_tk', $user_id)
-                    ->orderBy('ngay_su_dung', 'desc')
+                    ->orderBy('created_at', 'desc')
                     ->paginate(5);
 
                 $view =  view('frontend.checkout.table')->with([
@@ -180,9 +180,9 @@ class CheckoutController extends Controller
                 return response()->json(['html' => $view]);
             }
             if($request->search == 'da_dat') {
-                $result['historyOrders'] = PutPitchDetail::orderBy('ngay_su_dung', 'desc')->where('ma_tk', $user_id)->where('ngay_gio_huy', null)->paginate(5);
+                $result['historyOrders'] = PutPitchDetail::orderBy('created_at', 'desc')->where('ma_tk', $user_id)->where('ngay_gio_huy', null)->paginate(5);
             } else {
-                $result['historyOrders'] = PutPitchDetail::orderBy('ngay_su_dung', 'desc')->where('ma_tk', $user_id)->where('ngay_gio_huy','<>', null)->paginate(5);
+                $result['historyOrders'] = PutPitchDetail::orderBy('created_at', 'desc')->where('ma_tk', $user_id)->where('ngay_gio_huy','<>', null)->paginate(5);
             }
 
             $view = view('frontend.checkout.table')->with([
@@ -225,10 +225,12 @@ class CheckoutController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $date = Carbon::now();
         $today = $date->toDateTimeString();
         $putPitchDetail = PutPitchDetail::find($id);
-        $putPitch = PutPitch::find($id); 
+        $putPitch = PutPitch::find($id);
+        dd($putPitch);
         $putPitchDetail->ngay_gio_huy = $today;
         $putPitch->ma_trang_thai = 3;
         $putPitchDetail->update();
@@ -245,29 +247,33 @@ class CheckoutController extends Controller
      */
     public function destroy($id)
     {
+        // dd($id);
         $putPitchDetail = PutPitchDetail::find($id); 
         $putPitch = PutPitch::find($id); 
-        if($putPitch->delete() && $putPitchDetail->delete())
+        if($putPitchDetail->delete() && $putPitch->delete())
         {
             return redirect()->route('frontend.checkout.showHistory')->with('success',('Xóa lịch sử đặt sân thành công!'));
         }else{
-            return redirect()->route('frontend.checkout.showHistory')->withError('Xóa lịch sử đặt sân thất bại!');
+            return redirect()->route('frontend.checkout.showHistory')->withErrors('Xóa lịch sử đặt sân thất bại!');
         }
     }
     public function deleteSession()
     {
-        $idOrder = $_GET['valID'];
-        if(session()->has('order')) {
-            $order = session()->get('order');
-            foreach($order as $key => $val) {
-                if($key == $idOrder) {
-                    unset($order[$key]);
+        if(!empty($_GET['valID'])) {
+            $idOrder = $_GET['valID'];
+            if(session()->has('order')) {
+                $order = session()->get('order');
+                foreach($order as $key => $val) {
+                    if($key == $idOrder) {
+                        unset($order[$key]);
+                    }
                 }
+                session()->put('order', $order);
+            }else {
+                echo "Session does not exist!";
             }
-            session()->put('order', $order);
-        }else {
-            echo "Session does not exist!";
         }
+        return redirect()->route('frontend.checkout.index');
 
     }
 }

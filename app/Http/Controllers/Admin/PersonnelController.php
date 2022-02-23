@@ -56,7 +56,7 @@ class PersonnelController extends Controller
         {
             return redirect()->route('admin.personnel.index')->with('success',('Thêm thông tin nhân viên thành công!'));
         }else{
-            return redirect()->route('admin.personnel.index')->withError('Thêm thông tin nhân viên thất bại!');
+            return redirect()->route('admin.personnel.index')->withErrors('Thêm thông tin nhân viên thất bại!');
         }
 
     }
@@ -130,7 +130,7 @@ class PersonnelController extends Controller
         {
             return redirect()->route('admin.personnel.index')->with('success',('Sửa thông tin nhân viên thành công!'));
         }else{
-            return redirect()->route('admin.personnel.index')->withError('Sửa thông tin nhân viên thất bại!');
+            return redirect()->route('admin.personnel.index')->withErrors('Sửa thông tin nhân viên thất bại!');
         }
     }
 
@@ -147,7 +147,7 @@ class PersonnelController extends Controller
         {
             return redirect()->route('admin.personnel.index')->with('success',('Xóa thông tin nhân viên thành công!'));
         }else{
-            return redirect()->route('admin.personnel.index')->withError('Xóa thông tin nhân viên thất bại!');
+            return redirect()->route('admin.personnel.index')->withErrors('Xóa thông tin nhân viên thất bại!');
         }
     }
 }

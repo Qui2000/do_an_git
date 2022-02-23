@@ -45,7 +45,7 @@ class FootballPitchController extends Controller
         {
             return redirect()->route('admin.football_pitch.index')->with('success',('Thêm thông tin sân bóng thành công!'));
         }else{
-            return redirect()->route('admin.football_pitch.index')->withError('Thêm thông tin sân bóng thất bại!');
+            return redirect()->route('admin.football_pitch.index')->withErrors('Thêm thông tin sân bóng thất bại!');
         }
     }
 
@@ -88,7 +88,7 @@ class FootballPitchController extends Controller
         {
             return redirect()->route('admin.football_pitch.index')->with('success',('Sửa thông tin sân bóng thành công!'));
         }else{
-            return redirect()->route('admin.football_pitch.index')->withError('Sửa thông tin sân bóng thất bại!');
+            return redirect()->route('admin.football_pitch.index')->withErrors('Sửa thông tin sân bóng thất bại!');
         }
     }
 
@@ -105,7 +105,7 @@ class FootballPitchController extends Controller
         {
             return redirect()->route('admin.football_pitch.index')->with('success',('Xóa thông tin sân bóng thành công!'));
         }else{
-            return redirect()->route('admin.football_pitch.index')->withError('Xóa thông tin sân bóng thất bại!');
+            return redirect()->route('admin.football_pitch.index')->withErrors('Xóa thông tin sân bóng thất bại!');
         }
     }
 
@@ -129,7 +129,7 @@ class FootballPitchController extends Controller
         {
             return redirect()->route('admin.football_pitch.priceTime')->with('success',('Sửa giá khung giờ thành công!'));
         }else{
-            return redirect()->route('admin.football_pitch.priceTime')->withError('Sửa giá khung giờ thất bại!');
+            return redirect()->route('admin.football_pitch.priceTime')->withErrors('Sửa giá khung giờ thất bại!');
         }
     }
 

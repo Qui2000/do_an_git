@@ -93,8 +93,8 @@ Route::group([
         Route::post('edit/{id}', 'FootballPitchController@update')->name('update');
         Route::get('delete/{id}', 'FootballPitchController@destroy')->name('delete');
         Route::get('price-time/', 'FootballPitchController@priceTime')->name('priceTime');
-        Route::get('edit/{id}', 'FootballPitchController@editPriceTime')->name('editPriceTime');
-        Route::post('edit/{id}', 'FootballPitchController@editPostPriceTime')->name('editPostPriceTime');
+        Route::get('edit-price-time/{id}', 'FootballPitchController@editPriceTime')->name('editPriceTime');
+        Route::post('edit-price-time/{id}', 'FootballPitchController@editPostPriceTime')->name('editPostPriceTime');
 
     });
 

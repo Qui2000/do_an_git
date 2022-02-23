@@ -43,13 +43,21 @@ class ChartController extends Controller
         $denNgay = $data['den_ngay'];
 
         $thongKe = PutPitchDetail::whereBetween('ngay_su_dung', [$tuNgay, $denNgay])->orderBy('ngay_su_dung', 'ASC')->get();
-        foreach($thongKe as $key => $val) {
+        $countThongKe = count($thongKe);
+        if($countThongKe > 0) {
+            foreach($thongKe as $key => $val) {
+                $chart_data[] = array(
+                    'ngay_su_dung' => $val->ngay_su_dung,
+                    'tongTien' => $val->gia_tien,
+                );
+            }
+        }else {
+
             $chart_data[] = array(
-                'ngay_su_dung' => $val->ngay_su_dung,
-                'tongTien' => $val->gia_tien,
+                'ngay_su_dung' => '',
+                'tongTien' => '',
             );
         }
-        // dd($chart_data);
         
         echo $data = json_encode($chart_data);
 
@@ -61,12 +69,21 @@ class ChartController extends Controller
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
 
         $thongKe = PutPitchDetail::whereBetween('ngay_su_dung', [$sub7days, $now])->orderBy('ngay_su_dung', 'ASC')->get();
-        foreach($thongKe as $key => $val) {
+        $countThongKe = count($thongKe);
+        if($countThongKe > 0) {
+            foreach($thongKe as $key => $val) {
+                $chart_data[] = array(
+                    'ngay_su_dung' => $val->ngay_su_dung,
+                    'tongTien' => $val->gia_tien,
+                );
+            }
+        } else {
             $chart_data[] = array(
-                'ngay_su_dung' => $val->ngay_su_dung,
-                'tongTien' => $val->gia_tien,
+                'ngay_su_dung' => '',
+                'tongTien' => '',
             );
         }
+
         echo $data = json_encode($chart_data);
 
     }
@@ -81,7 +98,6 @@ class ChartController extends Controller
         
         $sub7days = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
         $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-        // dd($sub7days);
         if($data['dashboard_value'] == '7ngay') {
             $thongKe = PutPitchDetail::whereBetween('ngay_su_dung', [$sub7days, $now])->orderBy('ngay_su_dung', 'ASC')->get();
         } else if ($data['dashboard_value'] == 'thangTruoc') {
@@ -89,14 +105,22 @@ class ChartController extends Controller
         } else {
             $thongKe = PutPitchDetail::whereBetween('ngay_su_dung', [$dauThangNay, $now])->orderBy('ngay_su_dung', 'ASC')->get();
         }
-        foreach($thongKe as $key => $val) {
+
+        $countThongKe = count($thongKe);
+        if($countThongKe > 0) {
+            foreach($thongKe as $key => $val) {
+                $chart_data[] = array(
+                    'ngay_su_dung' => $val->ngay_su_dung,
+                    'tongTien' => $val->gia_tien,
+                );
+            }
+        } else {
             $chart_data[] = array(
-                'ngay_su_dung' => $val->ngay_su_dung,
-                'tongTien' => $val->gia_tien,
+                'ngay_su_dung' => '',
+                'tongTien' => '',
             );
         }
-        // dd($chart_data);
-        
+
         echo $data = json_encode($chart_data);
     }
 

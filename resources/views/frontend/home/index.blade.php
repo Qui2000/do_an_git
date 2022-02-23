@@ -12,15 +12,11 @@
               <div class="row">
                 <div class="col-lg-8">
                   <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345
-                    </p>
                     <h1 class="intro-title mb-4 ">
                       <span class="color-b">2019</span> Giải
                       <br> GIAO LƯU
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
                     </p>
                   </div>
                 </div>
@@ -37,15 +33,11 @@
               <div class="row">
                 <div class="col-lg-8">
                   <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345
-                    </p>
                     <h1 class="intro-title mb-4">
                       <span class="color-b">2020</span> GIẢI
                       <br> CÚP ĐÀ NẴNG
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
                     </p>
                   </div>
                 </div>
@@ -62,15 +54,11 @@
               <div class="row">
                 <div class="col-lg-8">
                   <div class="intro-body">
-                    <p class="intro-title-top">Doral, Florida
-                      <br> 78345
-                    </p>
                     <h1 class="intro-title mb-4">
                       <span class="color-b">20121 </span> GIẢI 
                       <br> GIAO LƯU CÔNG TY
                     </h1>
                     <p class="intro-subtitle intro-price">
-                      <a href="#"><span class="price-a">rent | $ 12.000</span></a>
                     </p>
                   </div>
                 </div>
@@ -163,9 +151,6 @@
                 <h2 class="title-a">Hình ảnh sân</h2>
               </div>
               <div class="title-link">
-                <a href="property-grid.html">Tất cả
-                  <span class="bi bi-chevron-right"></span>
-                </a>
               </div>
             </div>
           </div>
@@ -182,38 +167,22 @@
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
                     <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="property-single.html">206 Mount
-                          <br /> Olive Road Two</a>
-                      </h2>
                     </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
+                        <span class="price-a">Sân 5A</span>
                       </div>
-                      <a href="#" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
                     </div>
                     <div class="card-footer-a">
                       <ul class="card-info d-flex justify-content-around">
                         <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
+                          <h4 class="card-info-title">Chiều dài sân</h4>
+                          <span>25m
                           </span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
+                          <h4 class="card-info-title">Chiều rộng</h4>
+                          <span>15m</span>
                         </li>
                       </ul>
                     </div>
@@ -229,39 +198,21 @@
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="property-single.html">157 West
-                          <br /> Central Park</a>
-                      </h2>
-                    </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
+                        <span class="price-a">Sân 5B</span>
                       </div>
-                      <a href="property-single.html" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
                     </div>
                     <div class="card-footer-a">
                       <ul class="card-info d-flex justify-content-around">
                         <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
+                          <h4 class="card-info-title">Chiều dài sân</h4>
+                          <span>25m
                           </span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
+                          <h4 class="card-info-title">Chiều rộng</h4>
+                          <span>15m</span>
                         </li>
                       </ul>
                     </div>
@@ -277,39 +228,21 @@
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="property-single.html">245 Azabu
-                          <br /> Nishi Park let</a>
-                      </h2>
-                    </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
+                        <span class="price-a">Sân 5C</span>
                       </div>
-                      <a href="property-single.html" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
                     </div>
                     <div class="card-footer-a">
                       <ul class="card-info d-flex justify-content-around">
                         <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
+                          <h4 class="card-info-title">Chiều dài sân</h4>
+                          <span>25m
                           </span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
+                          <h4 class="card-info-title">Chiều rộng</h4>
+                          <span>15m</span>
                         </li>
                       </ul>
                     </div>
@@ -325,39 +258,21 @@
                 </div>
                 <div class="card-overlay">
                   <div class="card-overlay-a-content">
-                    <div class="card-header-a">
-                      <h2 class="card-title-a">
-                        <a href="property-single.html">204 Montal
-                          <br /> South Bela Two</a>
-                      </h2>
-                    </div>
                     <div class="card-body-a">
                       <div class="price-box d-flex">
-                        <span class="price-a">rent | $ 12.000</span>
+                        <span class="price-a">Sân 5D</span>
                       </div>
-                      <a href="property-single.html" class="link-a">Click here to view
-                        <span class="bi bi-chevron-right"></span>
-                      </a>
                     </div>
                     <div class="card-footer-a">
                       <ul class="card-info d-flex justify-content-around">
                         <li>
-                          <h4 class="card-info-title">Area</h4>
-                          <span>340m
-                            <sup>2</sup>
+                          <h4 class="card-info-title">Chiều dài sân</h4>
+                          <span>25m
                           </span>
                         </li>
                         <li>
-                          <h4 class="card-info-title">Beds</h4>
-                          <span>2</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Baths</h4>
-                          <span>4</span>
-                        </li>
-                        <li>
-                          <h4 class="card-info-title">Garages</h4>
-                          <span>1</span>
+                          <h4 class="card-info-title">Chiều rộng</h4>
+                          <span>15m</span>
                         </li>
                       </ul>
                     </div>
@@ -383,9 +298,6 @@
                 <h2 class="title-a">Các giải đấu tại sân Đa Phước</h2>
               </div>
               <div class="title-link">
-                <a href="blog-grid.html">Tất cả
-                  <span class="bi bi-chevron-right"></span>
-                </a>
               </div>
             </div>
           </div>
@@ -402,13 +314,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">House</a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">House is comming
-                          <br> new</a>
-                      </h2>
+                      <a href="#" class="category-b">Đa Phước</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -426,13 +332,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Travel</a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">Travel is comming
-                          <br> new</a>
-                      </h2>
+                      <a href="#" class="category-b">Đa Phước</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -450,13 +350,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Park</a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="blog-single.html">Park is comming
-                          <br> new</a>
-                      </h2>
+                      <a href="#" class="category-b">Đa Phước</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -474,13 +368,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Travel</a>
-                    </div>
-                    <div class="card-title-b">
-                      <h2 class="title-2">
-                        <a href="#">Travel is comming
-                          <br> new</a>
-                      </h2>
+                      <a href="#" class="category-b">Đa Phước</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>

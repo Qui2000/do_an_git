@@ -57,7 +57,7 @@ class CustomerController extends Controller
         {
             return redirect()->route('admin.customer.index')->with('success',('Thêm thông tin khách hàng thành công!'));
         }else{
-            return redirect()->route('admin.customer.index')->withError('Thêm thông tin khách hàng thất bại!');
+            return redirect()->route('admin.customer.index')->withErrors('Thêm thông tin khách hàng thất bại!');
         }
         
 
@@ -132,7 +132,7 @@ class CustomerController extends Controller
         {
             return redirect()->route('admin.customer.index')->with('success',('Sửa thông tin khách hàng thành công!'));
         }else{
-            return redirect()->route('admin.customer.index')->withError('Sửa thông tin khách hàng thất bại!');
+            return redirect()->route('admin.customer.index')->withErrors('Sửa thông tin khách hàng thất bại!');
         }
     }
 
@@ -149,7 +149,7 @@ class CustomerController extends Controller
         {
             return redirect()->route('admin.customer.index')->with('success',('Xóa thông tin khách hàng thành công!'));
         }else{
-            return redirect()->route('admin.customer.index')->withError('Xóa thông tin khách hàng thất bại!');
+            return redirect()->route('admin.customer.index')->withErrors('Xóa thông tin khách hàng thất bại!');
         }
     }
 }

@@ -67,12 +67,10 @@ class OrderController extends Controller
             $priceTime = PriceTime::where('khung_gio', FootballPitch::LIST_TIME_ORDER[$key])->first(); 
             $priceService = Service::where('ma_loai_dv', FootballPitch::LIST_SERVICE_ORDER[$val['water_name']])->first();
             // dd($priceService);   
-            if($val['water_name'] == "1") {
+            if($val['water_name'] == "1" || $val['water_name'] == "2" || $val['water_name'] == "3" || $val['water_name'] == "4" || $val['water_name'] == "5") {
                 $giaTien =  $priceTime->gia_tien + ($priceService->gia_tien *  $val['water_qty']);
             }
-            if($val['water_name'] == "2") {
-                $giaTien =  $priceTime->gia_tien + ($priceService->gia_tien *  $val['water_qty']);
-            }
+           
             $order[$key] = [
                 'id' => $key,
                 'ma_dat_san' => $maDatSan,
