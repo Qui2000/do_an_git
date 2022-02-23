@@ -84,7 +84,19 @@
                                     {{ $value['gia_san'] }} VND
                                 </td>
                                 <td class="cart_quantity">
-                                    {{ $value['ma_loai_dv'] == 1 ? "Nước khoáng lạc" : "Nước lọc" }}
+                                    {{-- {{ $value['ma_loai_dv'] == 1 ? "Nước khoáng lạc" : "Nước lọc" }} --}}
+                                    @php
+                                        if ($value['ma_loai_dv'] == 1) {
+                                            echo "Nước khoáng lạc";
+                                        }
+                                        if ($value['ma_loai_dv'] == 2) {
+                                            echo "Nước lọc";
+                                        } 
+                                        if ($value['ma_loai_dv'] == 3) {
+                                            echo "Nước chanh muối";
+                                        } 
+
+                                    @endphp
                                 </td>
                                 <td class="cart_price">
                                     {{ $value['gia_nuoc'] }} VND

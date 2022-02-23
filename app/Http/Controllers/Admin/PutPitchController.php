@@ -119,7 +119,7 @@ class PutPitchController extends Controller
             }
             $result = $this->getAllPutPitch();
             $query = PutPitchDetail::join('dat_san', 'dat_san.id', '=', 'chi_tiet_dat_san.id')
-                ->orderBy('ngay_su_dung', 'desc');
+                ->orderBy('created_at', 'desc');
             if($request->search == 'da_dat') {
                 $result['putPitchs'] = $query
                     ->where('ngay_gio_huy', null)
@@ -131,7 +131,7 @@ class PutPitchController extends Controller
             } else {
                 $result['putPitchs'] = PutPitchDetail::join('dat_san', 'dat_san.id', '=', 'chi_tiet_dat_san.id')
                     ->where('dat_san.ten_nguoi_dat', 'LIKE', '%' . $request->search . '%')
-                    ->orderBy('chi_tiet_dat_san.ngay_su_dung', 'desc')
+                    ->orderBy('chi_tiet_dat_san.created_at', 'desc')
                     ->paginate(5);
 
             }
@@ -248,9 +248,9 @@ class PutPitchController extends Controller
      */
     public function destroy($id)
     {
-        $putPitch = PutPitch::find($id); 
         $putPitchDetail = PutPitchDetail::find($id); 
-        if($putPitch->delete() && $putPitchDetail->delete())
+        $putPitch = PutPitch::find($id);
+        if($putPitchDetail->delete() && $putPitch->delete())
         {
             return redirect()->route('admin.putPitch.index')->with('success',('Xóa thông tin đặt sân thành công!'));
         }else{

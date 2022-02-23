@@ -76,9 +76,9 @@
                                                 </a>
                                                 <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                     style="color: red"
-                                                    href="{{ route('admin.service.delete', ['id' => $service->id]) }}"
+                                                    {{-- href="{{ route('admin.service.delete', ['id' => $service->id]) }}" --}}
                                                     aria-expanded="false"
-                                                    onclick="return confirm('Ban co muon xoa khong?')">
+                                                    onclick="return confirm('Dịch vụ này không thể xoá! Vì đã tồn tại loại dịch vụ?')">
                                                     Xóa<i style="font-size: 25px;" class="mdi mdi-delete"></i>
                                                 </a>
                                             </td>
