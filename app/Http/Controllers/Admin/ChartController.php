@@ -58,6 +58,8 @@ class ChartController extends Controller
                 'tongTien' => '',
             );
         }
+
+        dd($chart_data);
         
         echo $data = json_encode($chart_data);
 
