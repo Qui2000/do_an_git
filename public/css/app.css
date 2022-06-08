@@ -6,11 +6,11 @@
 }
 
 .orders .item_detail:hover {
-  background-color: green;
+  background-color: #6495ed;
 }
 
 .orders .active__item {
-  background-color: green;
+  background-color: #6495ed;
 }
 
 .orders #content-tab .table-dark h4 {

@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(assets/img/san_cup.jpg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(assets/img/san_bong.jpg)">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
@@ -55,7 +55,7 @@
                 <div class="col-lg-8">
                   <div class="intro-body">
                     <h1 class="intro-title mb-4">
-                      <span class="color-b">20121 </span> GIẢI 
+                      <span class="color-b">2021 </span> GIẢI 
                       <br> GIAO LƯU CÔNG TY
                     </h1>
                     <p class="intro-subtitle intro-price">
@@ -295,7 +295,7 @@
           <div class="col-md-12">
             <div class="title-wrap d-flex justify-content-between">
               <div class="title-box">
-                <h2 class="title-a">Các giải đấu tại sân Đa Phước</h2>
+                <h2 class="title-a">Các giải đấu tại sân Mỹ Nhật Quang</h2>
               </div>
               <div class="title-link">
               </div>
@@ -314,7 +314,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Đa Phước</a>
+                      <a href="#" class="category-b">Mỹ Nhật Quang</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -332,7 +332,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Đa Phước</a>
+                      <a href="#" class="category-b">Mỹ Nhật Quang</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -350,7 +350,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Đa Phước</a>
+                      <a href="#" class="category-b">Mỹ Nhật Quang</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -368,7 +368,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Đa Phước</a>
+                      <a href="#" class="category-b">Mỹ Nhật Quang</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -415,7 +415,7 @@
                     </div>
                     <div class="testimonials-content">
                       <p class="testimonial-text">
-                        Giải đấu tranh cúp Đa Phước lần thứ 1 năm 2020 tại sân bóng đá Đa Phước - Đà Nẵng.
+                        Giải đấu tranh cúp Mỹ Nhật Quang lần thứ 1 năm 2020 tại sân bóng đá Mỹ Nhật Quang - Đà Nẵng.
                       </p>
                     </div>
                     <div class="testimonial-author-box">
@@ -441,7 +441,7 @@
                     </div>
                     <div class="testimonials-content">
                       <p class="testimonial-text">
-                        Giải đấu tranh cúp Đa Phước lần thứ 2 năm 2021 tại sân bóng đá Đa Phước - Đà Nẵng.
+                        Giải đấu tranh cúp Mỹ Nhật Quang lần thứ 2 năm 2021 tại sân bóng đá Mỹ Nhật Quang - Đà Nẵng.
                       </p>
                     </div>
                     <div class="testimonial-author-box">

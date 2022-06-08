@@ -28,7 +28,7 @@
     <div class="row">
         <div class="col-sm-3"></div>
         <div class="col-sm-6">
-            <div class="alert alert-dismissible" style="background: #2eca6a; color: white; text-align: center;">
+            <div class="alert alert-dismissible" style="background: #6495ed; color: white; text-align: center;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                 <h4><i class="icon fa fa-check"></i>Thông báo!</h4>
                 <h1>Bạn đã đặt sân thành công!!</h1>

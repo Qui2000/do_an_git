@@ -18,7 +18,7 @@
     <body>
         <div class="container">
             <div class="header clearfix">
-                <h3 style="color: #2eca6a;font-weight: 600;" class="text-muted">VNPAY DEMO</h3>
+                <h3 style="color: #6495ed;font-weight: 600;" class="text-muted">VNPAY DEMO</h3>
             </div>
             <div class="table-responsive">
                 <form action="{{ route('frontend.checkout.vnpayCreate') }}" id="create_form" method="post">   

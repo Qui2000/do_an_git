@@ -27,7 +27,7 @@ use App\Models\FootballPitch;
         }
 
         ul#tabs li.active {
-            background-color: #2eca6a;
+            background-color: #6495ed;
         }
 
         ul#tab {
@@ -46,7 +46,7 @@ use App\Models\FootballPitch;
 
         #content-tab>div {
             text-align: center;
-            background-color: #2eca6a;
+            background-color: #6495ed;
             /* width: 650px; */
             margin: 0 auto;
             padding: 0 3px;
@@ -83,7 +83,7 @@ use App\Models\FootballPitch;
             </div>
         </div>
         <div>
-            <a href="{{ route('frontend.checkout.index') }}" style="float: right; font-size: 18px;color: #2eca6a;">Xem
+            <a href="{{ route('frontend.checkout.index') }}" style="float: right; font-size: 18px;color: #6495ed;">Xem
                 chi tiết đặt sân tại đây</a>
         </div>
     </div>

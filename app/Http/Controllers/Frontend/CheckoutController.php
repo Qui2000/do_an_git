@@ -225,12 +225,10 @@ class CheckoutController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $date = Carbon::now();
         $today = $date->toDateTimeString();
         $putPitchDetail = PutPitchDetail::find($id);
         $putPitch = PutPitch::find($id);
-        dd($putPitch);
         $putPitchDetail->ngay_gio_huy = $today;
         $putPitch->ma_trang_thai = 3;
         $putPitchDetail->update();

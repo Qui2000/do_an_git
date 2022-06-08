@@ -53,7 +53,7 @@ var plot = $.plot("#placeholder", [getRandomData()], {
     xaxis: {
         show: false
     },
-    colors: ["#55ce63"],
+    colors: ["#6495ed"],
     grid: {
         color: "#AFAFAF",
         hoverable: true,
@@ -103,7 +103,7 @@ $(document).ready(function() {
                 min: -1.2,
                 max: 1.2
             },
-            colors: ["#009efb", "#55ce63"],
+            colors: ["#009efb", "#6495ed"],
             grid: {
                 color: "#AFAFAF",
                 hoverable: true,

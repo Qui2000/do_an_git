@@ -31,11 +31,11 @@
             <div class="container">
                 <div class="table-responsive cart_info">
                     <div>
-                        <a href=" {{ route('frontend.checkout.showHistory') }} " style="float: right; font-size: 18px; color:#2eca6a">Xem lịch sử đặt sân</a>
+                        <a href=" {{ route('frontend.checkout.showHistory') }} " style="float: right; font-size: 18px; color:#6495ed">Xem lịch sử đặt sân</a>
                     </div>
                     <table class="table table-condensed">
                         <thead>
-                            <tr class="cart_menu" style="background: #2eca6a;font-size: 16px;color: black;font-weight: 600;">
+                            <tr class="cart_menu" style="background: #6495ed;font-size: 16px;color: black;font-weight: 600;">
                                 <td class="image">Mã đặt sân</td>
                                 <td class="description">Loại sân</td>
                                 <td class="description">Khung giờ</td>
@@ -134,7 +134,7 @@
                                             <td style="font-weight: 600;">Thanh toán bằng: </td>
                                             @if($total > 0)
                                             <td>
-                                                <a style="background: #2eca6a;
+                                                <a style="background: #6495ed;
                                                 padding: 5px;
                                                 border-radius: 10px;
                                                 text-decoration: none;
@@ -144,7 +144,7 @@
                                             @else 
                                             <td>
                                                 <a 
-                                                style="background: #2eca6a;
+                                                style="background: #6495ed;
                                                 pointer-events: none; 
                                                 cursor: default; 
                                                 padding: 5px;

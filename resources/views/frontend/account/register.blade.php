@@ -90,7 +90,7 @@
                                         </div>
                                     </form>
                                     <div class="login100-more"
-                                        style="background-image: url('{{ asset('frontend/assets/img/san_cup.jpg') }} ') ;">
+                                        style="background-image: url('{{ asset('frontend/assets/img/san_bong.jpg') }} ') ;">
                                     </div>
                                 </div>
                             </div>

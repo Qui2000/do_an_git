@@ -1,6 +1,6 @@
 <table class="table table-condensed">
     <thead>
-        <tr class="cart_menu" style="background: #2eca6a;font-size: 16px;color: black;font-weight: 600;">
+        <tr class="cart_menu" style="background: #6495ed;font-size: 16px;color: black;font-weight: 600;">
             <td class="image">Mã đặt sân</td>
             <td class="description">Loại sân</td>
             <td class="description">Khung giờ</td>

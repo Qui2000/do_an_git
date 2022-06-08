@@ -276,7 +276,7 @@ if (!document.createElement('canvas').getContext) {
     cornsilk: '#FFF8DC',
     crimson: '#DC143C',
     cyan: '#00FFFF',
-    darkblue: '#00008B',
+    darkblue: '#6495ed',
     darkcyan: '#008B8B',
     darkgoldenrod: '#B8860B',
     darkgray: '#A9A9A9',

@@ -5,7 +5,7 @@
         <!-- ============================================================== -->
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
-                <h4 style="font-weight: 500">Sân bóng đá Đa Phước</h4>
+                <h4 style="font-weight: 500">Sân bóng đá Mỹ Nhật Quang</h4>
             </a>
         </div>
         <!-- ============================================================== -->
