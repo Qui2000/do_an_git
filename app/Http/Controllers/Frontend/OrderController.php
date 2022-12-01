@@ -11,6 +11,7 @@ use App\Models\PriceTime;
 use App\Models\FootballPitch;
 use Illuminate\Support\Carbon;
 use App\Http\Requests\CreateOrderRequest;
+use App\Models\Type;
 use \Illuminate\Http\Response;
 
 class OrderController extends Controller
@@ -24,7 +25,6 @@ class OrderController extends Controller
     {
         $result = $this->getAllFootballPitch();
 
-        // dd($result['service']);
         if(session()->has('order')){
             $order = session()->get('order');
         } else {
@@ -36,16 +36,16 @@ class OrderController extends Controller
             'listService'     => $result['service'],
             'listOrders'     => $result['putPitchDetail'],
             'order'         => $order,
+            'typeList' => $result['typeList'],
         ]);
     }
     
     public function getAllFootballPitch()
     {
-        // $result['footballPitch'] =  PitchType::all();
         $result['service'] =  Service::all();
         $result['putPitchDetail'] =  PutPitchDetail::all();
-        $result['footballPitch'] =  FootballPitch::all();
-    
+        $result['footballPitch'] =  FootballPitch::with('loaiSan')->get();
+        $result['typeList'] = Type::all();
         return $result;
     }
     /**

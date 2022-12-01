@@ -193,3 +193,22 @@ a.link:hover, a.link:focus {
   background: #ffffff;
   color: #009efb;
 }
+
+.topbar {
+  background: #ffa32c !important;
+}
+
+.bg_tr {
+  background: #d9953e !important;
+}
+
+.sidebar-nav > ul > li > a.active {
+  color: #fb5e00;
+}
+.sidebar-nav > ul > li > a.active i {
+  color: #fb5e00;
+}
+
+.sidebar-nav ul li a.active, .sidebar-nav ul li a:hover, .sidebar-nav > ul > li > a:hover i {
+  color: #fa8440;
+}

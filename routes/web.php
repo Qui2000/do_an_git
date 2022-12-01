@@ -99,6 +99,18 @@ Route::group([
     });
 
     Route::group([
+        'prefix'    => 'badminton_pitch',
+        'as'        => 'badminton_pitch.',
+    ],function(){
+        Route::get('/', 'BadmintonPitchController@index')->name('index');
+        Route::get('add', 'BadmintonPitchController@create')->name('add');
+        Route::post('add', 'BadmintonPitchController@store')->name('create');
+        Route::get('edit/{id}', 'BadmintonPitchController@edit')->name('edit');
+        Route::post('edit/{id}', 'BadmintonPitchController@update')->name('update');
+        Route::get('delete/{id}', 'BadmintonPitchController@destroy')->name('delete');
+    });
+
+    Route::group([
         'prefix'    => 'service',
         'as'        => 'service.',
     ],function(){

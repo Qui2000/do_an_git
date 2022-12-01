@@ -25,11 +25,9 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-block">
-                        <h2 class="card-title">SÂN BÓNG ĐÁ MỸ NHẬT QUANG - ĐÀ NẴNG</h2> <br>
+                        <h2 class="card-title">Cung thể thao Tiên Sơn - ĐÀ NẴNG</h2> <br>
                         <div class="flot-chart">
-                            <div class="map-box">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.6827206530343!2d108.20562711526011!3d16.030023644744407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142198dd24b6069%3A0x76ad3d0302446619!2zU8OibiBiw7NuZyDEkcOhIE3hu7kgTmjhuq10IFF1YW5n!5e0!3m2!1svi!2s!4v1654684325472!5m2!1svi!2s" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
-                            </div>
+                            <div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=1040&amp;height=480&amp;hl=en&amp;q=cung the thao tien son&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://formatjson.org/">format json</a></div><style>.mapouter{position:relative;text-align:right;width:1040px;height:480px;}.gmap_canvas {overflow:hidden;background:none!important;width:1040px;height:480px;}.gmap_iframe {width:1040px!important;height:480px!important;}</style></div>
                         </div>
                     </div>
                 </div>

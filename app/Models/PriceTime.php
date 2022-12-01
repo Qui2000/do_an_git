@@ -12,4 +12,8 @@ class PriceTime extends Model
         'khung_gio',
         'gia_tien',
     ];
+
+    public function loaiSan() {
+        return $this->belongsTo('App\Models\PitchType', 'ma_loai_san', 'ma_san');
+    }
 }

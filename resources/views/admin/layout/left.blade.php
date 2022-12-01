@@ -24,6 +24,9 @@
                     <a href="{{ route('admin.football_pitch.index') }}" class="waves-effect"><i class="fa fa-futbol-o m-r-10" aria-hidden="true"></i>Quản lý sân bóng</a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.badminton_pitch.index') }}" class="waves-effect"><i class="fa fa-futbol-o m-r-10" aria-hidden="true"></i>Quản lý sân cầu lông</a>
+                </li>
+                <li>
                     <a href="{{ route('admin.service.index') }}" class="waves-effect"><i class="fa fa-columns m-r-10" aria-hidden="true"></i>Quản lý dịch vụ</a>
                 </li>
                 <li>

@@ -13,7 +13,11 @@
             <!-- Start Page Content -->
             <div class="row page-titles">
                 <div class="col-md-6 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">Quản lý giá theo khung giờ</h3>
+                    <h3 class="text-themecolor m-b-0 m-t-0">Quản lý sân cầu lông</h3>
+                    {{-- <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="javascript:void(0)">Trang chủ</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol> --}}
                 </div>
             </div>
             @if (session('success'))
@@ -37,8 +41,11 @@
             <!-- ============================================================== -->
             <!-- Row -->
             <div class="row">
-                <div class="card" style="margin-left: 15px">
+                <div class="card" style="margin-left: 15px;">
                     <div class="table-responsive">
+                        <a href="{{ route('admin.badminton_pitch.add') }}">
+                            <button style="display: block ;" type="submit" class="btn btn-success">Thêm mới</button>
+                        </a>
                     </div>
                 </div>
                 <!-- Column -->
@@ -49,25 +56,33 @@
                                 <thead class="thead-light">
                                     <tr class="bg_tr">
                                         <th scope="col">Id</th>
+                                        <th scope="col">Tên sân</th>
                                         <th scope="col">Loại sân</th>
-                                        <th scope="col">Khung giờ</th>
-                                        <th scope="col">Giá tiền</th>
+                                        <th scope="col">Mô tả</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($priceTimes as $key => $priceTime)
+                                    @foreach ($badmintonPitchs as $key => $badmintonPitch)
+
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $priceTime->loaiSan->ten }}</td>
-                                            <td>{{ $priceTime->khung_gio }}</td>
-                                            <td>{{ number_format($priceTime->gia_tien) }} VND</td>
+                                            <td>{{ $badmintonPitch->ten }}</td>
+                                            <td>{{ $badmintonPitch->loaiSan->ten }}</td>
+                                            <td>{{ $badmintonPitch->mo_ta }}</td>
                                             <td>
                                                 <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                    href="{{ route('admin.football_pitch.editPriceTime', ['id' => $priceTime->id]) }}"
+                                                    href="{{ route('admin.badminton_pitch.edit', ['id' => $badmintonPitch->id]) }}"
                                                     aria-expanded="false">
                                                     Sửa<i style="font-size: 25px; padding-right: 5px;"
                                                         class="mdi mdi-account-edit"></i>
+                                                </a>
+                                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                                    style="color: red"
+                                                    href="{{ route('admin.badminton_pitch.delete', ['id' => $badmintonPitch->id]) }}"
+                                                    aria-expanded="false"
+                                                    onclick="return confirm('Ban co muon xoa khong?')">
+                                                    Xóa<i style="font-size: 25px;" class="mdi mdi-delete"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -76,11 +91,11 @@
                             </table>
                         </div>
                     </div>
+                    <div style="float: right;">
+                    </div>
                 </div>
             </div>
-            <div class="pagination justify-content-center">
-                {{ $priceTimes->links() }}
-            </div>
+            {{ $badmintonPitchs->links() }}
         </div>
         <!-- ============================================================== -->
         <!-- End Container fluid  -->

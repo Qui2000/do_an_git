@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(assets/img/san_bong.jpg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(assets/img/san_bong-1.jpg)">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
@@ -295,7 +295,7 @@
           <div class="col-md-12">
             <div class="title-wrap d-flex justify-content-between">
               <div class="title-box">
-                <h2 class="title-a">Các giải đấu tại sân Mỹ Nhật Quang</h2>
+                <h2 class="title-a">Các giải đấu tại Cung thể thao Tiên Sơn</h2>
               </div>
               <div class="title-link">
               </div>
@@ -314,7 +314,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Mỹ Nhật Quang</a>
+                      <a href="#" class="category-b">Cung thể thao Tiên Sơn</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -332,7 +332,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Mỹ Nhật Quang</a>
+                      <a href="#" class="category-b">Cung thể thao Tiên Sơn</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -350,7 +350,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Mỹ Nhật Quang</a>
+                      <a href="#" class="category-b">Cung thể thao Tiên Sơn</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -368,7 +368,7 @@
                 <div class="card-overlay">
                   <div class="card-header-b">
                     <div class="card-category-b">
-                      <a href="#" class="category-b">Mỹ Nhật Quang</a>
+                      <a href="#" class="category-b">Cung thể thao Tiên Sơn</a>
                     </div>
                     <div class="card-date">
                       <span class="date-b">18 Sep. 2017</span>
@@ -415,7 +415,7 @@
                     </div>
                     <div class="testimonials-content">
                       <p class="testimonial-text">
-                        Giải đấu tranh cúp Mỹ Nhật Quang lần thứ 1 năm 2020 tại sân bóng đá Mỹ Nhật Quang - Đà Nẵng.
+                        Giải đấu tranh cúp Cung thể thao Tiên Sơn lần thứ 1 năm 2020 tại Cung thể thao Tiên Sơn - Đà Nẵng.
                       </p>
                     </div>
                     <div class="testimonial-author-box">
@@ -441,7 +441,7 @@
                     </div>
                     <div class="testimonials-content">
                       <p class="testimonial-text">
-                        Giải đấu tranh cúp Mỹ Nhật Quang lần thứ 2 năm 2021 tại sân bóng đá Mỹ Nhật Quang - Đà Nẵng.
+                        Giải đấu tranh cúp Cung thể thao Tiên Sơn lần thứ 2 năm 2021 tại Cung thể thao Tiên Sơn - Đà Nẵng.
                       </p>
                     </div>
                     <div class="testimonial-author-box">

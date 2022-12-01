@@ -2,9 +2,11 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSanTable extends Migration
+class ExcuteSqlV1 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +15,10 @@ class CreateSanTable extends Migration
      */
     public function up()
     {
-        Schema::create('san', function (Blueprint $table) {
-            $table->id();
-            $table->integer('ma_loai_san');
-            $table->string('ten');
-            $table->string('mo_ta');
-            $table->timestamps();
-        });
+        $path = base_path('do_an.sql');
+        $sql = file_get_contents($path);
+        DB::unprepared($sql);
+        DB::table('tai_khoan')->update(['password' => Hash::make('123123')]);
     }
 
     /**
@@ -29,6 +28,6 @@ class CreateSanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('san');
+        //
     }
 }

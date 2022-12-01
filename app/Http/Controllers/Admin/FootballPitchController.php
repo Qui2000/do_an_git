@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\FootballPitch;
 use App\Models\PriceTime;
 use App\Http\Requests\CreateFootBallPitchRequest;
+use App\Models\PitchType;
+use App\Models\Type;
+use Illuminate\Support\Facades\DB;
 
 class FootballPitchController extends Controller
 {
@@ -17,7 +20,9 @@ class FootballPitchController extends Controller
      */
     public function index()
     {
-        $footballPitchs = FootballPitch::latest()->paginate(5);
+        $footballPitchs = FootballPitch::whereHas('loaiSan', function($query) {
+            $query->where('ma_loai_hinh', Type::FOOTBALL);
+        })->latest()->paginate(5);
         return view('admin.football_pitch.index', compact('footballPitchs'));
     }
 
@@ -28,7 +33,8 @@ class FootballPitchController extends Controller
      */
     public function create()
     {
-        return view('admin.football_pitch.add');
+        $loaiSanList = PitchType::where('ma_loai_hinh', Type::FOOTBALL)->get();
+        return view('admin.football_pitch.add', compact('loaiSanList'));
     }
 
     /**
@@ -43,9 +49,9 @@ class FootballPitchController extends Controller
         $data = $request->all();
         if($footballPitch->create($data))
         {
-            return redirect()->route('admin.football_pitch.index')->with('success',('Thêm thông tin sân bóng thành công!'));
+            return redirect()->route('admin.football_pitch.index')->with('success',('Thêm sân thành công!'));
         }else{
-            return redirect()->route('admin.football_pitch.index')->withErrors('Thêm thông tin sân bóng thất bại!');
+            return redirect()->route('admin.football_pitch.index')->withErrors('Thêm sân thất bại!');
         }
     }
 
@@ -57,7 +63,13 @@ class FootballPitchController extends Controller
      */
     public function show($id)
     {
-        //
+        foreach (DB::table('gia_theo_khung_gio')->where('ma_loai_san', 1)->get() as $item) {
+            DB::table('gia_theo_khung_gio')->insert([
+                'ma_loai_san' => '3',
+                'khung_gio' => $item->khung_gio,
+                'gia_tien' => $item->gia_tien,
+            ]);
+        }
     }
 
     /**
@@ -69,7 +81,8 @@ class FootballPitchController extends Controller
     public function edit($id)
     {
         $footballPitch = FootballPitch::find($id);
-        return view('admin.football_pitch.edit', compact('footballPitch'));
+        $loaiSanList = PitchType::where('ma_loai_hinh', Type::FOOTBALL)->get();
+        return view('admin.football_pitch.edit', compact('footballPitch', 'loaiSanList'));
     }
 
     /**

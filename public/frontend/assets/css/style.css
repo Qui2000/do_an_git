@@ -1925,3 +1925,18 @@ footer .credits {
 #news-carousel img {
   height: 350px;
 }
+
+
+.color-b {
+  color: #fa8440;
+}
+
+.navbar-default.navbar-trans .nav-link:before,
+.navbar-default.navbar-reduce .nav-link:before {
+  background: #fa8440;
+
+}
+
+.card-box-ico {
+  border: 5px solid #fa8440;
+}

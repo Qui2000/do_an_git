@@ -57,7 +57,6 @@ use App\Models\FootballPitch;
             display: none;
 
         }
-
     </style>
 @endsection
 <!-- ======= Intro Single ======= -->
@@ -99,7 +98,7 @@ use App\Models\FootballPitch;
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                        <h4><i class="icon fa fa-check"></i>Thong bao!</h4>
+                        <h4><i class="icon fa fa-check"></i>Thông báo!</h4>
                         {{ session('success') }}
                     </div>
                 @endif
@@ -114,6 +113,16 @@ use App\Models\FootballPitch;
                         </ul>
                     </div>
                 @endif
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="ma_loai_hinh">Loại hình</label>
+                        <select class="form-control" id="ma_loai_hinh">
+                            @foreach ($typeList as $type)
+                                <option value="{{ $type->id }}">{{ $type->ten }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="footballPitch">Loại sân</label>
@@ -132,11 +141,11 @@ use App\Models\FootballPitch;
                             name="ngay_su_dung" id="dateRequest" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}">
                     </div>
                 </div>
-                <div class="col-md-3">
-                    {{-- <div class="form-group" style="line-height: 6.5;">
+                {{-- <div class="col-md-3">
+                    <div class="form-group" style="line-height: 6.5;">
                         <button type="button" id="showSchedule" class="btn btn-primary">Xem</button>
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
                 <div class="col-md-3">
                     <div class="form-group" style="line-height: 6.5; float:right">
                         <button type="submit" id="btn_order" class="btn btn-primary">Đặt sân</button>
@@ -162,12 +171,12 @@ use App\Models\FootballPitch;
                                 <h4>{{ $item }}</h4>
                                 <input type="hidden" name="chi_tiet[{{ $key }}][khung_gio]" id="khung_gio"
                                     value="{{ $key }}" class="qty-item" disabled>
-                                <span class="status_{{ $key }} status">Còn chỗ</span><br>
+                                <span class="status_{{ $key }} status">Có sẵn</span><br>
                                 <div class=" row water mb-2" style="margin-top: 15px;">
-                                    <div class="col-md-3" style="margin-top: -11px;">
+                                    <div class="col-md-4" style="margin-top: -11px;">
                                         <span>Loại nước:</span>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-7">
                                         <select id="loai_nuoc" name="chi_tiet[{{ $key }}][water_name]"
                                             class="qty-item text-center water_name" disabled>
                                             {{-- <option value="default">---Chọn---</option> --}}
@@ -179,10 +188,10 @@ use App\Models\FootballPitch;
                                     </div>
                                 </div>
                                 <div class=" row water mb-2">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <span>Số lượng:</span>
                                     </div>
-                                    <div class="col-md-6" style="margin-top: 9px;">
+                                    <div class="col-md-7" style="margin-top: 9px;">
                                         <input id="so_luong" type="number"
                                             name="chi_tiet[{{ $key }}][water_qty]"
                                             class="qty-item text-center water_qty" disabled required>
@@ -275,7 +284,7 @@ use App\Models\FootballPitch;
                     putPitchDetails = data.data;
                     console.log(putPitchDetails);
                     $(`.item_detail`).removeClass("disabled__item");
-                    $(`.status`).html('Còn chỗ');
+                    $(`.status`).html('Có sẵn');
                     $.map(putPitchDetails, function(putPitchDetail, index) {
                         val = $(`.timeText_${putPitchDetail.khung_gio}`).val();
                         if (putPitchDetail.khung_gio == val) {
@@ -292,6 +301,23 @@ use App\Models\FootballPitch;
 
         $('.timeText_05:00-06:00').click(function() {
             console.log(23);
+        })
+
+        const listFootballPitch = @json($listFootballPitch);
+        $('#ma_loai_hinh').change(function() {
+            const value = $(this).val()
+            const optionDefault = '<option value="default">----Chọn loại sân----</option>'
+            if (value == 2) {
+                const html = listFootballPitch.filter(x => x.loai_san.ma_loai_hinh == 2).map(x => `
+                    <option value="${x.id}">${x.ten}</option>
+                `).join('')
+                $('#footballPitch').html(optionDefault + html)
+                return
+            }
+            const html = listFootballPitch.filter(x => x.loai_san.ma_loai_hinh == 1).map(x => `
+                <option value="${x.id}">${x.ten}</option>
+            `).join('')
+            $('#footballPitch').html(optionDefault + html)
         })
     });
 </script>

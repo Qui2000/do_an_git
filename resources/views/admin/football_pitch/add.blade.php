@@ -19,7 +19,7 @@
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                    <h4><i class="icon fa fa-check"></i>Thong bao!</h4>
+                    <h4><i class="icon fa fa-check"></i>Thông báo!</h4>
                     {{ session('success') }}
                 </div>
             @endif
@@ -42,17 +42,21 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="pwd">Mã loại sân:</label>
-                            <input type="text" class="form-control" placeholder="Mã loại sân" name="ma_loai_san">
+                            <label for="pwd">Tên sân:</label>
+                            <input type="text" class="form-control" name="ten">
                         </div>
                         <div class="form-group">
-                            <label for="pwd">Tên:</label>
-                            <input type="text" class="form-control" placeholder="Tên" name="ten">
+                            <label for="pwd">Loại sân:</label>
+                            <select class="form-control" id="footballPitch" name="ma_loai_san">
+                                @foreach ($loaiSanList as $loaiSan)
+                                    <option value="{{ $loaiSan->id }}">{{ $loaiSan->ten }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="pwd">Mô tả:</label><br>
                             <textarea style="border: 1px solid rgba(0,0,0,.15); padding-left: 10px" name="mo_ta"
-                                placeholder="Mô tả" cols="50" rows="5"></textarea>
+                             cols="50" rows="5"></textarea>
                         </div>
                         <button type="submit" class="btn btn-success">Lưu</button>
                         <button type="button" class="btn btn-info"><a style="color: #fff"

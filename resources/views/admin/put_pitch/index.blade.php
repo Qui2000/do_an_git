@@ -19,7 +19,7 @@
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                    <h4><i class="icon fa fa-check"></i>Thong bao!</h4>
+                    <h4><i class="icon fa fa-check"></i>Thông báo!</h4>
                     {{ session('success') }}
                 </div>
             @endif
@@ -35,16 +35,23 @@
                 </div>
             @endif
             <!-- ============================================================== -->
-            <div class="search" style="margin-bottom: 10px;">
-                <input style="padding-left: 5px;" id="search" type="text" class="searchTerm"
-                    placeholder="Tìm kiếm tên người đặt">
-                <i style="margin: 13px 0 0 -25px;" class="fa fa-search"></i>
+            <div class="search row" style="margin-bottom: 10px;">
+                <div class="col-md-2">
+                    <input style="padding-left: 5px;" id="search" type="text" class="searchTerm form-control"
+                        placeholder="Tìm kiếm tên người đặt">
+                </div>
                 <select style="margin-left: 10px; padding: 5px; width:200px; color:currentcolor;border: 1px solid;background: white;"
-                    class="searchTerm" name="" id="searchTrangThai">
+                    class="searchTerm form-control col-md-2" name="" id="searchTrangThai">
                     <option value="">Tìm kiếm trạng thái sân</option>
                     <option value="da_dat">Đã đặt</option>
                     <option value="da_huy">Đã hủy</option>
                 </select>
+                {{-- <select style="margin-left: 10px; padding: 5px; width:200px; color:currentcolor;border: 1px solid;background: white;"
+                    class="searchTerm form-control col-md-2" name="" id="searchTrangThai">
+                    <option value="">Loại sân</option>
+                    <option value="da_dat">Sân đá bóng</option>
+                    <option value="da_huy">Sân cầu lông</option>
+                </select> --}}
                 {{-- <i style="margin: 13px 0 0 -25px;" class="fa fa-search"></i> --}}
             </div>
             <!-- Row -->

@@ -5,33 +5,50 @@
   cursor: pointer;
 }
 
-.orders .item_detail:hover {
-  background-color: #6495ed;
+.orders .item_detail:hover:not(.active__item){
+  background-color: #d6b566;
 }
-
+.orders .item_detail.disabled__item:hover {
+  background-color: #424e5a;
+}
 .orders .active__item {
-  background-color: #6495ed;
+  background-color: #d7a73a;
 }
 
-.orders #content-tab .table-dark h4 {
+.orders #content-tab .table h4 {
   color: #fff;
   font-weight: bolder;
 }
 
-.orders #content-tab .table-dark .add {
+.orders #content-tab .table .add {
   background-color: #03a9f4;
   padding: 0 8px;
   color: red;
 }
 
-.orders #content-tab .table-dark .qty-item {
+.orders #content-tab .table .qty-item {
   width: 100px;
 }
 
-.orders #content-tab .table-dark .sub {
+.orders #content-tab .table .sub {
   background-color: #03a9f4;
   padding: 0 8px;
   color: red;
+}
+.item_detail .status {
+  color: #1ded1d;
+}
+
+.item_detail.disabled__item {
+  opacity: 0.5;
+}
+.item_detail.disabled__item .status {
+  color: #ff5656;
+}
+
+.table-dark td {
+  background-color: #424e5a;
+  border-color: #bbb !important;
 }
 
 /*!

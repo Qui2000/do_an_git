@@ -1,5 +1,5 @@
 @extends('admin.layout.index')
-@section('title', 'Customer')
+@section('title', 'Add - FootballPitch')
 @section('content')
     <div class="page-wrapper">
         <!-- ============================================================== -->
@@ -13,7 +13,7 @@
             <!-- Start Page Content -->
             <div class="row page-titles">
                 <div class="col-md-6 col-8 align-self-center">
-                    <h3 class="text-themecolor m-b-0 m-t-0">Quản lý nhân viên / Thêm nhân viên</h3>
+                    <h3 class="text-themecolor m-b-0 m-t-0">Quản lý sân cầu lông / Thêm sân cầu lông</h3>
                 </div>
             </div>
             @if (session('success'))
@@ -42,37 +42,25 @@
                     <form action="" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="email">Tên nhân viên:</label>
-                            <input type="text" class="form-control" placeholder="Tên nhân viên" name="ten">
+                            <label for="pwd">Tên sân:</label>
+                            <input type="text" class="form-control" name="ten">
                         </div>
                         <div class="form-group">
-                            <label for="email">Ngày sinh:</label>
-                            <input type="date" class="form-control" placeholder="Ngày sinh" name="ngay_sinh">
+                            <label for="pwd">Loại sân:</label>
+                            <select class="form-control" id="footballPitch" name="ma_loai_san">
+                                @foreach ($loaiSanList as $loaiSan)
+                                    <option value="{{ $loaiSan->id }}">{{ $loaiSan->ten }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="pwd">Địa chỉ:</label>
-                            <input type="text" class="form-control" placeholder="Địa chỉ" name="dia_chi">
+                            <label for="pwd">Mô tả:</label><br>
+                            <textarea style="border: 1px solid rgba(0,0,0,.15); padding-left: 10px" name="mo_ta"
+                             cols="50" rows="5"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="pwd">Số điện thoại:</label>
-                            <input type="text" class="form-control" placeholder="Số điện thoại" name="sdt">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Giới tính:</label>
-                            <input type="text" class="form-control" placeholder="Giới tính" name="gioi_tinh">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Quốc tịch:</label>
-                            <input type="text" class="form-control" placeholder="Quốc tịch" name="quoc_tich">
-                        </div>
-                        <div class="form-group">
-                            <label for="pwd">Ngày làm việc:</label>
-                            <input type="date" class="form-control" placeholder="Ngày làm việc" name="ngay_lam_viec">
-                        </div>
-                        <input type="hidden" class="form-control" name="ma_quyen" value="1">
                         <button type="submit" class="btn btn-success">Lưu</button>
                         <button type="button" class="btn btn-info"><a style="color: #fff"
-                                href="{{ route('admin.personnel.index') }}">Trở lại</a></button>
+                                href="{{ route('admin.football_pitch.index') }}">Trở lại</a></button>
                     </form>
                     <div style="float: right;">
                     </div>

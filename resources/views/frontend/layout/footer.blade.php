@@ -4,7 +4,7 @@
         <div class="col-sm-12 col-md-4">
           <div class="widget-a">
             <div class="w-header-a">
-              <h3 class="w-title-a text-brand">Sân bóng đá Mỹ Nhật Quang</h3>
+              <h3 class="w-title-a text-brand">Cung thể thao Tiên Sơn</h3>
             </div>
             <div class="w-body-a">
               <p class="w-text-a color-text-a">
@@ -116,7 +116,7 @@
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=EstateAgency
           -->
-            Sân bóng đá <a href="https://bootstrapmade.com/">Mỹ Nhật Quang</a>
+            Sân bóng đá <a href="https://bootstrapmade.com/">Cung thể thao Tiên Sơn</a>
           </div>
         </div>
       </div>

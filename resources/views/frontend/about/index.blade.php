@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-md-12 col-lg-8">
                             <div class="title-single-box">
-                                <h1 class="title-single">Sân Bóng Đá Mỹ Nhật Quang - Đà Nẵng</h1>
+                                <h1 class="title-single">Cung thể thao Tiên Sơn - Đà Nẵng</h1>
                             </div>
                         </div>
                         <div class="col-md-12 col-lg-4">
@@ -56,20 +56,20 @@
                                 </div>
                                 <div class="col-md-6 col-lg-5 section-md-t3">
                                     <div class="title-box-d">
-                                        <h6 class="title-d">Sân bóng đá Mỹ Nhật Quang là 1 trong những sân bóng cỏ nhân
+                                        <h6 class="title-d">Cung thể thao Tiên Sơn là 1 trong những sân bóng cỏ nhân
                                             tạo có mặt cỏ tốt và chất lượng nhất ở Đà Nẵng.
                                         </h6>
                                     </div>
                                     <p class="color-text-a">
-                                        Sân bóng Mỹ Nhật Quang bao gồm: <br>
+                                        Cung thể thao Tiên Sơn bao gồm: <br>
                                         ✅Có 6 cụm sân 5️⃣và 2 sân 7️⃣ <br>
                                         ✅Tiện ích <br>
                                         🔹Có chỗ đậu xe <br>
                                         🔹Banh sử dụng miễn phí <br>
                                         🔹Nước uống miễn phí <br>
-                                        🔹Nơi đây diễn ra các trận đấu do sân bóng đá Mỹ Nhật Quang tổ chức <br>
+                                        🔹Nơi đây diễn ra các trận đấu do Cung thể thao Tiên Sơn tổ chức <br>
                                         🔹Và nhiều tiện ích khác <br>
-                                        Địa chỉ: Khu Đô Thị Mỹ Nhật Quang - Đà Nẵng.
+                                        Địa chỉ: Khu Đô Thị Cung thể thao Tiên Sơn - Đà Nẵng.
                                     </p>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="title-box-d" style="margin-top: -80px;">
-                                        <h6 class="title-d">Các qui định của sân bóng đá Mỹ Nhật Quang.</h6>
+                                        <h6 class="title-d">Các qui định của Cung thể thao Tiên Sơn.</h6>
 
                                     </div>
                                 </div>

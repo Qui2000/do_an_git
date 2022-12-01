@@ -23,7 +23,7 @@
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                    <h4><i class="icon fa fa-check"></i>Thong bao!</h4>
+                    <h4><i class="icon fa fa-check"></i>Thông báo!</h4>
                     {{ session('success') }}
                 </div>
             @endif
@@ -44,7 +44,7 @@
                 <div class="card" style="margin-left: 15px;">
                     <div class="table-responsive">
                         <a href="{{ route('admin.football_pitch.add') }}">
-                            <button style="display: block ;" type="submit" class="btn btn-success">Thêm sân bóng</button>
+                            <button style="display: block ;" type="submit" class="btn btn-success">Thêm mới</button>
                         </a>
                     </div>
                 </div>
@@ -56,8 +56,8 @@
                                 <thead class="thead-light">
                                     <tr class="bg_tr">
                                         <th scope="col">Id</th>
-                                        <th scope="col">Loại sân</th>
                                         <th scope="col">Tên sân</th>
+                                        <th scope="col">Loại sân</th>
                                         <th scope="col">Mô tả</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -67,8 +67,8 @@
 
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>Sân 5</td>
                                             <td>{{ $footballPitch->ten }}</td>
+                                            <td>{{ $footballPitch->loaiSan->ten }}</td>
                                             <td>{{ $footballPitch->mo_ta }}</td>
                                             <td>
                                                 <a class="sidebar-link waves-effect waves-dark sidebar-link"

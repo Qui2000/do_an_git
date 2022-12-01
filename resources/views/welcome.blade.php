@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Quản lý sân bóng đá Mỹ Nhật Quang</title>
+        <title>Quản lý Cung thể thao Tiên Sơn</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Quản Lý sân bóng đá Mỹ Nhật Quang
+                    Quản Lý Cung thể thao Tiên Sơn
                 </div>
 
                 <div class="links">

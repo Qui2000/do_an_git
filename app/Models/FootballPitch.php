@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class FootballPitch extends Model
 {
+
     CONST LIST_TIME_ORDER = [
         5   => '05:00-06:00',
         6   => '06:00-07:00',
@@ -43,5 +44,9 @@ class FootballPitch extends Model
 
     public function PutPitchDetai() {
         return $this->belongsTo('App\Models\PutPitchDetai');
+    }
+
+    public function loaiSan() {
+        return $this->belongsTo('App\Models\PitchType', 'ma_loai_san');
     }
 }
