@@ -12,7 +12,7 @@
                     <div class="col-md-12 col-lg-8">
                         <div class="title-single-box">
                             <h1 class="title-single">Địa chỉ cụ thể</h1>
-                            <span class="color-text-a">498 Nguyễn Hữu Thọ, Khuê Trung, Cẩm Lệ, Đà Nẵng 550000, Việt Nam</span>
+                            <span class="color-text-a">Nại Nam, Hoà Cường Bắc, Hải Châu, Đà Nẵng, Vietnam</span>
                         </div>
                     </div>
                     <div class="col-md-12 col-lg-4">
@@ -38,9 +38,7 @@
                     <div class="col-sm-12">
                         <div class="contact-map box">
                             <div id="map" class="contact-map">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.6827206530343!2d108.20562711526011!3d16.030023644744407!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3142198dd24b6069%3A0x76ad3d0302446619!2zU8OibiBiw7NuZyDEkcOhIE3hu7kgTmjhuq10IFF1YW5n!5e0!3m2!1svi!2s!4v1654684325472!5m2!1svi!2s"
-                                    width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3834.5905232610044!2d108.2268055!3d16.0348176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219e5e599f565%3A0x1e766cbc16295cc2!2sTuyen%20Son%20Sport%20Complex!5e0!3m2!1sen!2s!4v1671675418668!5m2!1sen!2s" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
                     </div>
@@ -94,10 +92,10 @@
                                         </div>
                                         <div class="icon-box-content">
                                             <p class="mb-1">Email.
-                                                <span class="color-a">mynhatquang@gmail.com</span>
+                                                <span class="color-a">thethaotienson@gmail.com</span>
                                             </p>
                                             <p class="mb-1">Phone.
-                                                <span class="color-a">+84 905 333333</span>
+                                                <span class="color-a">+02363630222</span>
                                             </p>
                                         </div>
                                     </div>
@@ -112,7 +110,7 @@
                                         </div>
                                         <div class="icon-box-content">
                                             <p class="mb-1">
-                                                498 Nguyễn Hữu Thọ, Khuê Trung, Cẩm Lệ, Đà Nẵng
+                                                Nại Nam, Hoà Cường Bắc, Hải Châu, Đà Nẵng
                                                 <br>Việt Nam
                                             </p>
                                         </div>

@@ -8,16 +8,16 @@
             </div>
             <div class="w-body-a">
               <p class="w-text-a color-text-a">
-                498 Nguyễn Hữu Thọ, Khuê Trung, Cẩm Lệ, Đà Nẵng 550000, Việt Nam
+                Nại Nam, Hoà Cường Bắc, Hải Châu, Đà Nẵng, Vietnam
               </p>
             </div>
             <div class="w-footer-a">
               <ul class="list-unstyled">
                 <li class="color-a">
-                  <span class="color-text-a">Phone: </span> +84 905 333333
+                  <span class="color-text-a">Phone: </span> +02363630222
                 </li>
                 <li class="color-a">
-                  <span class="color-text-a">Email: </span> mynhatquang@gmail.com
+                  <span class="color-text-a">Email: </span> thethaotienson@gmail.com
                 </li>
               </ul>
             </div>
@@ -53,10 +53,13 @@
             <div class="w-body-a">
               <ul class="list-unstyled">
                 <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Sân 5 (5 sân)</a>
+                  <i class="bi bi-chevron-right"></i> <a href="#">Sân 5</a>
                 </li>
                 <li class="item-list-a">
-                  <i class="bi bi-chevron-right"></i> <a href="#">Sân 7 (0 sân)</a>
+                  <i class="bi bi-chevron-right"></i> <a href="#">Sân 7</a>
+                </li>
+                <li class="item-list-a">
+                  <i class="bi bi-chevron-right"></i> <a href="#">Sân cầu lông</a>
                 </li>
               </ul>
             </div>

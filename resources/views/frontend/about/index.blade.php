@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-sm-12 position-relative">
                             <div class="about-img-box">
-                                <img src="assets/img/giai_dau.jpg" alt="" class="img-fluid">
+                                <img src="assets/img/giai_dau.jpg" alt="" class="img-fluid" style="width: 100%">
                             </div>
                             <div class="sinse-box">
                                 <h3 class="sinse-title">Khai mạc giải đấu

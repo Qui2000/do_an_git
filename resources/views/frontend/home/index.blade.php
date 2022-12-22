@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(assets/img/san7.jpg)">
+      <div class="swiper-slide carousel-item-a intro-item bg-image" style="background-image: url(assets/img/san_bong.jpg)">
         <div class="overlay overlay-a"></div>
         <div class="intro-content display-table">
           <div class="table-cell">
