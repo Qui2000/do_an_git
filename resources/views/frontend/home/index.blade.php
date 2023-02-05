@@ -432,7 +432,7 @@
                 <div class="row">
                   <div class="col-sm-12 col-md-6">
                     <div class="testimonial-img">
-                      <img src="assets/img/cup_2.jpg" alt="" class="img-fluid">
+                      <img src="assets/img/cup_3.jpg" alt="" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-sm-12 col-md-6">
